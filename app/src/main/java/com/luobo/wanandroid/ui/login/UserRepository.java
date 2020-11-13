@@ -1,4 +1,4 @@
-package com.luobo.wanandroid.ui.user;
+package com.luobo.wanandroid.ui.login;
 
 import android.util.Log;
 
@@ -13,14 +13,14 @@ public class UserRepository {
     private ApiService service = RetrofitFactory.getInstance();
 
     public void loginUser(String name, String psw) {
-        service.loginUser("aluobobo", "456123").enqueue(new Callback() {
+        service.loginUser(name, psw).enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call call, Response response) {
-                Log.e("Will", "onResponse: ok" );
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                Log.e("Will", "onResponse: " + response.body().getErrorMsg());
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
 
             }
         });

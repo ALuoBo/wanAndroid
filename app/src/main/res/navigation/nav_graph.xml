@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_otherFragment"
             app:destination="@id/otherFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
     </fragment>
 
     <fragment
@@ -42,4 +45,9 @@
             android:id="@+id/action_otherFragment_to_aqFragment"
             app:destination="@id/aqFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.luobo.wanandroid.ui.login.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/activity_login" />
 </navigation>

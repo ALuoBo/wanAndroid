@@ -2,6 +2,7 @@ package com.luobo.wanandroid.api;
 
 import com.luobo.wanandroid.ui.home.ArticleDataBean;
 import com.luobo.wanandroid.ui.home.HomeBannerBean;
+import com.luobo.wanandroid.ui.login.LoginResponse;
 
 
 import retrofit2.Call;
@@ -20,6 +21,6 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("/user/login")
-    Call loginUser(@Field("username") String userName, @Field("password") String password);
+    Call<LoginResponse> loginUser(@Field("username") String userName, @Field("password") String password);
 
 }

@@ -11,7 +11,7 @@ buildscript {
         GsonVersion = '2.8.6'
         // nav_version = "2.3.0"
         //materialVersion = "1.2.1"
-        //lottieVersion = "3.4.2"
+        lottieVersion = "3.4.2"
         //viewPager2 = "1.0.0"
     }
     repositories {

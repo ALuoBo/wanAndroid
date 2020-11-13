@@ -1,7 +1,7 @@
 package com.luobo.wanandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,8 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.luobo.wanandroid.ui.home.HomeFragment;
-import com.luobo.wanandroid.ui.home.HomeViewModel;
-import com.luobo.wanandroid.ui.user.UserViewModel;
+import com.luobo.wanandroid.ui.login.LoginActivity;
+import com.luobo.wanandroid.ui.login.LoginViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     TextView toolbarMainText;
     NavController navController;
     ImageView user;
-    UserViewModel viewModel;
+    LoginViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
@@ -55,12 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            viewModel.loginUser();
-            }
-        });
+        user.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, LoginActivity.class)));
     }
 
 
