@@ -19,6 +19,8 @@ public class RetrofitFactory {
                 //打印retrofit日志
                 Log.i("RetrofitLog", "retrofitBack = " + message);
             }
+
+
         });
 
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

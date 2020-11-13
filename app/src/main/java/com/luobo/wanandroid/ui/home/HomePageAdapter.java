@@ -1,6 +1,7 @@
 package com.luobo.wanandroid.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
+import com.luobo.wanandroid.util.WebActivity;
 
 class HomePageAdapter extends ListAdapter<ArticleDataBean.DataBean.DatasBean, HomePageAdapter.MyViewHolder> {
 
@@ -37,7 +39,9 @@ class HomePageAdapter extends ListAdapter<ArticleDataBean.DataBean.DatasBean, Ho
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, WebActivity.class);
+                intent.putExtra("URL", getItem(position).getLink());
+                context.startActivity(intent);
             }
         });
     }

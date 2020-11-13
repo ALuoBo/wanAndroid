@@ -5,7 +5,10 @@ import com.luobo.wanandroid.ui.home.HomeBannerBean;
 
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiService {
@@ -14,4 +17,9 @@ public interface ApiService {
 
     @GET("banner/json")
     Call<HomeBannerBean> getBannerList();
+
+    @FormUrlEncoded
+    @POST("/user/login")
+    Call loginUser(@Field("username") String userName, @Field("password") String password);
+
 }
