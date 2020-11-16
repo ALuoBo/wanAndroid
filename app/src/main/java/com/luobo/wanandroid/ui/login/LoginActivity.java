@@ -1,22 +1,25 @@
 package com.luobo.wanandroid.ui.login;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.luobo.wanandroid.R;
-import com.luobo.wanandroid.ui.home.HomeViewModel;
+
 
 
 public class LoginActivity extends AppCompatActivity {
     LottieAnimationView lottieAnimationView;
     private LoginViewModel loginViewModel;
     Button okButton;
-    EditText username, password;
+    EditText username, password, checkPassword;
+    TextView changeLogin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,8 +31,15 @@ public class LoginActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         okButton = findViewById(R.id.done);
+        checkPassword = findViewById(R.id.checkPassword);
+        changeLogin = findViewById(R.id.changeLogin);
+
         okButton.setOnClickListener(v -> {
             login();
+        });
+
+        changeLogin.setOnClickListener(v -> {
+            checkPassword.setVisibility(View.VISIBLE);
         });
     }
 

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
-import com.luobo.wanandroid.util.WebActivity;
+import com.luobo.wanandroid.WebActivity;
 
 class HomePageAdapter extends ListAdapter<ArticleDataBean.DataBean.DatasBean, HomePageAdapter.MyViewHolder> {
 

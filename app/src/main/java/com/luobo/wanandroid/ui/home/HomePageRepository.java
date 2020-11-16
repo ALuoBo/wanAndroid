@@ -19,20 +19,16 @@ class HomePageRepository {
     MutableLiveData<HomeBannerBean> liveBanner = new MutableLiveData<>();
 
     public MutableLiveData<ArticleDataBean> getArticle(final int pageNum) {
-        Log.e("Will", "onResponse: ...");
 
         service.getArticlesList(pageNum).enqueue(new Callback<ArticleDataBean>() {
             @Override
             public void onResponse(Call<ArticleDataBean> call, Response<ArticleDataBean> response) {
-
                 liveData.setValue(response.body());
 
-                Log.e("Will", "onResponse: SUCESS");
             }
 
             @Override
             public void onFailure(Call<ArticleDataBean> call, Throwable t) {
-                Log.e("Will", "onFailure: " + t.toString());
 
             }
 
@@ -46,7 +42,6 @@ class HomePageRepository {
             @Override
             public void onResponse(Call<HomeBannerBean> call, Response<HomeBannerBean> response) {
                 liveBanner.setValue(response.body());
-                Log.e("Will", "onResponse: SUCESS");
             }
 
             @Override

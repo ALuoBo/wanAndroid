@@ -20,7 +20,6 @@ public class RetrofitFactory {
                 Log.i("RetrofitLog", "retrofitBack = " + message);
             }
 
-
         });
 
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

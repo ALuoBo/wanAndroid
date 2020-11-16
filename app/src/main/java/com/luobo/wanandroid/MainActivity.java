@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -16,14 +15,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.luobo.wanandroid.ui.home.HomeFragment;
 import com.luobo.wanandroid.ui.login.LoginActivity;
 import com.luobo.wanandroid.ui.login.LoginViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     BottomNavigationView bottomNavigationView;
     TextView toolbarMainText;
@@ -32,14 +27,9 @@ public class MainActivity extends AppCompatActivity {
     LoginViewModel viewModel;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new AqFragment());
-        fragments.add(new HomeFragment());
-        fragments.add(new OtherFragment());
-
         user = findViewById(R.id.userImageAtBar);
         toolbarMainText = findViewById(R.id.toolbarMainText);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);

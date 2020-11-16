@@ -26,6 +26,7 @@
 
     <string name="username">name</string>
     <string name="password">password</string>
+    <string name="checkPassword">check password</string>
     <string name="ok">OK</string>
     <string name="change">Go to register</string>
     <string name="changeBack">Go to login</string>

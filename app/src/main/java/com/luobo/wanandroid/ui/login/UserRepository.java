@@ -16,7 +16,7 @@ public class UserRepository {
         service.loginUser(name, psw).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                Log.e("Will", "onResponse: " + response.body().getErrorMsg());
+
             }
 
             @Override

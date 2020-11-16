@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/aqFragment"
-        android:name="com.luobo.wanandroid.AqFragment"
+        android:name="com.luobo.wanandroid.ui.aq.AqFragment"
         android:label="@string/aq"
         tools:layout="@layout/fragment_aq">
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/otherFragment"
-        android:name="com.luobo.wanandroid.OtherFragment"
+        android:name="com.luobo.wanandroid.ui.other.OtherFragment"
         android:label="@string/other"
         tools:layout="@layout/fragment_other">
         <action
