@@ -15,6 +15,7 @@ import retrofit2.Response;
 class HomePageRepository {
 
     private ApiService service = RetrofitFactory.getInstance();
+
     MutableLiveData<ArticleDataBean> liveData = new MutableLiveData<>();
     MutableLiveData<HomeBannerBean> liveBanner = new MutableLiveData<>();
 

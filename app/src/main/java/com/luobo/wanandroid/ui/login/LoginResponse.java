@@ -8,15 +8,15 @@ public class LoginResponse {
      * errorMsg : 账号密码不匹配！
      */
 
-    private Object data;
+    private Data data;
     private int errorCode;
     private String errorMsg;
 
-    public Object getData() {
+    public Data getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(Data data) {
         this.data = data;
     }
 
@@ -34,5 +34,18 @@ public class LoginResponse {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    static class Data {
+        private String nickname;
+        private String username;
+
+        public String getNickname() {
+            return nickname;
+        }
+
+        public String getUsername() {
+            return username;
+        }
     }
 }

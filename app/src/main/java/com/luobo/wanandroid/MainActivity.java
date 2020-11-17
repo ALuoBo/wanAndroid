@@ -25,12 +25,13 @@ public class MainActivity extends BaseActivity {
     NavController navController;
     ImageView user;
     LoginViewModel viewModel;
-
+    TextView username;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         user = findViewById(R.id.userImageAtBar);
+        username =findViewById(R.id.username);
         toolbarMainText = findViewById(R.id.toolbarMainText);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();

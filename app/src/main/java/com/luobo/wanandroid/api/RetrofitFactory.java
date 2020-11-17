@@ -1,6 +1,16 @@
 package com.luobo.wanandroid.api;
 
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
+
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.luobo.wanandroid.MyApplication;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -8,6 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitFactory {
+
     private RetrofitFactory() {
     }
 
@@ -19,13 +30,15 @@ public class RetrofitFactory {
                 //打印retrofit日志
                 Log.i("RetrofitLog", "retrofitBack = " + message);
             }
-
         });
 
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        ClearableCookieJar cookieJar =
+                new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MyApplication.getInstance()));
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
+                .cookieJar(cookieJar)
                 .build();
 
         Retrofit retrofit = new Retrofit
@@ -33,6 +46,7 @@ public class RetrofitFactory {
                 .client(client)
                 .baseUrl("https://www.wanandroid.com")
                 .addConverterFactory(GsonConverterFactory.create())
+
                 .build();
 
         ApiService service = retrofit.create(ApiService.class);

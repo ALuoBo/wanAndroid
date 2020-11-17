@@ -1,7 +1,6 @@
 package com.luobo.wanandroid;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-
-import com.luobo.wanandroid.BaseActivity;
-import com.luobo.wanandroid.R;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
@@ -37,10 +32,8 @@ public class WebActivity extends BaseActivity {
         mWebView.loadUrl(intent.getStringExtra("URL"));
 
         if (nightMode) {
-            Log.e("Will", "onCreate: " + nightMode);
             this.getWindow().getDecorView().setSystemUiVisibility(SYSTEM_UI_FLAG_LAYOUT_STABLE);
         } else {
-            Log.e("Will", "onCreate: " + nightMode);
             this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
     }
