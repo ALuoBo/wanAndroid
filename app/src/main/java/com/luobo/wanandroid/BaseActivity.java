@@ -28,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         checkNightMode(newConfig);
     }
 
+
     //是否是夜间模式
     private Boolean checkNightMode(Configuration configuration) {
         switch (currentNightMode) {
