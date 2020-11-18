@@ -9,45 +9,21 @@
         android:id="@+id/homeFragment"
         android:name="com.luobo.wanandroid.ui.home.HomeFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_blankFragment_to_aqFragment"
-            app:destination="@id/aqFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_otherFragment"
-            app:destination="@id/otherFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
 
     <fragment
         android:id="@+id/aqFragment"
         android:name="com.luobo.wanandroid.ui.aq.AqFragment"
         android:label="@string/aq"
-        tools:layout="@layout/fragment_aq">
-        <action
-            android:id="@+id/action_aqFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_aqFragment_to_otherFragment"
-            app:destination="@id/otherFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_aq"/>
     <fragment
         android:id="@+id/otherFragment"
         android:name="com.luobo.wanandroid.ui.other.OtherFragment"
         android:label="@string/other"
-        tools:layout="@layout/fragment_other">
-        <action
-            android:id="@+id/action_otherFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_otherFragment_to_aqFragment"
-            app:destination="@id/aqFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_other"/>
     <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.luobo.wanandroid.ui.login.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/activity_login" />
+        android:id="@+id/userFragment"
+        android:name="com.luobo.wanandroid.ui.user.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
 </navigation>

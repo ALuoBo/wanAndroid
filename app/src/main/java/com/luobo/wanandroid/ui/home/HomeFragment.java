@@ -73,15 +73,18 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         HomePageAdapter adapter = new HomePageAdapter(getContext(), new ArticleDiffUtil());
+
         viewModel.getData(0).observe(getViewLifecycleOwner(), articleDataBean -> adapter.submitList(articleDataBean.getData().getDatas()));
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ImageView imageView = view.findViewById(R.id.imageView);
+
+
         viewModel.getBanner().observe(getViewLifecycleOwner(), homeBannerBean -> {
             Log.e("Will", homeBannerBean.getData().get(1).getImagePath());
             Glide.with(getActivity())

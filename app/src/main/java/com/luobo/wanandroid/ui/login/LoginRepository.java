@@ -35,6 +35,7 @@ public class LoginRepository {
                 } else {
 
                     Log.e(TAG, "onResponse: " + response.body().getErrorCode());
+
                     resultMutableLiveData.setValue(new LoginResult(
                             new LoggedInUser(response.body().getData().getUsername(), response.body().getData().getUsername())));
                 }
@@ -47,8 +48,8 @@ public class LoginRepository {
                 resultMutableLiveData.setValue(new LoginResult("网络异常"));
             }
         });
+
         return resultMutableLiveData;
     }
-
 
 }

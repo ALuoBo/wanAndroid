@@ -1,0 +1,11 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        app:title="关于与帮助">
+
+        <Preference
+            app:key="@string/logout"
+            app:summary="@string/logout"
+            app:title="@string/logout" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

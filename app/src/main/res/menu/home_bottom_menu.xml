@@ -13,4 +13,8 @@
         android:id="@+id/otherFragment"
         android:icon="@drawable/ic_baseline_public_24"
         android:title="@string/other" />
+    <item
+        android:id="@+id/userFragment"
+        android:icon="@drawable/ic_baseline_person_outline_24"
+        android:title="@string/me" />
 </menu>

@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.aq.AqFragment">
+    tools:context=".ui.user.UserFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/aqRecyclerView"
+    <!-- TODO: Update blank fragment seeting_preference -->
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/aq_item_layout" />
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>

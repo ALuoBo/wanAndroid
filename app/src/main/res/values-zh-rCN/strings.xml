@@ -1,13 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">WanAndroid</string>
+    <string name="logout"><![CDATA[退出登录]]></string>
+    <string name="app_name">玩安卓</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="Loading">Loading...</string>
-    <string name="home">Home</string>
-    <string name="aq">Aq</string>
-    <string name="other">Other</string>
-    <string name="me">Me</string>
+    <string name="home">首页</string>
+    <string name="aq">问答</string>
+    <string name="other">广场</string>
+    <string name="me">我的</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -23,7 +25,6 @@
     <string name="password">password</string>
     <string name="checkPassword">check password</string>
     <string name="ok">OK</string>
-    <string name="logout">logout</string>
     <string name="change">Go to register</string>
     <string name="changeBack">Go to login</string>
     <string name="title_activity_login">LoginActivity</string>

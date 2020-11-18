@@ -1,6 +1,5 @@
 package com.luobo.wanandroid.ui.login;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,8 +8,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
 
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
@@ -51,7 +49,6 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(LoginResult loginResult) {
                     Log.e("will", "onChanged: ");
-
 
                     if (loginResult != null) {
                         if (loginResult.getError() != null) {

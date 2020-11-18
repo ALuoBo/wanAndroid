@@ -30,6 +30,7 @@ public class MainActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         user = findViewById(R.id.userImageAtBar);
         username =findViewById(R.id.username);
         toolbarMainText = findViewById(R.id.toolbarMainText);
