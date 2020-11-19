@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,15 +46,21 @@ public class AqFragment extends Fragment {
             @Override
             public void onChanged(AqResponse aqResponse) {
                 data = aqResponse;
-                Log.e("will", "onChanged: " + data.getData().getSize());
+                Toast.makeText(getContext(), "aq On Change", Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
             }
         });
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_aq, container, false);
     }
 
@@ -73,7 +80,6 @@ public class AqFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
             if (data != null) {
-                Log.e("will", "onChanged: " + data.getData().getDatas().get(position).getTitle());
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     holder.tv.setText(Html.fromHtml(data.getData().getDatas().get(position).getTitle(), Html.FROM_HTML_MODE_COMPACT));
                 } else {

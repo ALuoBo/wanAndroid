@@ -14,10 +14,11 @@ public class LoginViewModel extends AndroidViewModel {
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        userRepository = new LoginRepository();
+        userRepository = LoginRepository.getInstance();
     }
 
     public MutableLiveData<LoginResult> loginUser(String name, String psw) {
+        Log.e("will", "viewModel");
         return userRepository.loginUser(name, psw);
     }
 

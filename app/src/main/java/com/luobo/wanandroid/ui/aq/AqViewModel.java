@@ -8,7 +8,6 @@ import androidx.lifecycle.MutableLiveData;
 
 public class AqViewModel extends AndroidViewModel {
     private AqRepository aqRepository;
-    private MutableLiveData<AqResponse> aq =new MutableLiveData<>();
 
     public AqViewModel(@NonNull Application application) {
         super(application);
