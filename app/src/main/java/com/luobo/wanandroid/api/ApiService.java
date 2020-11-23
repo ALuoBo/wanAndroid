@@ -5,6 +5,7 @@ import com.luobo.wanandroid.ui.aq.AqResponse;
 import com.luobo.wanandroid.ui.home.ArticleDataBean;
 import com.luobo.wanandroid.ui.home.HomeBannerBean;
 import com.luobo.wanandroid.ui.login.LoginResponse;
+import com.luobo.wanandroid.ui.user.IntegralBean;
 
 
 import retrofit2.Call;
@@ -31,4 +32,9 @@ public interface ApiService {
     /*问答*/
     @GET("/wenda/list/{pageNum}/json")
     Call<AqResponse> getAq(@Path("pageNum") int curPage);
+
+    /*积分*/
+    @GET("/lg/coin/userinfo/json")
+    Call<IntegralBean> getIntegral();
+
 }

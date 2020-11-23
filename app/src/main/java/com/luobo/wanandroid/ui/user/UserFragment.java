@@ -10,10 +10,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.ui.login.LoginActivity;
+import com.luobo.wanandroid.ui.setting.SettingsActivity;
 
 public class UserFragment extends Fragment {
 
@@ -29,6 +32,10 @@ public class UserFragment extends Fragment {
         ImageView userPhoto = view.findViewById(R.id.userPhoto);
         userPhoto.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), LoginActivity.class));
+        });
+        LinearLayout linearLayout = view.findViewById(R.id.goSetting);
+        linearLayout.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), SettingsActivity.class));
         });
     }
 
