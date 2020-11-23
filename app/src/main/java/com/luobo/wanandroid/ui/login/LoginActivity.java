@@ -49,7 +49,15 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(LoginResult loginResult) {
 
-                    Log.e("will", "onChanged ");
+                    if (loginResult != null) {
+                        if (loginResult.getSuccess() != null) {
+                            Toast.makeText(LoginActivity.this, "Welcome " + loginResult.getSuccess().getDisplayName(), Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                        else if (loginResult.getError() != null) {
+                            Toast.makeText(LoginActivity.this, loginResult.getError(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
                 }
             });

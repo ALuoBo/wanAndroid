@@ -22,8 +22,9 @@
     <string name="username">name</string>
     <string name="password">password</string>
     <string name="checkPassword">check password</string>
-    <string name="ok">OK</string>
+    <string name="ok">OK</string>c
     <string name="logout">logout</string>
+    <string name="openSource">open source</string>
     <string name="change">Go to register</string>
     <string name="changeBack">Go to login</string>
     <string name="title_activity_login">LoginActivity</string>

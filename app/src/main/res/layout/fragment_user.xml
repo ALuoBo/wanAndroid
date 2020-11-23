@@ -199,9 +199,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -209,14 +207,15 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:background="?android:attr/selectableItemBackground"
             android:id="@+id/goSetting"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:background="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:layout_marginLeft="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_settings_24" />

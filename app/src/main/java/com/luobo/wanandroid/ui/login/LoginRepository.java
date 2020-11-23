@@ -30,9 +30,10 @@ public class LoginRepository {
 
     private ApiService service = RetrofitFactory.getInstance();
 
-    private MutableLiveData<LoginResult> resultMutableLiveData = new MutableLiveData<>();
 
     public MutableLiveData<LoginResult> loginUser(String name, String psw) {
+
+        MutableLiveData<LoginResult> resultMutableLiveData = new MutableLiveData<>();
 
         service.loginUser(name, psw).enqueue(new Callback<LoginResponse>() {
 

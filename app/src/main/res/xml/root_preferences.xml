@@ -1,10 +1,13 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory
-        app:title="关于与帮助">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="关于与帮助">
 
         <Preference
+            app:key="@string/openSource"
+            app:title="@string/openSource" />
+        <Preference
             app:key="@string/logout"
-            app:summary="@string/logout"
             app:title="@string/logout" />
 
     </PreferenceCategory>

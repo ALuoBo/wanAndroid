@@ -29,6 +29,10 @@ public interface ApiService {
     @POST("/user/login")
     Call<LoginResponse> loginUser(@Field("username") String userName, @Field("password") String password);
 
+    /*退出登录*/
+    @GET("/user/logout/json")
+    Call loginOut();
+
     /*问答*/
     @GET("/wenda/list/{pageNum}/json")
     Call<AqResponse> getAq(@Path("pageNum") int curPage);

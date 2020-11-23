@@ -16,11 +16,8 @@ class HomePageRepository {
 
     private ApiService service = RetrofitFactory.getInstance();
 
-    MutableLiveData<ArticleDataBean> liveData = new MutableLiveData<>();
-    MutableLiveData<HomeBannerBean> liveBanner = new MutableLiveData<>();
-
     public MutableLiveData<ArticleDataBean> getArticle(final int pageNum) {
-
+        MutableLiveData<ArticleDataBean> liveData = new MutableLiveData<>();
         service.getArticlesList(pageNum).enqueue(new Callback<ArticleDataBean>() {
             @Override
             public void onResponse(Call<ArticleDataBean> call, Response<ArticleDataBean> response) {
@@ -39,6 +36,7 @@ class HomePageRepository {
     }
 
     public MutableLiveData<HomeBannerBean> getBanner() {
+        MutableLiveData<HomeBannerBean> liveBanner = new MutableLiveData<>();
         service.getBannerList().enqueue(new Callback<HomeBannerBean>() {
             @Override
             public void onResponse(Call<HomeBannerBean> call, Response<HomeBannerBean> response) {

@@ -15,7 +15,7 @@ import retrofit2.Response;
 public class AqRepository {
     private static volatile AqRepository instance;
     private ApiService service = RetrofitFactory.getInstance();
-    private MutableLiveData<AqResponse> responseLiveData = new MediatorLiveData<>();
+
 
     private AqRepository() {
     }
@@ -29,6 +29,8 @@ public class AqRepository {
     }
 
     MutableLiveData<AqResponse> getAq(int page) {
+
+        MutableLiveData<AqResponse> responseLiveData = new MediatorLiveData<>();
 
         service.getAq(page).enqueue(new Callback<AqResponse>() {
             @Override
