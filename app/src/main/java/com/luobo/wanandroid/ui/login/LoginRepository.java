@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.luobo.wanandroid.api.ApiService;
 import com.luobo.wanandroid.api.RetrofitFactory;
-import com.luobo.wanandroid.ui.aq.AqRepository;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,6 +14,7 @@ import retrofit2.Response;
 public class LoginRepository {
     static final String TAG = "Will";
     private static volatile LoginRepository instance;
+    private LoggedInUser user = null;
 
     private LoginRepository() {
     }
@@ -27,18 +27,16 @@ public class LoginRepository {
         return instance;
     }
 
-
     private ApiService service = RetrofitFactory.getInstance();
 
-
-    public MutableLiveData<LoginResult> loginUser(String name, String psw) {
+    public MutableLiveData<LoginResult> login(String name, String psw) {
 
         MutableLiveData<LoginResult> resultMutableLiveData = new MutableLiveData<>();
 
-        service.loginUser(name, psw).enqueue(new Callback<LoginResponse>() {
+        service.loginUser(name, psw).enqueue(new Callback<LoggedInUser>() {
 
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+            public void onResponse(Call<LoggedInUser> call, Response<LoggedInUser> response) {
 
                 if (response.body().getErrorCode() == -1) {
                     Log.e(TAG, "onResponse: " + "error code -1");
@@ -47,20 +45,28 @@ public class LoginRepository {
 
                 } else {
                     Log.e(TAG, "onResponse: " + response.body().getErrorCode());
-                    resultMutableLiveData.setValue(new LoginResult(
-                            new LoggedInUser(response.body().getData().getUsername(), response.body().getData().getUsername())));
+
+                    resultMutableLiveData.setValue(new LoginResult(response.body()));
+
+                    setLoggedInUser(response.body());
                 }
 
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<LoggedInUser> call, Throwable t) {
                 Log.e(TAG, "onResponse: " + t);
                 resultMutableLiveData.setValue(new LoginResult("网络异常"));
             }
         });
 
         return resultMutableLiveData;
+    }
+
+    private void setLoggedInUser(LoggedInUser user) {
+        this.user = user;
+        // If user credentials will be cached in local storage, it is recommended it be encrypted
+        // @see https://developer.android.com/training/articles/keystore
     }
 
 }

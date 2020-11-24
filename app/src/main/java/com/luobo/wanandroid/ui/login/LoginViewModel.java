@@ -5,7 +5,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 public class LoginViewModel extends AndroidViewModel {
@@ -17,9 +16,9 @@ public class LoginViewModel extends AndroidViewModel {
         userRepository = LoginRepository.getInstance();
     }
 
-    public MutableLiveData<LoginResult> loginUser(String name, String psw) {
+    public MutableLiveData<LoginResult> login(String name, String psw) {
         Log.e("will", "viewModel");
-        return userRepository.loginUser(name, psw);
+        return userRepository.login(name, psw);
     }
 
 }

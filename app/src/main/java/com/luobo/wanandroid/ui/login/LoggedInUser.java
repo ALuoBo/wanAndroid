@@ -1,23 +1,51 @@
 package com.luobo.wanandroid.ui.login;
 
-/**
- * Data class that captures user information for logged in users retrieved from LoginRepository
- */
 public class LoggedInUser {
 
-    private String userId;
-    private String displayName;
+    /**
+     * data : null
+     * errorCode : -1
+     * errorMsg : 账号密码不匹配！
+     */
 
-    public LoggedInUser(String userId, String displayName) {
-        this.userId = userId;
-        this.displayName = displayName;
+    private Data data;
+    private int errorCode;
+    private String errorMsg;
+
+    public Data getData() {
+        return data;
     }
 
-    public String getUserId() {
-        return userId;
+    public void setData(Data data) {
+        this.data = data;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public int getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
+    static class Data {
+        private String nickname;
+        private String username;
+
+        public String getNickname() {
+            return nickname;
+        }
+
+        public String getUsername() {
+            return username;
+        }
     }
 }

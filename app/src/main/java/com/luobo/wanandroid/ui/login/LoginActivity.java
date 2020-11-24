@@ -1,7 +1,8 @@
 package com.luobo.wanandroid.ui.login;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,16 +46,21 @@ public class LoginActivity extends AppCompatActivity {
             String userName = username.getText().toString();
             String psw = password.getText().toString();
 
-            loginViewModel.loginUser(userName, psw).observe(this, new Observer<LoginResult>() {
+            loginViewModel.login(userName, psw).observe(this, new Observer<LoginResult>() {
                 @Override
                 public void onChanged(LoginResult loginResult) {
 
                     if (loginResult != null) {
                         if (loginResult.getSuccess() != null) {
-                            Toast.makeText(LoginActivity.this, "Welcome " + loginResult.getSuccess().getDisplayName(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Welcome " + loginResult.getSuccess().getData().getNickname(), Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent();
+                            intent.putExtra("username", loginResult.getSuccess().getData().getNickname());
+
+                            setResult(Activity.RESULT_OK);
+
                             finish();
-                        }
-                        else if (loginResult.getError() != null) {
+
+                        } else if (loginResult.getError() != null) {
                             Toast.makeText(LoginActivity.this, loginResult.getError(), Toast.LENGTH_SHORT).show();
                         }
                     }

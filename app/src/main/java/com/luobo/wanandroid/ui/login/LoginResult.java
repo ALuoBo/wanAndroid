@@ -1,7 +1,5 @@
 package com.luobo.wanandroid.ui.login;
 
-import androidx.annotation.Nullable;
-
 /**
  * Authentication result : success (user details) or error message.
  */

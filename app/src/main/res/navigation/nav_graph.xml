@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_other"/>
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.luobo.wanandroid.ui.user.UserFragment"
+        android:name="com.luobo.wanandroid.ui.user.PersonCenterFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
 </navigation>

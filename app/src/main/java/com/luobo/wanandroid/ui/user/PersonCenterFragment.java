@@ -16,7 +16,7 @@ import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.ui.login.LoginActivity;
 import com.luobo.wanandroid.ui.setting.SettingsActivity;
 
-public class UserFragment extends Fragment {
+public class PersonCenterFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

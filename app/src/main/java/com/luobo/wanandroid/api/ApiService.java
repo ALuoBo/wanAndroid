@@ -1,10 +1,9 @@
 package com.luobo.wanandroid.api;
 
-import com.luobo.wanandroid.ui.aq.AqFragment;
 import com.luobo.wanandroid.ui.aq.AqResponse;
 import com.luobo.wanandroid.ui.home.ArticleDataBean;
 import com.luobo.wanandroid.ui.home.HomeBannerBean;
-import com.luobo.wanandroid.ui.login.LoginResponse;
+import com.luobo.wanandroid.ui.login.LoggedInUser;
 import com.luobo.wanandroid.ui.user.IntegralBean;
 
 
@@ -27,7 +26,7 @@ public interface ApiService {
     /*登录*/
     @FormUrlEncoded
     @POST("/user/login")
-    Call<LoginResponse> loginUser(@Field("username") String userName, @Field("password") String password);
+    Call<LoggedInUser> loginUser(@Field("username") String userName, @Field("password") String password);
 
     /*退出登录*/
     @GET("/user/logout/json")
