@@ -10,6 +10,7 @@
     <string name="aq">问答</string>
     <string name="other">广场</string>
     <string name="me">我的</string>
+    <string name="noLogin">登录开启更多功能</string>
     <string name="openSource">开源</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

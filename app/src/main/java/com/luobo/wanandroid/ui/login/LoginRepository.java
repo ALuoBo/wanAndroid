@@ -12,9 +12,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginRepository {
+
     static final String TAG = "Will";
+
     private static volatile LoginRepository instance;
-    private LoggedInUser user = null;
+
 
     private LoginRepository() {
     }
@@ -64,7 +66,8 @@ public class LoginRepository {
     }
 
     private void setLoggedInUser(LoggedInUser user) {
-        this.user = user;
+        Log.e(TAG, "setLoggedInUser: " + user.getData().getNickname());
+        LoggedInUser.getInstance().setData(user.getData());
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }

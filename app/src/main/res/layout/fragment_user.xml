@@ -29,8 +29,8 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/userPhoto"
                 style="@style/circleImageStyle"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_margin="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
@@ -40,10 +40,11 @@
                 tools:src="@drawable/ic_github" />
 
             <TextView
+                android:text="@string/noLogin"
                 android:id="@+id/username"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:textColor="@android:color/primary_text_light"
                 android:textSize="18sp"

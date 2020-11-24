@@ -2,6 +2,19 @@ package com.luobo.wanandroid.ui.login;
 
 public class LoggedInUser {
 
+    private static LoggedInUser instance;
+
+    private LoggedInUser() {
+    }
+
+    public static LoggedInUser getInstance() {
+        if (instance == null) {
+            return instance = new LoggedInUser();
+        } else {
+            return instance;
+        }
+    }
+
     /**
      * data : null
      * errorCode : -1
@@ -12,33 +25,42 @@ public class LoggedInUser {
     private int errorCode;
     private String errorMsg;
 
-    public Data getData() {
-        return data;
-    }
-
     public void setData(Data data) {
         this.data = data;
-    }
-
-    public int getErrorCode() {
-        return errorCode;
     }
 
     public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
     }
 
-    public String getErrorMsg() {
-        return errorMsg;
-    }
-
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
     }
 
-    static class Data {
+    public Data getData() {
+        return data;
+    }
+
+    public int getErrorCode() {
+        return errorCode;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public class Data {
+
         private String nickname;
         private String username;
+
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
 
         public String getNickname() {
             return nickname;
