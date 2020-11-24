@@ -40,13 +40,11 @@ public class AqFragment extends Fragment {
         recyclerView.setAdapter(adapter = new AqAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        viewModel = new ViewModelProvider(requireActivity()).get(AqViewModel.class);
 
         viewModel.getAq(1).observe(getViewLifecycleOwner(), new Observer<AqResponse>() {
             @Override
             public void onChanged(AqResponse aqResponse) {
                 data = aqResponse;
-                Toast.makeText(getContext(), "aq On Change", Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
             }
         });
@@ -60,7 +58,7 @@ public class AqFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        viewModel = new ViewModelProvider(requireActivity()).get(AqViewModel.class);
         return inflater.inflate(R.layout.fragment_aq, container, false);
     }
 

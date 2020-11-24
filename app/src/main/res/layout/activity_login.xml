@@ -107,6 +107,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
-        app:layout_constraintVertical_bias="0.26999998"
+        app:layout_constraintVertical_bias="0.13999999"
         app:strokeColor="?attr/colorPrimary" />
 </androidx.constraintlayout.widget.ConstraintLayout>

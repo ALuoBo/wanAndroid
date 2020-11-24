@@ -1,9 +1,5 @@
 package com.luobo.wanandroid.api;
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.franmontiel.persistentcookiejar.ClearableCookieJar;
@@ -49,7 +45,6 @@ public class RetrofitFactory {
 
                 .build();
 
-        ApiService service = retrofit.create(ApiService.class);
-        return service;
+        return retrofit.create(ApiService.class);
     }
 }

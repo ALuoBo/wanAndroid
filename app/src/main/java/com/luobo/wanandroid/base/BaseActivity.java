@@ -1,4 +1,4 @@
-package com.luobo.wanandroid;
+package com.luobo.wanandroid.base;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.luobo.wanandroid.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected Boolean nightMode;

@@ -9,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.luobo.wanandroid.base.BaseActivity;
 import com.luobo.wanandroid.ui.login.LoginViewModel;
 
 public class MainActivity extends BaseActivity {
