@@ -1,9 +1,7 @@
 package com.luobo.wanandroid.ui.user;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -48,13 +45,15 @@ public class PersonCenterFragment extends Fragment {
         userName = view.findViewById(R.id.username);
 
         TextView integral = view.findViewById(R.id.integral);
-        viewModel.getIntegral().observe(requireActivity(), new Observer<IntegralBean>() {
-            @Override
-            public void onChanged(IntegralBean integralBean) {
-                Log.e("TAG", "onChanged: " + integralBean.getData().getCoinCount());
-                integral.setText(String.valueOf(integralBean.getData().getCoinCount()));
-            }
-        });
+        if (LoggedInUser.getInstance().getData() != null) {
+            viewModel.getIntegral().observe(requireActivity(), new Observer<IntegralBean>() {
+                @Override
+                public void onChanged(IntegralBean integralBean) {
+                    Log.e("TAG", "onChanged: " + integralBean.getData().getCoinCount());
+                    integral.setText(String.valueOf(integralBean.getData().getCoinCount()));
+                }
+            });
+        }
     }
 
     @Override

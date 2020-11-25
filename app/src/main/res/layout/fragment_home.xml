@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline"
-            tools:listitem="@layout/home_item_layout" />
+            tools:listitem="@layout/article_item_layout" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

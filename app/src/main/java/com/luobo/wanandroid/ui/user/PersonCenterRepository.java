@@ -31,9 +31,9 @@ class PersonCenterRepository {
         service.getIntegral().enqueue(new Callback<IntegralBean>() {
             @Override
             public void onResponse(Call<IntegralBean> call, Response<IntegralBean> response) {
-               // Log.e("will", "onResponse: " + response.body().getErrorCode()+response.body().getData().getCoinCount());
+               Log.e("will", "onResponse: " + response.body().getErrorCode()+response.body().getData().getCoinCount());
                 if (response.body().getErrorCode() != -1) {
-             //      data.setValue(response.body());
+                   data.setValue(response.body());
 
                 }
             }
