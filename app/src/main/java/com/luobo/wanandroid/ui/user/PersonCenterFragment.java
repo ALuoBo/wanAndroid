@@ -68,8 +68,8 @@ public class PersonCenterFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         getActivity().findViewById(R.id.appBar).setVisibility(View.VISIBLE);
     }
 

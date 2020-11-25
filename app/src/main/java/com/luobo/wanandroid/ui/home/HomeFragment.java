@@ -21,13 +21,11 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel viewModel;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         HomePageAdapter adapter = new HomePageAdapter(getContext(), new ArticleDiffUtil());
 
         viewModel.getData(0).observe(getViewLifecycleOwner(), articleDataBean -> adapter.submitList(articleDataBean.getData().getDatas()));

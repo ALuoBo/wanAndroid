@@ -40,4 +40,8 @@ public interface ApiService {
     @GET("/lg/coin/userinfo/json")
     Call<IntegralBean> getIntegral();
 
+    /*搜索*/
+    @FormUrlEncoded
+    @POST("/article/query/{page}/json")
+    Call<ArticleDataBean> search(@Path("page") String page, @Field("k") String key);
 }
