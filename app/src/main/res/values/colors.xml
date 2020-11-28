@@ -6,5 +6,5 @@
 
     <color name="indigo_500">#2196F3</color>
     <color name="indigo_200">#FFAB91</color>
-    <color name="searchBackground">#FFFFFF</color>
+    <color name="searchBackground">#8FFFFFFF</color>
 </resources>

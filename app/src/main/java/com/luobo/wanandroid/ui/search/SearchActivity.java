@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DiffUtil;
@@ -34,6 +35,9 @@ public class SearchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_serach);
         searchView = findViewById(R.id.searchView);
+        searchView.findViewById(R.id.search_plate).setBackground(null);
+        searchView.findViewById(R.id.submit_area).setBackground(null);
+        searchView.setIconifiedByDefault(false);
         recyclerView = findViewById(R.id.searchResultRecycler);
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
         adapter = new MyAdapter(new ArticleDiffUtil());
@@ -80,9 +84,10 @@ public class SearchActivity extends BaseActivity {
         public void onBindViewHolder(@NonNull SearchResultViewHolder holder, int position) {
             TextView textView = holder.itemView.findViewById(R.id.title);
             TextView classify = holder.itemView.findViewById(R.id.classify);
+            CardView cardView = holder.itemView.findViewById(R.id.articleItem);
             textView.setText(Html.fromHtml(getItem(position).getTitle()));
             classify.setText(getItem(position).getChapterName());
-            holder.itemView.setOnClickListener(v -> {
+            cardView.setOnClickListener(v -> {
                 Intent intent = new Intent(SearchActivity.this, WebActivity.class);
                 intent.putExtra("URL", getItem(position).getLink());
                 startActivity(intent);

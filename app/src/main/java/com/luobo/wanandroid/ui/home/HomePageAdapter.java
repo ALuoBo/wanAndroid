@@ -38,13 +38,10 @@ class HomePageAdapter extends ListAdapter<ArticleDataBean.DataBean.DatasBean, Ho
         CardView cardView =holder.itemView.findViewById(R.id.articleItem);
         textView.setText(getItem(position).getTitle());
         classify.setText(getItem(position).getChapterName());
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, WebActivity.class);
-                intent.putExtra("URL", getItem(position).getLink());
-                context.startActivity(intent);
-            }
+        cardView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, WebActivity.class);
+            intent.putExtra("URL", getItem(position).getLink());
+            context.startActivity(intent);
         });
     }
 

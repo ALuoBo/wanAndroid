@@ -25,6 +25,7 @@
     <string name="ok">OK</string>c
     <string name="logout">logout</string>
     <string name="noLogin">not login</string>
+    <string name="searchQueryHint">Separate keywords with spaces</string>
     <string name="openSource">open source</string>
     <string name="change">Go to register</string>
     <string name="changeBack">Go to login</string>

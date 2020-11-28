@@ -14,7 +14,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
@@ -23,34 +25,19 @@ import com.luobo.wanandroid.WebActivity;
 public class AqFragment extends Fragment {
     RecyclerView recyclerView;
     AqViewModel viewModel;
-    AqResponse data;
     AqAdapter adapter;
-
-    public AqFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = view.findViewById(R.id.aqRecyclerView);
-        recyclerView.setAdapter(adapter = new AqAdapter());
+        recyclerView.setAdapter(adapter = new AqAdapter(new AqDiffUtil()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
-        viewModel.getAq(1).observe(getViewLifecycleOwner(), new Observer<AqResponse>() {
-            @Override
-            public void onChanged(AqResponse aqResponse) {
-                data = aqResponse;
-                adapter.notifyDataSetChanged();
-            }
+        viewModel.getAq(1).observe(getViewLifecycleOwner(), aqResponse -> {
+            adapter.submitList(aqResponse.getData().getDatas());
         });
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -61,7 +48,11 @@ public class AqFragment extends Fragment {
     }
 
 
-    class AqAdapter extends RecyclerView.Adapter<AqAdapter.MyViewHolder> {
+    class AqAdapter extends ListAdapter<AqResponse.DataBean.DatasBean, AqAdapter.MyViewHolder> {
+
+        protected AqAdapter(@NonNull DiffUtil.ItemCallback<AqResponse.DataBean.DatasBean> diffCallback) {
+            super(diffCallback);
+        }
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -72,32 +63,21 @@ public class AqFragment extends Fragment {
             return holder;
         }
 
-
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            if (data != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    holder.tv.setText(Html.fromHtml(data.getData().getDatas().get(position).getTitle(), Html.FROM_HTML_MODE_COMPACT));
-                } else {
-                    holder.tv.setText(Html.fromHtml(data.getData().getDatas().get(position).getTitle()));
 
-                }
-                holder.tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(getContext(), WebActivity.class);
-                        intent.putExtra("URL", data.getData().getDatas().get(position).getLink());
-                        startActivity(intent);
-                    }
-                });
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                holder.tv.setText(Html.fromHtml(getItem(position).getTitle(), Html.FROM_HTML_MODE_COMPACT));
+
+            } else {
+                holder.tv.setText(Html.fromHtml(getItem(position).getTitle()));
+
             }
-        }
-
-        @Override
-        public int getItemCount() {
-            if (data != null)
-                return data.getData().getSize();
-            else return 0;
+            holder.tv.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), WebActivity.class);
+                intent.putExtra("URL", getItem(position).getLink());
+                startActivity(intent);
+            });
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
