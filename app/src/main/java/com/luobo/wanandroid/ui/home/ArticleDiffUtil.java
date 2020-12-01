@@ -21,4 +21,5 @@ public class ArticleDiffUtil extends DiffUtil.ItemCallback<ArticleDataBean.DataB
 
         return oldItem.getId() == newItem.getId();
     }
+
 }

@@ -1,38 +1,69 @@
 package com.luobo.wanandroid.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.luobo.wanandroid.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HomeFragment extends Fragment {
+    static String TAG = "HomeFragment";
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        HomePageAdapter adapter = new HomePageAdapter(getContext(), new ArticleDiffUtil());
+        RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        viewModel.getData().observe(getViewLifecycleOwner(), articleDataBean -> {
+
+            List<ArticleDataBean.DataBean.DatasBean> data = new ArrayList<>();
+            data.addAll(articleDataBean.getData().getDatas());
+            adapter.submitList(data);
+
+            Log.e(TAG, "observe" + articleDataBean.getData().getDatas().toString());
+            for (ArticleDataBean.DataBean.DatasBean x : articleDataBean.getData().getDatas()
+            ) {
+                Log.e(TAG, String.valueOf(x.getId()));
+            }
+        });
+
+
+        NestedScrollView scrollView = getActivity().findViewById(R.id.parentScroll);
+        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+                    //底部加载
+                    Log.e("will", "onScrollChange: +load more");
+                    viewModel.getData();
+                }
+            }
+        });
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
-        HomePageAdapter adapter = new HomePageAdapter(getContext(), new ArticleDiffUtil());
-
-        viewModel.getData(0).observe(getViewLifecycleOwner(), articleDataBean -> adapter.submitList(articleDataBean.getData().getDatas()));
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        return view;
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
 }

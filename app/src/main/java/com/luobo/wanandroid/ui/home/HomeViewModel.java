@@ -11,11 +11,11 @@ public class HomeViewModel extends AndroidViewModel {
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
-        articleRepository = new HomePageRepository();
+        articleRepository = HomePageRepository.getInstance();
     }
 
-    MutableLiveData<ArticleDataBean> getData(int pageNum) {
-        return articleRepository.getArticle(pageNum);
+    MutableLiveData<ArticleDataBean> getData() {
+        return articleRepository.getArticle();
     }
 
     MutableLiveData<HomeBannerBean> getBanner() {
