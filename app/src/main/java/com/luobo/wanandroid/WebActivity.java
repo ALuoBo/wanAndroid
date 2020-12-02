@@ -2,10 +2,12 @@ package com.luobo.wanandroid;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -41,7 +43,14 @@ public class WebActivity extends BaseActivity {
 
     private void initWebView() {
         mWebView.canGoBack();
-        mWebView.setWebViewClient(new WebViewClient());
+        //TODO
+    /*    mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return !request.getUrl().toString().startsWith("http://") && !request.getUrl().toString().startsWith("https://");
+            }
+
+    });*/
 
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setUseWideViewPort(true); //将图片调整到适合webView的大小
