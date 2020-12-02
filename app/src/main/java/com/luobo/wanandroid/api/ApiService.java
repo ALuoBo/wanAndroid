@@ -43,5 +43,5 @@ public interface ApiService {
     /*搜索*/
     @FormUrlEncoded
     @POST("/article/query/{page}/json")
-    Call<ArticleDataBean> search(@Path("page") String page, @Field("k") String key);
+    Call<ArticleDataBean> search(@Path("page") int page, @Field("k") String key);
 }

@@ -19,13 +19,11 @@ import com.luobo.wanandroid.R;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class HomeFragment extends Fragment {
     static String TAG = "HomeFragment";
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
         HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         HomePageAdapter adapter = new HomePageAdapter(getContext(), new ArticleDiffUtil());
         RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
@@ -36,24 +34,14 @@ public class HomeFragment extends Fragment {
             List<ArticleDataBean.DataBean.DatasBean> data = new ArrayList<>();
             data.addAll(articleDataBean.getData().getDatas());
             adapter.submitList(data);
-
-            Log.e(TAG, "observe" + articleDataBean.getData().getDatas().toString());
-            for (ArticleDataBean.DataBean.DatasBean x : articleDataBean.getData().getDatas()
-            ) {
-                Log.e(TAG, String.valueOf(x.getId()));
-            }
         });
 
 
         NestedScrollView scrollView = getActivity().findViewById(R.id.parentScroll);
-        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
-                    //底部加载
-                    Log.e("will", "onScrollChange: +load more");
-                    viewModel.getData();
-                }
+        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+                //底部加载
+                viewModel.getData();
             }
         });
 
@@ -62,7 +50,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 

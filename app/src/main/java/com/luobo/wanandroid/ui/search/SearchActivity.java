@@ -25,11 +25,16 @@ import com.luobo.wanandroid.base.BaseActivity;
 import com.luobo.wanandroid.ui.home.ArticleDataBean;
 import com.luobo.wanandroid.ui.home.ArticleDiffUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchActivity extends BaseActivity {
     SearchView searchView;
     RecyclerView recyclerView;
     SearchViewModel viewModel;
     MyAdapter adapter;
+    String keywords = "";
+    LoadMoreObserver observer = new LoadMoreObserver();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,21 +54,26 @@ public class SearchActivity extends BaseActivity {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                Log.e("will", "onScrolled: YYYY");
-
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy < 0) return;
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1 && !keywords.isEmpty()) {
+                    viewModel.LoadMoreResult(keywords).observe(SearchActivity.this, observer);
+                }
             }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // TODO: 2020/11/25 未添加访问其它页
-                viewModel.getSearchResult("0", query).observe(SearchActivity.this, new Observer<ArticleDataBean>() {
+                keywords = query;
+                viewModel.getSearchResult(keywords).observe(SearchActivity.this, new Observer<ArticleDataBean>() {
                     @Override
                     public void onChanged(ArticleDataBean articleDataBean) {
+
                         adapter.submitList(articleDataBean.getData().getDatas());
+
                     }
                 });
-
                 return false;
             }
 
@@ -76,6 +86,10 @@ public class SearchActivity extends BaseActivity {
     }
 
     class MyAdapter extends ListAdapter<ArticleDataBean.DataBean.DatasBean, MyAdapter.SearchResultViewHolder> {
+        //private static final int HEADER_VIEW_TYPE = -1;
+        private static final int NORMAL_VIEW_TYPE = 0;
+        private static final int FOOTER_VIEW_TYPE = 1;
+
         protected MyAdapter(@NonNull DiffUtil.ItemCallback<ArticleDataBean.DataBean.DatasBean> diffCallback) {
             super(diffCallback);
         }
@@ -83,24 +97,52 @@ public class SearchActivity extends BaseActivity {
         @NonNull
         @Override
         public SearchResultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            SearchResultViewHolder holder = new SearchResultViewHolder(LayoutInflater.from(SearchActivity.this)
-                    .inflate(R.layout.article_item_layout, parent,
-                            false));
-            return holder;
+            View itemView;
+            switch (viewType) {
+                case FOOTER_VIEW_TYPE:
+                    itemView = LayoutInflater.from(SearchActivity.this).inflate(R.layout.footer_layout, parent, false);
+                    break;
+                default:
+                    itemView = LayoutInflater.from(SearchActivity.this).inflate(R.layout.article_item_layout, parent, false);
+                    break;
+            }
+
+            return new SearchResultViewHolder(itemView);
+        }
+
+        @Override
+        public int getItemCount() {
+            return super.getItemCount() + 1;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+           /* if (position == 0) {
+               return HEADER_VIEW_TYPE;
+            } else if (position == getItemCount() - 1) {
+                return FOOTER_VIEW_TYPE;
+            } else return NORMAL_VIEW_TYPE;*/
+
+            if (position == getItemCount() - 1) return FOOTER_VIEW_TYPE;
+            else return NORMAL_VIEW_TYPE;
         }
 
         @Override
         public void onBindViewHolder(@NonNull SearchResultViewHolder holder, int position) {
-            TextView textView = holder.itemView.findViewById(R.id.title);
-            TextView classify = holder.itemView.findViewById(R.id.classify);
-            CardView cardView = holder.itemView.findViewById(R.id.articleItem);
-            textView.setText(Html.fromHtml(getItem(position).getTitle()));
-            classify.setText(getItem(position).getChapterName());
-            cardView.setOnClickListener(v -> {
-                Intent intent = new Intent(SearchActivity.this, WebActivity.class);
-                intent.putExtra("URL", getItem(position).getLink());
-                startActivity(intent);
-            });
+            if (position == getItemCount() - 1) {
+                return;
+            } else {
+                TextView textView = holder.itemView.findViewById(R.id.title);
+                TextView classify = holder.itemView.findViewById(R.id.classify);
+                CardView cardView = holder.itemView.findViewById(R.id.articleItem);
+                textView.setText(Html.fromHtml(getItem(position).getTitle()));
+                classify.setText(getItem(position).getChapterName());
+                cardView.setOnClickListener(v -> {
+                    Intent intent = new Intent(SearchActivity.this, WebActivity.class);
+                    intent.putExtra("URL", getItem(position).getLink());
+                    startActivity(intent);
+                });
+            }
         }
 
         class SearchResultViewHolder extends RecyclerView.ViewHolder {
@@ -108,6 +150,16 @@ public class SearchActivity extends BaseActivity {
             public SearchResultViewHolder(@NonNull View itemView) {
                 super(itemView);
             }
+        }
+    }
+
+    class LoadMoreObserver implements Observer<ArticleDataBean> {
+        @Override
+        public void onChanged(ArticleDataBean articleDataBean) {
+            Log.e("myTag", "onChange");
+            List<ArticleDataBean.DataBean.DatasBean> data = new ArrayList<>();
+            data.addAll(articleDataBean.getData().getDatas());
+            adapter.submitList(data);
         }
     }
 }

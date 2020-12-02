@@ -46,11 +46,9 @@ class HomePageRepository {
                     isFirstRequest = false;
                 } else {
                     datasBean.getData().getDatas().addAll(response.body().getData().getDatas());
-                    Log.e(TAG, "onResponse: " + liveData.getValue().getData().getDatas().get(0));
                 }
-                ArticleDataBean articleDataBean = new ArticleDataBean();
-                articleDataBean.setData(datasBean.getData());
-                liveData.setValue(articleDataBean);
+                //不管值是否相同，只看version的值,都会执行onchange()
+                liveData.setValue(datasBean);
                 page++;
                 isLoading = false;
             }
@@ -60,7 +58,6 @@ class HomePageRepository {
                 isLoading = false;
             }
         });
-        Log.e("Article", String.valueOf(page));
 
         return liveData;
     }

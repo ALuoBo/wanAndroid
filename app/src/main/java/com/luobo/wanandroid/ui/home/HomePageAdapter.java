@@ -12,9 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
 

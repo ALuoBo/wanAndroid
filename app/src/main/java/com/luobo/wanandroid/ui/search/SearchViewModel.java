@@ -12,8 +12,11 @@ public class SearchViewModel extends ViewModel {
         searchRepository = SearchRepository.getInstance();
     }
 
-    public MutableLiveData<ArticleDataBean> getSearchResult(String page, String keywords) {
-        return searchRepository.getSearchResult(page, keywords);
+    public MutableLiveData<ArticleDataBean> getSearchResult(String keywords) {
+        return searchRepository.getSearchResult(keywords);
+    }
 
+    public MutableLiveData<ArticleDataBean> LoadMoreResult(String keywords) {
+        return searchRepository.LoadMoreResult(keywords);
     }
 }
