@@ -23,6 +23,10 @@ public interface ApiService {
     @GET("banner/json")
     Call<HomeBannerBean> getBannerList();
 
+    /*置顶文章*/
+    @GET("/article/top/json")
+    Call<ArticleDataBean> getToppingArticles();
+
     /*登录*/
     @FormUrlEncoded
     @POST("/user/login")

@@ -5,6 +5,8 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/design_default_color_background</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+
     </style>
 
     <style name="Theme.MyTheme" parent="AppTheme">

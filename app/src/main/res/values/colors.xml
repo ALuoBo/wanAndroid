@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimer">#E8F5E9</color>
-    <color name="colorPrimerDark">#E8F5E9</color>
     <color name="colorAccent">#39E4A6</color>
     <color name="black_overlay">#66000000</color>
 
     <color name="indigo_500">#39E4A6</color>
     <color name="indigo_200">#F74C44</color>
+    <color name="ColorBlock">#F3F5F6</color>
 </resources>
