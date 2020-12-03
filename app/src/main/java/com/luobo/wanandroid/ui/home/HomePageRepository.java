@@ -35,7 +35,6 @@ class HomePageRepository {
     MutableLiveData<ArticleDataBean> liveData = new MutableLiveData<>();
 
     public MutableLiveData<ArticleDataBean> getArticle() {
-
         if (isLoading) return liveData;
         isLoading = true;
         service.getArticlesList(page).enqueue(new Callback<ArticleDataBean>() {

@@ -43,14 +43,13 @@ public class WebActivity extends BaseActivity {
 
     private void initWebView() {
         mWebView.canGoBack();
-        //TODO
-    /*    mWebView.setWebViewClient(new WebViewClient() {
+        mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 return !request.getUrl().toString().startsWith("http://") && !request.getUrl().toString().startsWith("https://");
             }
 
-    });*/
+    });
 
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setUseWideViewPort(true); //将图片调整到适合webView的大小
