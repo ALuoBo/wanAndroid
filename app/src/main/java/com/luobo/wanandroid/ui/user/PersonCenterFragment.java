@@ -58,7 +58,7 @@ public class PersonCenterFragment extends Fragment {
 
     @Override
     public void onResume() {
-        getActivity().findViewById(R.id.appBar).setVisibility(View.GONE);
+        getActivity().findViewById(R.id.toolbar).setVisibility(View.GONE);
 
         if (LoggedInUser.getInstance().getData() != null) {
             userName.setText(LoggedInUser.getInstance().getData().getUsername());
@@ -69,7 +69,7 @@ public class PersonCenterFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        getActivity().findViewById(R.id.appBar).setVisibility(View.VISIBLE);
+        getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
     }
 
     @Override

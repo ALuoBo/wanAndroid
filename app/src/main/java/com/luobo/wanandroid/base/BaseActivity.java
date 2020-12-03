@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.luobo.wanandroid.R;
+import static android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
 
 public abstract class BaseActivity extends AppCompatActivity {
     protected Boolean nightMode;
@@ -47,12 +47,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     //沉浸式状态栏
-    private void transparentStatusBar() {
+    protected void transparentStatusBar() {
         View decorView = getWindow().getDecorView();
         if (nightMode) {
-            getWindow().setStatusBarColor(getColor(R.color.indigo_200));
+            this.getWindow().getDecorView().setSystemUiVisibility(SYSTEM_UI_FLAG_LAYOUT_STABLE);
         } else {
-            getWindow().setStatusBarColor(getColor(R.color.colorAccent));
+            this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
     }

@@ -3,6 +3,6 @@
     <style name="Theme.MyTheme"
         parent="AppTheme">
         <item name="colorPrimary">@color/indigo_200</item>
-        <item name="colorPrimaryDark">@color/indigo_200</item>
+        <item name="colorPrimaryDark">@color/colorPrimer</item>
     </style>
 </resources>
