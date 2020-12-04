@@ -1,7 +1,6 @@
 package com.luobo.wanandroid.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +26,24 @@ public class HomeFragment extends Fragment {
         HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         HomePageAdapter adapter = new HomePageAdapter(getContext(), new ArticleDiffUtil());
         RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
+
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         viewModel.getData().observe(getViewLifecycleOwner(), articleDataBean -> {
-
             List<ArticleDataBean.DataBean.DatasBean> data = new ArrayList<>();
             data.addAll(articleDataBean.getData().getDatas());
             adapter.submitList(data);
+        });
+
+        RecyclerView toppingRecycler = view.findViewById(R.id.homeTopping);
+        LinearLayoutManager toppingLinear = new LinearLayoutManager(getContext());
+        toppingLinear.setOrientation(RecyclerView.HORIZONTAL);
+        toppingRecycler.setLayoutManager(toppingLinear);
+        ToppingAdapter toppingAdapter = new ToppingAdapter(new ToppingDiffUtil(), getContext());
+        toppingRecycler.setAdapter(toppingAdapter);
+
+        viewModel.getTopping().observe(getViewLifecycleOwner(), toppingBean -> {
+            toppingAdapter.submitList(toppingBean.getData());
         });
 
 

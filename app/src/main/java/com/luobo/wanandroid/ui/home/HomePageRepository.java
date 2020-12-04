@@ -71,10 +71,30 @@ class HomePageRepository {
 
             @Override
             public void onFailure(Call<HomeBannerBean> call, Throwable t) {
-                Log.e("Will", "Banner onFailure: " + t.toString());
+
             }
         });
 
         return liveBanner;
     }
+
+    public MutableLiveData<ToppingBean> getTopping() {
+
+        MutableLiveData<ToppingBean> liveData = new MutableLiveData<>();
+        service.getToppingArticles().enqueue(new Callback<ToppingBean>() {
+            @Override
+            public void onResponse(Call<ToppingBean> call, Response<ToppingBean> response) {
+                liveData.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ToppingBean> call, Throwable t) {
+
+            }
+        });
+
+        return liveData;
+    }
+
+
 }

@@ -3,6 +3,7 @@ package com.luobo.wanandroid.api;
 import com.luobo.wanandroid.ui.aq.AqResponse;
 import com.luobo.wanandroid.ui.home.ArticleDataBean;
 import com.luobo.wanandroid.ui.home.HomeBannerBean;
+import com.luobo.wanandroid.ui.home.ToppingBean;
 import com.luobo.wanandroid.ui.login.LoggedInUser;
 import com.luobo.wanandroid.ui.user.IntegralBean;
 
@@ -25,7 +26,7 @@ public interface ApiService {
 
     /*置顶文章*/
     @GET("/article/top/json")
-    Call<ArticleDataBean> getToppingArticles();
+    Call<ToppingBean> getToppingArticles();
 
     /*登录*/
     @FormUrlEncoded

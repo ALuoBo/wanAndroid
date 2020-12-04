@@ -48,7 +48,7 @@ class HomePageAdapter extends ListAdapter<ArticleDataBean.DataBean.DatasBean, Ho
         View itemView;
         switch (viewType) {
             case HEADER_VIEW_TYPE:
-                itemView = LayoutInflater.from(context).inflate(R.layout.head_layout, parent, false);
+                itemView = LayoutInflater.from(context).inflate(R.layout.article_head_item_layout, parent, false);
                 break;
             case FOOTER_VIEW_TYPE:
                 itemView = LayoutInflater.from(context).inflate(R.layout.footer_layout, parent, false);
@@ -63,7 +63,7 @@ class HomePageAdapter extends ListAdapter<ArticleDataBean.DataBean.DatasBean, Ho
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        if (position == getItemCount() - 1 || position == 0) {
+        if (position == getItemCount() - 1) {
             return;
         } else {
             TextView textView = holder.itemView.findViewById(R.id.title);

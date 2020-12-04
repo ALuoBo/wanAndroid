@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieCircle"
@@ -85,13 +86,13 @@
         app:layout_constraintVertical_bias="0.1">
 
         <EditText
-            android:visibility="gone"
             android:id="@+id/checkPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/checkPassword"
             android:inputType="numberPassword"
-            android:maxLength="8" />
+            android:maxLength="8"
+            android:visibility="gone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
