@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -19,6 +22,7 @@ import static android.view.KeyEvent.KEYCODE_BACK;
 
 public class WebActivity extends BaseActivity {
     WebView mWebView;
+    ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -31,14 +35,33 @@ public class WebActivity extends BaseActivity {
         initWebView();
         Intent intent = getIntent();
         mWebView.loadUrl(intent.getStringExtra("URL"));
+        progressBar = findViewById(R.id.webProgress);
     }
 
     private void initWebView() {
         mWebView.canGoBack();
-        mWebView.setWebViewClient(new WebViewClient() {
+      /*  mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 return !request.getUrl().toString().startsWith("http://") && !request.getUrl().toString().startsWith("https://");
+            }
+
+        });*/
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                if (newProgress == 100) {
+
+                    progressBar.setVisibility(View.GONE);
+                } else {
+
+                    if (progressBar.getVisibility() == View.GONE)
+                        progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setProgress(newProgress);
+
+                }
+                super.onProgressChanged(view, newProgress);
             }
 
         });
