@@ -1,6 +1,7 @@
 package com.luobo.wanandroid.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,17 @@ public class HomeFragment extends Fragment {
     static String TAG = "HomeFragment";
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
         HomePageAdapter adapter = new HomePageAdapter(getContext(), new ArticleDiffUtil());
         RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
+
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -47,7 +55,7 @@ public class HomeFragment extends Fragment {
         });
 
 
-        NestedScrollView scrollView = getActivity().findViewById(R.id.parentScroll);
+        NestedScrollView scrollView = getActivity().findViewById(R.id.homeScroll);
         scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
                 //底部加载
@@ -55,12 +63,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
 }

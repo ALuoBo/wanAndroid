@@ -26,11 +26,6 @@ public class PersonCenterFragment extends Fragment {
     PersonCenterViewModel viewModel;
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ImageView userPhoto = view.findViewById(R.id.userPhoto);
@@ -54,22 +49,6 @@ public class PersonCenterFragment extends Fragment {
                 }
             });
         }
-    }
-
-    @Override
-    public void onResume() {
-        getActivity().findViewById(R.id.toolbar).setVisibility(View.GONE);
-
-        if (LoggedInUser.getInstance().getData() != null) {
-            userName.setText(LoggedInUser.getInstance().getData().getUsername());
-        }
-        super.onResume();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        getActivity().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.luobo.wanandroid;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.navigation.NavController;
@@ -11,7 +9,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.luobo.wanandroid.base.BaseActivity;
-import com.luobo.wanandroid.ui.search.SearchActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -35,10 +32,10 @@ public class MainActivity extends BaseActivity {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
         });
 
-        LinearLayout linearLayout = findViewById(R.id.goSearchActivity);
+       /* LinearLayout linearLayout = findViewById(R.id.goSearchActivity);
         linearLayout.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, SearchActivity.class));
-        });
+        });*/
     }
 
 
