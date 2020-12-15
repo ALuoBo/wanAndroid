@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +11,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
@@ -36,28 +32,27 @@ public class AqFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         recyclerView = view.findViewById(R.id.aqRecyclerView);
         recyclerView.setAdapter(adapter = new AqAdapter(new AqDiffUtil()));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         viewModel.getAq().observe(getViewLifecycleOwner(), aqResponse -> {
-            Log.e("will", "onResponse: 6");
             List<AqResponse.DataBean.DatasBean> data = new ArrayList<>();
             data.addAll(aqResponse.getData().getDatas());
             adapter.submitList(data);
 
         });
-
-        NestedScrollView scrollView = getActivity().findViewById(R.id.scroll);
-        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
-                //底部加载
-                viewModel.getAq();
-                Log.e("will", "onResponse: 123456");
-
+       // swipeRefreshLayout.setEnabled(false);
+        //swipeRefreshLayout.setOnRefreshListener(() -> initiateRefresh());
+        /*nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                swipeRefreshLayout.setEnabled(nestedScrollView.getScrollY() == 0);
             }
-        });
+        });*/
+
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

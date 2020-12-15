@@ -1,17 +1,16 @@
 package com.luobo.wanandroid.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
@@ -34,7 +33,6 @@ public class HomeFragment extends Fragment {
         HomePageAdapter adapter = new HomePageAdapter(getContext(), new ArticleDiffUtil());
         RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
 
-
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         viewModel.getData().observe(getViewLifecycleOwner(), articleDataBean -> {
@@ -44,6 +42,10 @@ public class HomeFragment extends Fragment {
         });
 
         RecyclerView toppingRecycler = view.findViewById(R.id.homeTopping);
+        //LinearSnapHelper：使当前Item居中显示
+        LinearSnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(toppingRecycler);
+
         LinearLayoutManager toppingLinear = new LinearLayoutManager(getContext());
         toppingLinear.setOrientation(RecyclerView.HORIZONTAL);
         toppingRecycler.setLayoutManager(toppingLinear);
@@ -51,17 +53,22 @@ public class HomeFragment extends Fragment {
         toppingRecycler.setAdapter(toppingAdapter);
 
         viewModel.getTopping().observe(getViewLifecycleOwner(), toppingBean -> {
+            recyclerView.scrollToPosition(0);
             toppingAdapter.submitList(toppingBean.getData());
         });
 
-
-        NestedScrollView scrollView = getActivity().findViewById(R.id.homeScroll);
-        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
-                //底部加载
-                viewModel.getData();
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy < 0) return;
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
+                    viewModel.getData();
+                }
             }
         });
+
 
     }
 
