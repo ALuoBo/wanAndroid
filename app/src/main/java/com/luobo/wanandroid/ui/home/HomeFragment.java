@@ -1,12 +1,14 @@
 package com.luobo.wanandroid.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,9 +39,9 @@ public class HomeFragment extends Fragment {
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         linearLayoutManager.setAutoMeasureEnabled(true);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         viewModel.getData().observe(getViewLifecycleOwner(), articleDataBean -> {
             List<ArticleDataBean.DataBean.DatasBean> data = new ArrayList<>();
             data.addAll(articleDataBean.getData().getDatas());
@@ -72,7 +74,14 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
+       /* NestedScrollView scrollView = view.findViewById(R.id.homeScrollView);
+        scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            //判断是否滑到的底部
+            if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+                Log.e(TAG, "onViewCreated: loadMore" );
+                viewModel.getData();
+            }
+        });*/
 
     }
 

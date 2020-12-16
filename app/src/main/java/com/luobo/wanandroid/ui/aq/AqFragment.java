@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
@@ -41,23 +43,38 @@ public class AqFragment extends Fragment {
             adapter.submitList(data);
 
         });
-       // swipeRefreshLayout.setEnabled(false);
-        //swipeRefreshLayout.setOnRefreshListener(() -> initiateRefresh());
-        /*nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+
+        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
+        swipeRefreshLayout.setOnRefreshListener(() ->
+        {
+            viewModel.refresh();
+            viewModel.getAq();
+            swipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
+        });
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollChanged() {
-                swipeRefreshLayout.setEnabled(nestedScrollView.getScrollY() == 0);
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy <= 0) return;
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
+                    viewModel.getAq();
+                }
             }
-        });*/
-
+        });
     }
-
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         viewModel = new ViewModelProvider(requireActivity()).get(AqViewModel.class);
+
+
         return inflater.inflate(R.layout.fragment_aq, container, false);
     }
 

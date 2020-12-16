@@ -17,4 +17,8 @@ public class AqViewModel extends AndroidViewModel {
     public MutableLiveData<AqResponse> getAq() {
         return aqRepository.getAq();
     }
+
+    public void refresh() {
+        aqRepository.setPage(1);
+    }
 }

@@ -1,32 +1,32 @@
-package com.luobo.wanandroid.ui.aq;
+package com.luobo.wanandroid.ui.other;
 
 import android.util.Log;
 
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.luobo.wanandroid.api.ApiService;
 import com.luobo.wanandroid.api.RetrofitFactory;
+import com.luobo.wanandroid.ui.aq.AqResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AqRepository {
-    private static volatile AqRepository instance;
+public class OtherRepository {
+    private static volatile OtherRepository instance;
     private ApiService service = RetrofitFactory.getInstance();
     private int page = 1;
     private boolean isFirst = true;
     private boolean isLoading = false;
     private AqResponse datas = new AqResponse();
 
-    private AqRepository() {
+    private OtherRepository() {
     }
 
     // private constructor : singleton access
-    public static AqRepository getInstance() {
+    public static OtherRepository getInstance() {
         if (instance == null) {
-            instance = new AqRepository();
+            instance = new OtherRepository();
         }
         return instance;
     }
