@@ -33,6 +33,11 @@ public class HomeFragment extends Fragment {
         HomePageAdapter adapter = new HomePageAdapter(getContext(), new ArticleDiffUtil());
         RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setSmoothScrollbarEnabled(true);
+        linearLayoutManager.setAutoMeasureEnabled(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         viewModel.getData().observe(getViewLifecycleOwner(), articleDataBean -> {
@@ -56,7 +61,6 @@ public class HomeFragment extends Fragment {
             recyclerView.scrollToPosition(0);
             toppingAdapter.submitList(toppingBean.getData());
         });
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {

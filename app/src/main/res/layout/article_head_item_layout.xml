@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center">
 
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/articleItem"
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imageView"
                 android:layout_width="20dp"
                 android:layout_height="28dp"
                 android:layout_marginStart="8dp"
@@ -37,7 +38,7 @@
                 android:text="热门文章"
                 app:layout_constraintBottom_toTopOf="@+id/title"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -50,7 +51,7 @@
                 android:fontFamily="sans-serif"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
                 tools:text="AAAAAAAAAAAAAAAA字字字" />
 
             <TextView

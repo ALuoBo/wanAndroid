@@ -13,7 +13,6 @@ import com.luobo.wanandroid.base.BaseActivity;
 public class MainActivity extends BaseActivity {
 
     BottomNavigationView bottomNavigationView;
-
     NavController navController;
     TextView username;
 
@@ -31,11 +30,6 @@ public class MainActivity extends BaseActivity {
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
         });
-
-       /* LinearLayout linearLayout = findViewById(R.id.goSearchActivity);
-        linearLayout.setOnClickListener(v -> {
-            startActivity(new Intent(MainActivity.this, SearchActivity.class));
-        });*/
     }
 
 
