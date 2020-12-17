@@ -1,6 +1,5 @@
-package com.luobo.wanandroid.ui.project;
+package com.luobo.wanandroid.ui.other.project;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 

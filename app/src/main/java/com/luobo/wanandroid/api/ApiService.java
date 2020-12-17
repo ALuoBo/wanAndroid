@@ -5,7 +5,7 @@ import com.luobo.wanandroid.ui.home.ArticleDataBean;
 import com.luobo.wanandroid.ui.home.HomeBannerBean;
 import com.luobo.wanandroid.ui.home.ToppingBean;
 import com.luobo.wanandroid.ui.login.LoggedInUser;
-import com.luobo.wanandroid.ui.project.ProjectTreeBean;
+import com.luobo.wanandroid.ui.other.project.ProjectTreeBean;
 import com.luobo.wanandroid.ui.user.IntegralBean;
 
 

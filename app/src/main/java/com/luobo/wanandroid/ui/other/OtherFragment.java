@@ -16,10 +16,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.luobo.wanandroid.R;
-import com.luobo.wanandroid.ui.project.ProjectFragment;
+import com.luobo.wanandroid.ui.other.project.ProjectFragment;
 import com.luobo.wanandroid.ui.user.PersonCenterFragment;
-
-import static android.text.Html.FROM_HTML_MODE_LEGACY;
 
 
 public class OtherFragment extends Fragment {

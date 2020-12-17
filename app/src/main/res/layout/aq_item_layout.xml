@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="90dp"
+    app:cardElevation="1dp">
 
-    <com.google.android.material.card.MaterialCardView
+    <TextView
+        android:id="@+id/aqTitle"
+        style="@style/articleTextSummary"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        app:cardElevation="1dp">
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        tool:text="\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE011213e" />
+</com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            style="@style/articleTextSummary"
-            android:layout_marginHorizontal="16dp"
-            android:id="@+id/aqTitle"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            tool:text="\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE011213e" />
-    </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
