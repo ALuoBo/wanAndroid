@@ -17,6 +17,7 @@
             layout="@layout/app_bar_main" />
 
         <com.google.android.material.tabs.TabLayout
+            app:tabMode="scrollable"
             android:id="@+id/otherTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

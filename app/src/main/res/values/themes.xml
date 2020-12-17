@@ -13,4 +13,6 @@
         <item name="colorPrimary">@color/colorAccent</item>
     </style>
 
+    <style name="AppLauncherTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
 </resources>
