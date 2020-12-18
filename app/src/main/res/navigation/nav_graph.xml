@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/homeFragmentContain">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.luobo.wanandroid.ui.home.HomeFragment"
+        android:id="@+id/homeFragmentContain"
+        android:name="com.luobo.wanandroid.ui.home.HomeContainFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home_contain" />
 
     <fragment
         android:id="@+id/aqFragment"
