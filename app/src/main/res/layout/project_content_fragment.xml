@@ -6,6 +6,7 @@
     tools:context=".ui.other.project.ProjectContentFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/projectContentRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/project_item_layout" />

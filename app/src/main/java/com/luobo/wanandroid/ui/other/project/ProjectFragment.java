@@ -36,7 +36,6 @@ public class ProjectFragment extends Fragment {
             for (ProjectTreeBean.DataBean dataBean : projectTreeBean.getData()
             ) {
                 tabLayout.addTab(tabLayout.newTab().setText(dataBean.getName()));
-
             }
         });
     }

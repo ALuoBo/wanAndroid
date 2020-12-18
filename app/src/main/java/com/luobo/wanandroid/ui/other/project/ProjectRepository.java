@@ -11,7 +11,6 @@ import retrofit2.Response;
 
 public class ProjectRepository {
     private ApiService service = RetrofitFactory.getInstance();
-
     public MutableLiveData<ProjectTreeBean> getProjectTree() {
         MutableLiveData<ProjectTreeBean> data = new MutableLiveData<>();
         service.getProjectTree().enqueue(new Callback<ProjectTreeBean>() {
@@ -29,4 +28,5 @@ public class ProjectRepository {
         });
         return data;
     }
+    
 }
