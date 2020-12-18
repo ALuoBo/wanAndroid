@@ -10,9 +10,9 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/home" />
     <item
-        android:id="@+id/otherFragment"
+        android:id="@+id/projectFragment"
         android:icon="@drawable/ic_baseline_public_24"
-        android:title="@string/other" />
+        android:title="@string/project" />
     <item
         android:id="@+id/userFragment"
         android:icon="@drawable/ic_baseline_person_outline_24"

@@ -1,8 +1,5 @@
 package com.luobo.wanandroid.ui.aq;
 
-import android.util.Log;
-
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.luobo.wanandroid.api.ApiService;
@@ -34,11 +31,9 @@ public class AqRepository {
     MutableLiveData<AqResponse> responseLiveData = new MutableLiveData<>();
 
     MutableLiveData<AqResponse> getAq() {
-        Log.e("will", "onResponse: 1");
         if (isLoading) {
             return responseLiveData;
         }
-        Log.e("will", "onResponse: 3");
         isLoading = true;
         service.getAq(page).enqueue(new Callback<AqResponse>() {
             @Override
@@ -49,7 +44,6 @@ public class AqRepository {
                 } else {
                     datas.getData().getDatas().addAll(response.body().getData().getDatas());
                 }
-                Log.e("will", "onResponse: 4");
                 responseLiveData.setValue(datas);
                 isLoading = false;
                 page++;
@@ -57,7 +51,6 @@ public class AqRepository {
 
             @Override
             public void onFailure(Call<AqResponse> call, Throwable t) {
-                Log.e("will", "onResponse: 5");
                 isLoading = false;
             }
         });

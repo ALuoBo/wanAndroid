@@ -1,4 +1,4 @@
-package com.luobo.wanandroid.ui.other.project;
+package com.luobo.wanandroid.ui.project;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;

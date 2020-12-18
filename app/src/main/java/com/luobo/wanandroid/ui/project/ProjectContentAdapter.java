@@ -1,4 +1,4 @@
-package com.luobo.wanandroid.ui.other.project;
+package com.luobo.wanandroid.ui.project;
 
 import android.content.Context;
 import android.view.LayoutInflater;

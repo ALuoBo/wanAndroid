@@ -5,7 +5,8 @@ import com.luobo.wanandroid.ui.home.ArticleDataBean;
 import com.luobo.wanandroid.ui.home.HomeBannerBean;
 import com.luobo.wanandroid.ui.home.ToppingBean;
 import com.luobo.wanandroid.ui.login.LoggedInUser;
-import com.luobo.wanandroid.ui.other.project.ProjectTreeBean;
+import com.luobo.wanandroid.ui.project.ProjectContentBean;
+import com.luobo.wanandroid.ui.project.ProjectTreeBean;
 import com.luobo.wanandroid.ui.user.IntegralBean;
 
 
@@ -15,7 +16,11 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
+/**
+ *
+ */
 public interface ApiService {
     /**
      * 首页
@@ -90,4 +95,12 @@ public interface ApiService {
 
     @GET("/project/tree/json")
     Call<ProjectTreeBean> getProjectTree();
+
+    /**
+     * @param page 页码：拼接在链接中，从1开始。
+     * @param cid  分类的id，上面项目分类接口
+     * @return
+     */
+    @GET("/project/list/{page}/json")
+    Call<ProjectContentBean> getProjectContent(@Path("page") int page, @Query("cid") int cid);
 }

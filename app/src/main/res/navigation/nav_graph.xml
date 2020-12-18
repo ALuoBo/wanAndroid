@@ -9,18 +9,18 @@
         android:id="@+id/homeFragment"
         android:name="com.luobo.wanandroid.ui.home.HomeFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/aqFragment"
         android:name="com.luobo.wanandroid.ui.aq.AqFragment"
         android:label="@string/aq"
-        tools:layout="@layout/fragment_aq"/>
+        tools:layout="@layout/fragment_aq" />
     <fragment
-        android:id="@+id/otherFragment"
-        android:name="com.luobo.wanandroid.ui.other.OtherFragment"
-        android:label="@string/other"
-        tools:layout="@layout/fragment_other"/>
+        android:id="@+id/projectFragment"
+        android:name="com.luobo.wanandroid.ui.project.ProjectFragment"
+        android:label="@string/project"
+        tools:layout="@layout/fragment_other" />
     <fragment
         android:id="@+id/userFragment"
         android:name="com.luobo.wanandroid.ui.user.PersonCenterFragment"

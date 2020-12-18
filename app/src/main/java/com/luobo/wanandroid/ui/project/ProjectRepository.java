@@ -1,4 +1,4 @@
-package com.luobo.wanandroid.ui.other.project;
+package com.luobo.wanandroid.ui.project;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -28,5 +28,5 @@ public class ProjectRepository {
         });
         return data;
     }
-    
+
 }
