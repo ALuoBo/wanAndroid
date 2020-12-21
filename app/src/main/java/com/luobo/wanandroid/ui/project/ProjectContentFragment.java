@@ -31,7 +31,7 @@ public class ProjectContentFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mViewModel = new ViewModelProvider(requireActivity()).get(ProjectContentViewModel.class);
-        return inflater.inflate(R.layout.project_content_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_project_content, container, false);
     }
 
     @Override

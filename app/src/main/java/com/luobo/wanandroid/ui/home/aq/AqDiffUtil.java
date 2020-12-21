@@ -1,4 +1,4 @@
-package com.luobo.wanandroid.ui.aq;
+package com.luobo.wanandroid.ui.home.aq;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;

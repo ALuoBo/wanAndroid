@@ -16,15 +16,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/aqFragment"
-        android:name="com.luobo.wanandroid.ui.aq.AqFragment"
-        android:label="@string/aq"
-        tools:layout="@layout/fragment_aq" />
-    <fragment
         android:id="@+id/projectFragment"
         android:name="com.luobo.wanandroid.ui.project.ProjectFragment"
         android:label="@string/project"
-        tools:layout="@layout/fragment_other" />
+        tools:layout="@layout/fragment_project" />
     <fragment
         android:id="@+id/userFragment"
         android:name="com.luobo.wanandroid.ui.user.PersonCenterFragment"
@@ -42,5 +37,10 @@
         android:id="@+id/searchFragment"
         android:name="com.luobo.wanandroid.ui.search.SearchFragment"
         android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/officialFragment"
+        android:name="com.luobo.wanandroid.ui.official.OfficialFragment"
+        android:label="fragment_offical_list"
+        tools:layout="@layout/fragment_official" />
 
 </navigation>

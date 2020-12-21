@@ -1,14 +1,14 @@
 package com.luobo.wanandroid.api;
 
-import com.luobo.wanandroid.ui.aq.AqResponse;
 import com.luobo.wanandroid.ui.home.ArticleDataBean;
 import com.luobo.wanandroid.ui.home.HomeBannerBean;
 import com.luobo.wanandroid.ui.home.ToppingBean;
+import com.luobo.wanandroid.ui.home.aq.AqResponse;
 import com.luobo.wanandroid.ui.login.LoggedInUser;
+import com.luobo.wanandroid.ui.official.OfficialTreeBean;
 import com.luobo.wanandroid.ui.project.ProjectContentBean;
 import com.luobo.wanandroid.ui.project.ProjectTreeBean;
 import com.luobo.wanandroid.ui.user.IntegralBean;
-
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -103,4 +103,8 @@ public interface ApiService {
      */
     @GET("/project/list/{page}/json")
     Call<ProjectContentBean> getProjectContent(@Path("page") int page, @Query("cid") int cid);
+
+    @GET("/wxarticle/chapters/json ")
+    Call<OfficialTreeBean> getOfficialProjectTree();
+
 }

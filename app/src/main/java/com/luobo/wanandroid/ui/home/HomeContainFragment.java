@@ -16,7 +16,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.base.BaseFragment;
-import com.luobo.wanandroid.ui.aq.AqFragment;
+import com.luobo.wanandroid.ui.home.aq.AqFragment;
 
 public class HomeContainFragment extends BaseFragment {
     NavController navController;

@@ -1,4 +1,4 @@
-package com.luobo.wanandroid.ui.aq;
+package com.luobo.wanandroid.ui.home.aq;
 
 import android.content.Intent;
 import android.os.Build;

@@ -17,11 +17,10 @@
             android:label="@string/title_activity_settings"></activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
-        </activity>
+            android:label="@string/title_activity_login"></activity>
         <activity
-            android:theme="@style/AppLauncherTheme"
-            android:name=".LauncherActivity">
+            android:name=".LauncherActivity"
+            android:theme="@style/AppLauncherTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
