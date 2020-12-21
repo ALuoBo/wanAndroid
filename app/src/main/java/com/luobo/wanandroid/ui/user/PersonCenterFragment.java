@@ -15,6 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.ui.login.LoggedInUser;
@@ -24,18 +27,21 @@ import com.luobo.wanandroid.ui.setting.SettingsActivity;
 public class PersonCenterFragment extends Fragment {
     TextView userName;
     PersonCenterViewModel viewModel;
+    NavController navController;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ImageView userPhoto = view.findViewById(R.id.userPhoto);
-
+        NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
         userPhoto.setOnClickListener(v -> {
             startActivity(new Intent(getActivity(), LoginActivity.class));
         });
         LinearLayout linearLayout = view.findViewById(R.id.goSetting);
         linearLayout.setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), SettingsActivity.class));
+            navController.navigate(R.id.action_userFragment_to_settingsActivity);
+            //startActivity(new Intent(getActivity(), SettingsActivity.class));
         });
         userName = view.findViewById(R.id.username);
 

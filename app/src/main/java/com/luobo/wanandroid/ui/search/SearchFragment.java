@@ -1,5 +1,6 @@
 package com.luobo.wanandroid.ui.search;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -9,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
@@ -21,14 +24,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
-import com.luobo.wanandroid.base.BaseActivity;
+import com.luobo.wanandroid.base.BaseFragment;
 import com.luobo.wanandroid.ui.home.ArticleDataBean;
 import com.luobo.wanandroid.ui.home.ArticleDiffUtil;
+import com.luobo.wanandroid.utils.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends BaseActivity {
+
+public class SearchFragment extends BaseFragment {
     SearchView searchView;
     RecyclerView recyclerView;
     SearchViewModel viewModel;
@@ -37,19 +42,48 @@ public class SearchActivity extends BaseActivity {
     LoadMoreObserver observer = new LoadMoreObserver();
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getActivity().findViewById(R.id.bottomNavigationView).setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_serach);
-        searchView = findViewById(R.id.searchView);
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                searchViewAnim(false);
+                getNavController(requireActivity()).navigateUp();
+            }
+        });
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_serach, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        searchView = view.findViewById(R.id.searchView);
         searchView.findViewById(R.id.search_plate).setBackground(null);
         searchView.findViewById(R.id.submit_area).setBackground(null);
         searchView.setIconifiedByDefault(false);
-        recyclerView = findViewById(R.id.searchResultRecycler);
+        TextView textSearch = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        textSearch.setTextSize(14);
+        searchViewAnim(true);
+        recyclerView = view.findViewById(R.id.searchResultRecycler);
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
         adapter = new MyAdapter(new ArticleDiffUtil());
         recyclerView.setAdapter(adapter);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -58,7 +92,7 @@ public class SearchActivity extends BaseActivity {
                 if (dy < 0) return;
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1 && !keywords.isEmpty()) {
-                    viewModel.LoadMoreResult(keywords).observe(SearchActivity.this, observer);
+                    viewModel.LoadMoreResult(keywords).observe(getViewLifecycleOwner(), observer);
                 }
             }
         });
@@ -66,7 +100,7 @@ public class SearchActivity extends BaseActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 keywords = query;
-                viewModel.getSearchResult(keywords).observe(SearchActivity.this, new Observer<ArticleDataBean>() {
+                viewModel.getSearchResult(keywords).observe(getViewLifecycleOwner(), new Observer<ArticleDataBean>() {
                     @Override
                     public void onChanged(ArticleDataBean articleDataBean) {
 
@@ -85,6 +119,29 @@ public class SearchActivity extends BaseActivity {
 
     }
 
+
+    /**
+     * 搜索框展开动画
+     */
+    private void searchViewAnim(boolean isIn) {
+        int searchWidth = ScreenUtil.getScreenWidth(getActivity()) - ScreenUtil.dp2px(getActivity(), 128);
+        int targetWidth = ScreenUtil.getScreenWidth(getActivity()) - ScreenUtil.dp2px(getActivity(), 32);
+        ValueAnimator animator;
+        if (isIn) {
+            animator = ValueAnimator.ofInt(searchWidth, targetWidth);
+        } else {
+            animator = ValueAnimator.ofInt(targetWidth, searchWidth);
+        }
+        animator.setDuration(300);
+        animator.addUpdateListener(animation -> {
+            int value = (int) animation.getAnimatedValue();
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) searchView.getLayoutParams();
+            params.width = value;
+            searchView.setLayoutParams(params);
+        });
+        animator.start();
+    }
+
     class MyAdapter extends ListAdapter<ArticleDataBean.DataBean.DatasBean, MyAdapter.SearchResultViewHolder> {
         //private static final int HEADER_VIEW_TYPE = -1;
         private static final int NORMAL_VIEW_TYPE = 0;
@@ -96,18 +153,18 @@ public class SearchActivity extends BaseActivity {
 
         @NonNull
         @Override
-        public SearchResultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        public MyAdapter.SearchResultViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View itemView;
             switch (viewType) {
                 case FOOTER_VIEW_TYPE:
-                    itemView = LayoutInflater.from(SearchActivity.this).inflate(R.layout.footer_layout, parent, false);
+                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.footer_layout, parent, false);
                     break;
                 default:
-                    itemView = LayoutInflater.from(SearchActivity.this).inflate(R.layout.article_item_layout, parent, false);
+                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.article_item_layout, parent, false);
                     break;
             }
 
-            return new SearchResultViewHolder(itemView);
+            return new MyAdapter.SearchResultViewHolder(itemView);
         }
 
         @Override
@@ -128,7 +185,7 @@ public class SearchActivity extends BaseActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull SearchResultViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull MyAdapter.SearchResultViewHolder holder, int position) {
             if (position == getItemCount() - 1) {
                 return;
             } else {
@@ -138,7 +195,7 @@ public class SearchActivity extends BaseActivity {
                 textView.setText(Html.fromHtml(getItem(position).getTitle()));
                 classify.setText(getItem(position).getChapterName());
                 cardView.setOnClickListener(v -> {
-                    Intent intent = new Intent(SearchActivity.this, WebActivity.class);
+                    Intent intent = new Intent(getContext(), WebActivity.class);
                     intent.putExtra("URL", getItem(position).getLink());
                     startActivity(intent);
                 });
@@ -161,5 +218,6 @@ public class SearchActivity extends BaseActivity {
             data.addAll(articleDataBean.getData().getDatas());
             adapter.submitList(data);
         }
+
     }
 }

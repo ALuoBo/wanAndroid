@@ -9,7 +9,11 @@
         android:id="@+id/homeFragmentContain"
         android:name="com.luobo.wanandroid.ui.home.HomeContainFragment"
         android:label="@string/home"
-        tools:layout="@layout/fragment_home_contain" />
+        tools:layout="@layout/fragment_home_contain">
+        <action
+            android:id="@+id/action_homeFragmentContain_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/aqFragment"
@@ -25,5 +29,18 @@
         android:id="@+id/userFragment"
         android:name="com.luobo.wanandroid.ui.user.PersonCenterFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_user">
+        <action
+            android:id="@+id/action_userFragment_to_settingsActivity"
+            app:destination="@id/settingsActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="com.luobo.wanandroid.ui.setting.SettingsActivity"
+        android:label="SettingsActivity" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.luobo.wanandroid.ui.search.SearchFragment"
+        android:label="SearchFragment" />
+
 </navigation>
