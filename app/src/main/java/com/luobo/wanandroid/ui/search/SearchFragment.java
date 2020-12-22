@@ -160,7 +160,7 @@ public class SearchFragment extends BaseFragment {
                     itemView = LayoutInflater.from(getContext()).inflate(R.layout.footer_layout, parent, false);
                     break;
                 default:
-                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.article_item_layout, parent, false);
+                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_article, parent, false);
                     break;
             }
 

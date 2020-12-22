@@ -9,5 +9,5 @@
         android:id="@+id/projectContentRecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/project_item_layout" />
+        tools:listitem="@layout/item_project" />
 </LinearLayout>

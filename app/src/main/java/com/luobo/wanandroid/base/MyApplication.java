@@ -1,4 +1,4 @@
-package com.luobo.wanandroid;
+package com.luobo.wanandroid.base;
 
 import android.app.Application;
 import android.content.Context;

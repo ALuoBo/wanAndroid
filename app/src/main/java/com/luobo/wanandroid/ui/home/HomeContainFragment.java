@@ -22,7 +22,6 @@ public class HomeContainFragment extends BaseFragment {
     NavController navController;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class HomeContainFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         navController = getNavController(requireActivity());
-        View goSearchBar = view.findViewById(R.id.goSearchBar);
+        View goSearchBar = view.findViewById(R.id.goSearch);
         ViewPager2 viewPager = view.findViewById(R.id.homeContainViewpager);
         viewPager.setAdapter(new HomeFragmentAdapter(this));
         TabLayout tabLayout = view.findViewById(R.id.homeTabLayout);

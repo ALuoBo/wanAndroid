@@ -96,7 +96,7 @@ public class AqFragment extends Fragment {
                     itemView = LayoutInflater.from(getContext()).inflate(R.layout.footer_layout, parent, false);
                     break;
                 default:
-                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.aq_item_layout, parent, false);
+                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_aq, parent, false);
                     break;
             }
             return new MyViewHolder(itemView);

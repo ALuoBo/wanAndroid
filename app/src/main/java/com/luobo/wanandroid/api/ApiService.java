@@ -5,6 +5,7 @@ import com.luobo.wanandroid.ui.home.HomeBannerBean;
 import com.luobo.wanandroid.ui.home.ToppingBean;
 import com.luobo.wanandroid.ui.home.aq.AqResponse;
 import com.luobo.wanandroid.ui.login.LoggedInUser;
+import com.luobo.wanandroid.ui.official.OfficialBean;
 import com.luobo.wanandroid.ui.official.OfficialTreeBean;
 import com.luobo.wanandroid.ui.project.ProjectContentBean;
 import com.luobo.wanandroid.ui.project.ProjectTreeBean;
@@ -105,6 +106,20 @@ public interface ApiService {
     Call<ProjectContentBean> getProjectContent(@Path("page") int page, @Query("cid") int cid);
 
     @GET("/wxarticle/chapters/json ")
-    Call<OfficialTreeBean> getOfficialProjectTree();
+    Call<OfficialTreeBean> getOfficialTree();
+/**
+ * 在某个公众号中搜索历史文章
+ */
+ /*   @GET("/wxarticle/list/{id}/{page}/json")
+    Call<OfficialBean> getOfficialArticle(@Path("id") int id, @Path("page") int page, @Query("k") String str);*/
 
+    /**
+     * 查看某个公众号历史数据
+     *
+     * @param id
+     * @param page
+     * @return
+     */
+    @GET("/wxarticle/list/{id}/{page}/json")
+    Call<OfficialBean> getOfficialArticle(@Path("id") int id, @Path("page") int page);
 }

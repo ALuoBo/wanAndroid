@@ -5,8 +5,10 @@
     android:id="@+id/articleItem"
     android:layout_width="match_parent"
     android:layout_height="90dp"
+    android:layout_marginVertical="0.5dp"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardElevation="1dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -18,17 +20,31 @@
         android:layout_gravity="center">
 
         <TextView
+            android:id="@+id/newTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/outline_square"
+            android:paddingHorizontal="4dp"
+            android:text="新"
+            android:textColor="@color/indigo_500"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/title"
             style="@style/articleTextSummary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="sans-serif"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/newTag"
+            app:layout_constraintTop_toBottomOf="@+id/newTag"
             tools:text="AAAAAAAAAAAAAAAA字字字" />
 
         <TextView

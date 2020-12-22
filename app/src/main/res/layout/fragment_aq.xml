@@ -9,6 +9,6 @@
         android:id="@+id/aqRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/aq_item_layout" />
+        tools:listitem="@layout/item_aq" />
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

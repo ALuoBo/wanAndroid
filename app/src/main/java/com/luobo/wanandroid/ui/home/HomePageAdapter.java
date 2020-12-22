@@ -48,13 +48,13 @@ class HomePageAdapter extends ListAdapter<ArticleDataBean.DataBean.DatasBean, Ho
         View itemView;
         switch (viewType) {
             case HEADER_VIEW_TYPE:
-                itemView = LayoutInflater.from(context).inflate(R.layout.article_head_item_layout, parent, false);
+                itemView = LayoutInflater.from(context).inflate(R.layout.item_article_head, parent, false);
                 break;
             case FOOTER_VIEW_TYPE:
                 itemView = LayoutInflater.from(context).inflate(R.layout.footer_layout, parent, false);
                 break;
             default:
-                itemView = LayoutInflater.from(context).inflate(R.layout.article_item_layout, parent, false);
+                itemView = LayoutInflater.from(context).inflate(R.layout.item_article, parent, false);
                 break;
         }
 

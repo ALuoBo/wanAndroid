@@ -30,7 +30,7 @@ class ProjectContentAdapter extends ListAdapter<ProjectContentBean.DataBean.Data
     @NonNull
     @Override
     public MViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(context).inflate(R.layout.project_item_layout, parent, false);
+        View itemView = LayoutInflater.from(context).inflate(R.layout.item_project, parent, false);
         return new MViewHolder(itemView);
     }
 
