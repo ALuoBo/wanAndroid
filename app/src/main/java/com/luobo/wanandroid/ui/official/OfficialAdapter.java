@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
 
-class OfficialAdapter extends ListAdapter<OfficialBean.DataBean.DatasBean, OfficialAdapter.MViewHolder> {
+class OfficialAdapter extends ListAdapter<OfficialArticleBean.DataBean.DatasBean, OfficialAdapter.MViewHolder> {
     private Context context;
 
-    protected OfficialAdapter(Context context, @NonNull DiffUtil.ItemCallback<OfficialBean.DataBean.DatasBean> diffCallback) {
+    protected OfficialAdapter(Context context, @NonNull DiffUtil.ItemCallback<OfficialArticleBean.DataBean.DatasBean> diffCallback) {
         super(diffCallback);
         this.context = context;
     }

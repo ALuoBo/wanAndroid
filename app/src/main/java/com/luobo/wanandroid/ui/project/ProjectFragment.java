@@ -23,6 +23,7 @@ public class ProjectFragment extends Fragment {
     private String TAG = "projectFragment";
     private ProjectViewModel mViewModel;
     private int projectContentFragmentSize;
+    private int[] typeId = new int[30];
 
     public static ProjectFragment newInstance() {
         return new ProjectFragment();
@@ -51,6 +52,7 @@ public class ProjectFragment extends Fragment {
             for (ProjectTreeBean.DataBean dataBean : projectTreeBean.getData()
             ) {
                 titleList.add(dataBean.getName());
+                typeId[projectContentFragmentSize] = dataBean.getId();
                 projectContentFragmentSize++;
                 Log.e(TAG, "itemCount---: " + projectContentFragmentSize);
             }
@@ -73,7 +75,7 @@ public class ProjectFragment extends Fragment {
         @Override
         public Fragment createFragment(int position) {
             //添加项目内容fragment
-            return ProjectContentFragment.newInstance();
+            return ProjectContentFragment.newInstance(typeId[position]);
         }
 
         @Override

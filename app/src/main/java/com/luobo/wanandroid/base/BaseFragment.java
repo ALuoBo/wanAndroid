@@ -10,7 +10,7 @@ import com.luobo.wanandroid.R;
 public class BaseFragment extends Fragment {
 
     /**
-     * 获取导航控制
+     * 获取导航控制器
      *
      * @param requestActivity
      * @return

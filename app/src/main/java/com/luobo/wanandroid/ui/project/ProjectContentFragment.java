@@ -22,9 +22,14 @@ public class ProjectContentFragment extends Fragment {
 
     private ProjectContentViewModel mViewModel;
     private RecyclerView recyclerView;
+    private int projectCid;
 
-    public static ProjectContentFragment newInstance() {
-        return new ProjectContentFragment();
+    public ProjectContentFragment(int projectCid) {
+        this.projectCid = projectCid;
+    }
+
+    public static ProjectContentFragment newInstance(int projectCid) {
+        return new ProjectContentFragment(projectCid);
     }
 
     @Override
@@ -41,7 +46,7 @@ public class ProjectContentFragment extends Fragment {
         ProjectContentAdapter adapter = new ProjectContentAdapter(getContext(), new ProjectContentDiffUtil());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mViewModel.getProjectContent(1).observe(getViewLifecycleOwner(), new Observer<ProjectContentBean>() {
+        mViewModel.getProjectContent(projectCid).observe(getViewLifecycleOwner(), new Observer<ProjectContentBean>() {
             @Override
             public void onChanged(ProjectContentBean projectContentBean) {
 

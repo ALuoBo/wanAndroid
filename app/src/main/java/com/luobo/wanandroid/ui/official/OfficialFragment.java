@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class OfficialFragment extends BaseFragment {
     OfficialViewModel viewModel;
     int officialContentFragmentSize;
-
+    int[] authorIds = new int[30];
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,8 +49,8 @@ public class OfficialFragment extends BaseFragment {
             for (OfficialTreeBean.DataBean dataBean : projectTreeBean.getData()) {
 
                 titleList.add(dataBean.getName());
+                authorIds[officialContentFragmentSize] = dataBean.getId();
                 officialContentFragmentSize++;
-
             }
             adapter.notifyItemRangeInserted(0, officialContentFragmentSize);
 
@@ -70,7 +70,7 @@ public class OfficialFragment extends BaseFragment {
         @Override
         public Fragment createFragment(int position) {
             //添加内容fragment
-            return OfficialContentFragment.newInstance();
+            return OfficialContentFragment.newInstance(authorIds[position]);
         }
 
         @Override
