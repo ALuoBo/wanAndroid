@@ -4,14 +4,38 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="90dp"
+    android:layout_marginBottom="6dp"
     app:cardElevation="1dp">
 
-    <TextView
-        android:id="@+id/aqTitle"
-        style="@style/articleTextSummary"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginHorizontal="16dp"
-        tool:text="\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE011213e" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/newTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/outline_square"
+            android:paddingHorizontal="4dp"
+            android:text="AQ"
+            android:textColor="@color/indigo_500"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/aqTitle"
+            style="@style/articleTextSummary"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_margin="2dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/newTag"
+            app:layout_constraintTop_toBottomOf="@+id/newTag"
+            tool:text="\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE01\uD83D\uDE011213e" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
 

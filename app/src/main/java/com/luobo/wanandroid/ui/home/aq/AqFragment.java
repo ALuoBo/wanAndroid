@@ -93,7 +93,7 @@ public class AqFragment extends Fragment {
             View itemView;
             switch (viewType) {
                 case FOOTER_VIEW_TYPE:
-                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.footer_layout, parent, false);
+                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.footer, parent, false);
                     break;
                 default:
                     itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_aq, parent, false);

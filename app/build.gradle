@@ -69,4 +69,7 @@ dependencies {
     implementation "com.github.franmontiel:PersistentCookieJar:v1.0.1"
 
     implementation "androidx.paging:paging-runtime:$paging_version"
+    //BannerViewPager
+    implementation "com.github.zhpanvip:BannerViewPager:$BannerViewPagerVersion"
+
 }

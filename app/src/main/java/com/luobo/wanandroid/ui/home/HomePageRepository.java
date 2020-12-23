@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.luobo.wanandroid.api.ApiService;
 import com.luobo.wanandroid.api.RetrofitFactory;
+import com.luobo.wanandroid.ui.home.banner.HomeBannerBean;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,15 +30,15 @@ class HomePageRepository {
     private int page = 0;
     private boolean isLoading = false;
     private boolean isFirstRequest = true;
-    ArticleDataBean datasBean = new ArticleDataBean();
-    MutableLiveData<ArticleDataBean> liveData = new MutableLiveData<>();
+    ArticleBean datasBean = new ArticleBean();
+    MutableLiveData<ArticleBean> liveData = new MutableLiveData<>();
 
-    public MutableLiveData<ArticleDataBean> getArticle() {
+    public MutableLiveData<ArticleBean> getArticle() {
         if (isLoading) return liveData;
         isLoading = true;
-        service.getArticlesList(page).enqueue(new Callback<ArticleDataBean>() {
+        service.getArticlesList(page).enqueue(new Callback<ArticleBean>() {
             @Override
-            public void onResponse(Call<ArticleDataBean> call, Response<ArticleDataBean> response) {
+            public void onResponse(Call<ArticleBean> call, Response<ArticleBean> response) {
                 if (isFirstRequest) {
                     datasBean.setData(response.body().getData());
                     isFirstRequest = false;
@@ -51,7 +52,7 @@ class HomePageRepository {
             }
 
             @Override
-            public void onFailure(Call<ArticleDataBean> call, Throwable t) {
+            public void onFailure(Call<ArticleBean> call, Throwable t) {
                 isLoading = false;
             }
         });

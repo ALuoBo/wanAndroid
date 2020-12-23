@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
 import com.luobo.wanandroid.base.BaseFragment;
-import com.luobo.wanandroid.ui.home.ArticleDataBean;
+import com.luobo.wanandroid.ui.home.ArticleBean;
 import com.luobo.wanandroid.ui.home.ArticleDiffUtil;
 import com.luobo.wanandroid.utils.ScreenUtil;
 
@@ -100,11 +100,11 @@ public class SearchFragment extends BaseFragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 keywords = query;
-                viewModel.getSearchResult(keywords).observe(getViewLifecycleOwner(), new Observer<ArticleDataBean>() {
+                viewModel.getSearchResult(keywords).observe(getViewLifecycleOwner(), new Observer<ArticleBean>() {
                     @Override
-                    public void onChanged(ArticleDataBean articleDataBean) {
+                    public void onChanged(ArticleBean articleBean) {
 
-                        adapter.submitList(articleDataBean.getData().getDatas());
+                        adapter.submitList(articleBean.getData().getDatas());
 
                     }
                 });
@@ -142,12 +142,12 @@ public class SearchFragment extends BaseFragment {
         animator.start();
     }
 
-    class MyAdapter extends ListAdapter<ArticleDataBean.DataBean.DatasBean, MyAdapter.SearchResultViewHolder> {
+    class MyAdapter extends ListAdapter<ArticleBean.DataBean.DatasBean, MyAdapter.SearchResultViewHolder> {
         //private static final int HEADER_VIEW_TYPE = -1;
         private static final int NORMAL_VIEW_TYPE = 0;
         private static final int FOOTER_VIEW_TYPE = 1;
 
-        protected MyAdapter(@NonNull DiffUtil.ItemCallback<ArticleDataBean.DataBean.DatasBean> diffCallback) {
+        protected MyAdapter(@NonNull DiffUtil.ItemCallback<ArticleBean.DataBean.DatasBean> diffCallback) {
             super(diffCallback);
         }
 
@@ -157,7 +157,7 @@ public class SearchFragment extends BaseFragment {
             View itemView;
             switch (viewType) {
                 case FOOTER_VIEW_TYPE:
-                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.footer_layout, parent, false);
+                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.footer, parent, false);
                     break;
                 default:
                     itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_article, parent, false);
@@ -210,12 +210,12 @@ public class SearchFragment extends BaseFragment {
         }
     }
 
-    class LoadMoreObserver implements Observer<ArticleDataBean> {
+    class LoadMoreObserver implements Observer<ArticleBean> {
         @Override
-        public void onChanged(ArticleDataBean articleDataBean) {
+        public void onChanged(ArticleBean articleBean) {
             Log.e("myTag", "onChange");
-            List<ArticleDataBean.DataBean.DatasBean> data = new ArrayList<>();
-            data.addAll(articleDataBean.getData().getDatas());
+            List<ArticleBean.DataBean.DatasBean> data = new ArrayList<>();
+            data.addAll(articleBean.getData().getDatas());
             adapter.submitList(data);
         }
 

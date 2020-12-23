@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.luobo.wanandroid.ui.home.banner.HomeBannerBean;
+
 public class HomeViewModel extends AndroidViewModel {
     private HomePageRepository articleRepository;
 
@@ -14,7 +16,7 @@ public class HomeViewModel extends AndroidViewModel {
         articleRepository = HomePageRepository.getInstance();
     }
 
-    MutableLiveData<ArticleDataBean> getData() {
+    MutableLiveData<ArticleBean> getData() {
         return articleRepository.getArticle();
     }
 

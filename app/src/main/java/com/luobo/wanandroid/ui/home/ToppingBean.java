@@ -38,7 +38,7 @@ public class ToppingBean {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean extends HomeBean{
         /**
          * apkLink :
          * audit : 1

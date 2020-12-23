@@ -1,7 +1,7 @@
 package com.luobo.wanandroid.api;
 
-import com.luobo.wanandroid.ui.home.ArticleDataBean;
-import com.luobo.wanandroid.ui.home.HomeBannerBean;
+import com.luobo.wanandroid.ui.home.ArticleBean;
+import com.luobo.wanandroid.ui.home.banner.HomeBannerBean;
 import com.luobo.wanandroid.ui.home.ToppingBean;
 import com.luobo.wanandroid.ui.home.aq.AqResponse;
 import com.luobo.wanandroid.ui.login.LoggedInUser;
@@ -27,7 +27,7 @@ public interface ApiService {
      * @return
      */
     @GET("/article/list/{pageNum}/json")
-    Call<ArticleDataBean> getArticlesList(@Path("pageNum") int curPage);
+    Call<ArticleBean> getArticlesList(@Path("pageNum") int curPage);
 
 
     /**
@@ -88,7 +88,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("/article/query/{page}/json")
-    Call<ArticleDataBean> search(@Path("page") int page, @Field("k") String key);
+    Call<ArticleBean> search(@Path("page") int page, @Field("k") String key);
 
 
     @GET("/project/tree/json")

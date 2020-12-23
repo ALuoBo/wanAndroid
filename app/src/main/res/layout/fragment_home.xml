@@ -11,24 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/homeRecycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeTopping"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:orientation="horizontal"
-                tools:listitem="@layout/topping" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeRecycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/item_article" />
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/item_article" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>
 

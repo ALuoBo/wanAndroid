@@ -1,6 +1,7 @@
 package com.luobo.wanandroid.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
@@ -20,6 +20,9 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     static String TAG = "HomeFragment";
+    HomeViewModel viewModel;
+    HomePageAdapter adapter;
+    List<HomeBean> data = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,38 +32,46 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
-        HomePageAdapter adapter = new HomePageAdapter(getContext(), new ArticleDiffUtil());
-        RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
 
+        viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        adapter = new HomePageAdapter(getContext(), getLifecycle(), new HomeDiffUtil());
+
+        RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+
+
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         linearLayoutManager.setAutoMeasureEnabled(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        //Banner
+        viewModel.getBanner().observe(getViewLifecycleOwner(), homeBannerBean -> {
+            HomePageAdapter.BannerViewHolder viewHolder =
+                    (HomePageAdapter.BannerViewHolder) recyclerView.getChildViewHolder(recyclerView.getChildAt(0));
+            viewHolder.mBannerViewPager.refreshData(homeBannerBean.getData());
+            adapter.notifyDataSetChanged();
+        });
 
+        //Top
+        viewModel.getTopping().observe(getViewLifecycleOwner(), toppingBean -> {
+            for (HomeBean bean : toppingBean.getData()
+            ) {
+                bean.setViewType(HomePageAdapter.HEADER_VIEW_TYPE);
+            }
+            data.addAll(toppingBean.getData());
+            adapter.submitList(data);
+        });
+        //Article
         viewModel.getData().observe(getViewLifecycleOwner(), articleDataBean -> {
-            List<ArticleDataBean.DataBean.DatasBean> data = new ArrayList<>();
+            for (HomeBean bean : articleDataBean.getData().getDatas()
+            ) {
+                bean.setViewType(HomePageAdapter.NORMAL_VIEW_TYPE);
+            }
             data.addAll(articleDataBean.getData().getDatas());
             adapter.submitList(data);
         });
 
-        RecyclerView toppingRecycler = view.findViewById(R.id.homeTopping);
-        //LinearSnapHelper：使当前Item居中显示
-        LinearSnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(toppingRecycler);
-
-        LinearLayoutManager toppingLinear = new LinearLayoutManager(getContext());
-        toppingLinear.setOrientation(RecyclerView.HORIZONTAL);
-        toppingRecycler.setLayoutManager(toppingLinear);
-        ToppingAdapter toppingAdapter = new ToppingAdapter(new ToppingDiffUtil(), getContext());
-        toppingRecycler.setAdapter(toppingAdapter);
-
-        viewModel.getTopping().observe(getViewLifecycleOwner(), toppingBean -> {
-            recyclerView.scrollToPosition(0);
-            toppingAdapter.submitList(toppingBean.getData());
-        });
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -69,9 +80,11 @@ public class HomeFragment extends Fragment {
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
                     viewModel.getData();
+                    Log.e(TAG, "onScrolled: ");
                 }
             }
         });
+
        /* NestedScrollView scrollView = view.findViewById(R.id.homeScrollView);
         scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             //判断是否滑到的底部

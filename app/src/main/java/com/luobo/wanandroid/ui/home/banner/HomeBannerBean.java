@@ -1,4 +1,4 @@
-package com.luobo.wanandroid.ui.home;
+package com.luobo.wanandroid.ui.home.banner;
 
 import java.util.List;
 

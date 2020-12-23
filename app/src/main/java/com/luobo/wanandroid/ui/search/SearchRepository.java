@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.luobo.wanandroid.api.ApiService;
 import com.luobo.wanandroid.api.RetrofitFactory;
-import com.luobo.wanandroid.ui.home.ArticleDataBean;
+import com.luobo.wanandroid.ui.home.ArticleBean;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,10 +20,10 @@ public class SearchRepository {
     private boolean isLoading = false;
     private boolean isFirstRequest = true;
     private String oldKeyword = "";
-    ArticleDataBean datasBean = new ArticleDataBean();
+    ArticleBean datasBean = new ArticleBean();
 
     private ApiService service = RetrofitFactory.getInstance();
-    MutableLiveData<ArticleDataBean> data = new MutableLiveData<>();
+    MutableLiveData<ArticleBean> data = new MutableLiveData<>();
 
     private SearchRepository() {
     }
@@ -43,16 +43,16 @@ public class SearchRepository {
      * @return liveData 搜索结果
      * @Description 搜索键搜索
      */
-    public MutableLiveData<ArticleDataBean> getSearchResult(String keywords) {
-        MutableLiveData<ArticleDataBean> liveData = new MutableLiveData<>();
-        service.search(0, keywords).enqueue(new Callback<ArticleDataBean>() {
+    public MutableLiveData<ArticleBean> getSearchResult(String keywords) {
+        MutableLiveData<ArticleBean> liveData = new MutableLiveData<>();
+        service.search(0, keywords).enqueue(new Callback<ArticleBean>() {
             @Override
-            public void onResponse(Call<ArticleDataBean> call, Response<ArticleDataBean> response) {
+            public void onResponse(Call<ArticleBean> call, Response<ArticleBean> response) {
                 liveData.setValue(response.body());
             }
 
             @Override
-            public void onFailure(Call<ArticleDataBean> call, Throwable t) {
+            public void onFailure(Call<ArticleBean> call, Throwable t) {
 
             }
         });
@@ -64,7 +64,7 @@ public class SearchRepository {
      * @return liveData 搜索结果
      * @Description 加载更多
      */
-    public MutableLiveData<ArticleDataBean> LoadMoreResult(String keyword) {
+    public MutableLiveData<ArticleBean> LoadMoreResult(String keyword) {
 
         if (!isSameKeyword(keyword)) {
             page = 0;
@@ -72,9 +72,9 @@ public class SearchRepository {
         }
         if (isLoading) return data;
         isLoading = true;
-        service.search(page, keyword).enqueue(new Callback<ArticleDataBean>() {
+        service.search(page, keyword).enqueue(new Callback<ArticleBean>() {
             @Override
-            public void onResponse(Call<ArticleDataBean> call, Response<ArticleDataBean> response) {
+            public void onResponse(Call<ArticleBean> call, Response<ArticleBean> response) {
                 if (isFirstRequest) {
                     oldKeyword = keyword;
                     datasBean.setData(response.body().getData());
@@ -88,7 +88,7 @@ public class SearchRepository {
             }
 
             @Override
-            public void onFailure(Call<ArticleDataBean> call, Throwable t) {
+            public void onFailure(Call<ArticleBean> call, Throwable t) {
                 isLoading = false;
             }
         });
