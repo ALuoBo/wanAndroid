@@ -36,36 +36,4 @@ public class HomeViewModel extends AndroidViewModel {
         return articleRepository.getArticle();
     }
 
-    /**
-     * 合并置顶与普通文章
-     */
-    private MediatorLiveData<List<HomeBean>> liveDataMerger = new MediatorLiveData();
-
-    public MediatorLiveData<List<HomeBean>> getHomeData() {
-        Log.e(TAG, "getHomeData: ==========");
-        ArrayList<HomeBean> data = new ArrayList<>();
-
-        liveDataMerger.addSource(getTopping(), toppingBean -> {
-            for (HomeBean bean : toppingBean.getData()
-            ) {
-                bean.setViewType(HomePageAdapter.TOP_VIEW_TYPE);
-                data.add(bean);
-            }
-            Log.e(TAG, "getHomeData: " + "topping.change----------");
-            liveDataMerger.setValue(data);
-        });
-
-        liveDataMerger.addSource(getData(), articleBean -> {
-            for (HomeBean bean : articleBean.getData().getDatas()
-            ) {
-                bean.setViewType(HomePageAdapter.NORMAL_VIEW_TYPE);
-                data.add(bean);
-            }
-            Log.e(TAG, "getHomeData: " + "articleBean.change++++++++++");
-            liveDataMerger.setValue(data);
-        });
-        Log.e(TAG, String.valueOf(data.size()));
-        return liveDataMerger;
-
-    }
 }

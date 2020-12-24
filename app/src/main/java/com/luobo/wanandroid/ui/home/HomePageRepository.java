@@ -30,14 +30,14 @@ class HomePageRepository {
     }
 
     private ApiService service = RetrofitFactory.getInstance();
-
+    MutableLiveData<ArticleBean> liveData = new MutableLiveData<>();
     private int page = 0;
     private boolean isLoading = false;
     private boolean isFirstRequest = true;
     ArticleBean datasBean = new ArticleBean();
     public MutableLiveData<ArticleBean> getArticle() {
         Log.e(TAG, "getArticle: " );
-        MutableLiveData<ArticleBean> liveData = new MutableLiveData<>();
+
         if (isLoading) return liveData;
         isLoading = true;
         service.getArticlesList(page).enqueue(new Callback<ArticleBean>() {

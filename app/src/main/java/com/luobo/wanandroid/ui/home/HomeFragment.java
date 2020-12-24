@@ -29,7 +29,6 @@ import java.util.List;
 public class HomeFragment extends Fragment {
     static String TAG = "HomeFragment";
     HomeViewModel viewModel;
-    HomePageAdapter adapter;
     ToppingAdapter toppingAdapter;
     ArticleAdapter articleAdapter;
     HomeAdapter homeAdapter;
