@@ -22,17 +22,16 @@ class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private String TAG = this.getClass().getName();
     public static final int BANNER_VIEW_TYPE = -2; //Banner
     private Context context;
-
+    private Lifecycle lifecycle;
     public HomeAdapter(Context context, Lifecycle lifecycle) {
         this.context = context;
         this.lifecycle = lifecycle;
     }
 
-    private Lifecycle lifecycle;
+
 
     @Override
     public int getItemViewType(int position) {
-        Log.e(TAG, "onCreateViewHolder: itemCount " + getItemCount());
 
         if (position == 0) {
             return BANNER_VIEW_TYPE;

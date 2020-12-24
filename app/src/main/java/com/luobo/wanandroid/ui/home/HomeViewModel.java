@@ -32,8 +32,6 @@ public class HomeViewModel extends AndroidViewModel {
         return articleRepository.getTopping();
     }
 
-    MutableLiveData<ArticleBean> getData() {
-        return articleRepository.getArticle();
-    }
+    MutableLiveData<ArticleBean> getData() { return articleRepository.getArticle(); }
 
 }

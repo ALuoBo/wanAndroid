@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ConcatAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
@@ -22,6 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
+import com.luobo.wanandroid.ui.FootAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,19 +31,21 @@ import java.util.List;
 public class AqFragment extends Fragment {
     RecyclerView recyclerView;
     AqViewModel viewModel;
-    AqAdapter adapter;
+    AqAdapter aqAdapter;
+    FootAdapter footAdapter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.aqRecyclerView);
-        recyclerView.setAdapter(adapter = new AqAdapter(new AqDiffUtil()));
+        footAdapter = new FootAdapter(getContext());
+        aqAdapter = new AqAdapter(new AqDiffUtil());
+        ConcatAdapter concatAdapter = new ConcatAdapter(aqAdapter, footAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(concatAdapter);
         viewModel.getAq().observe(getViewLifecycleOwner(), aqResponse -> {
-            List<AqResponse.DataBean.DatasBean> data = new ArrayList<>();
-            data.addAll(aqResponse.getData().getDatas());
-            adapter.submitList(data);
-
+            List<AqResponse.DataBean.DatasBean> data = new ArrayList<>(aqResponse.getData().getDatas());
+            aqAdapter.submitList(data);
         });
 
         SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
@@ -60,7 +64,7 @@ public class AqFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy <= 0) return;
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
+                if (layoutManager.findLastCompletelyVisibleItemPosition() == aqAdapter.getItemCount() - 1) {
                     viewModel.getAq();
                 }
             }
@@ -74,15 +78,11 @@ public class AqFragment extends Fragment {
 
         viewModel = new ViewModelProvider(this).get(AqViewModel.class);
 
-
         return inflater.inflate(R.layout.fragment_aq, container, false);
     }
 
 
     class AqAdapter extends ListAdapter<AqResponse.DataBean.DatasBean, AqAdapter.MyViewHolder> {
-        //private static final int HEADER_VIEW_TYPE = -1;
-        private static final int NORMAL_VIEW_TYPE = 0;
-        private static final int FOOTER_VIEW_TYPE = 1;
 
         protected AqAdapter(@NonNull DiffUtil.ItemCallback<AqResponse.DataBean.DatasBean> diffCallback) {
             super(diffCallback);
@@ -91,53 +91,24 @@ public class AqFragment extends Fragment {
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView;
-            switch (viewType) {
-                case FOOTER_VIEW_TYPE:
-                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.footer, parent, false);
-                    break;
-                default:
-                    itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_aq, parent, false);
-                    break;
-            }
+            itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_aq, parent, false);
             return new MyViewHolder(itemView);
 
         }
 
-        @Override
-        public int getItemCount() {
-            return super.getItemCount() + 1;
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-           /* if (position == 0) {
-               return HEADER_VIEW_TYPE;
-            } else if (position == getItemCount() - 1) {
-                return FOOTER_VIEW_TYPE;
-            } else return NORMAL_VIEW_TYPE;*/
-
-            if (position == getItemCount() - 1) return FOOTER_VIEW_TYPE;
-            else return NORMAL_VIEW_TYPE;
-        }
 
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            if (position == getItemCount() - 1) {
-                return;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                holder.tv.setText(Html.fromHtml(getItem(position).getTitle(), Html.FROM_HTML_MODE_COMPACT));
             } else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    holder.tv.setText(Html.fromHtml(getItem(position).getTitle(), Html.FROM_HTML_MODE_COMPACT));
-
-                } else {
-                    holder.tv.setText(Html.fromHtml(getItem(position).getTitle()));
-
-                }
-                holder.tv.setOnClickListener(v -> {
-                    Intent intent = new Intent(getContext(), WebActivity.class);
-                    intent.putExtra("URL", getItem(position).getLink());
-                    startActivity(intent);
-                });
+                holder.tv.setText(Html.fromHtml(getItem(position).getTitle()));
             }
+            holder.tv.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), WebActivity.class);
+                intent.putExtra("URL", getItem(position).getLink());
+                startActivity(intent);
+            });
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {
