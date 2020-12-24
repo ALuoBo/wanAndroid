@@ -6,12 +6,6 @@ import androidx.recyclerview.widget.DiffUtil;
 class HomeDiffUtil extends DiffUtil.ItemCallback<HomeBean> {
     @Override
     public boolean areItemsTheSame(@NonNull HomeBean oldItem, @NonNull HomeBean newItem) {
-        return oldItem == newItem;
-    }
-
-    @Override
-    public boolean areContentsTheSame(@NonNull HomeBean oldItem, @NonNull HomeBean newItem) {
-
         if (oldItem.getViewType() != newItem.getViewType()) {
             return false;
         } else if (oldItem.getViewType() == HomePageAdapter.NORMAL_VIEW_TYPE) {
@@ -19,11 +13,16 @@ class HomeDiffUtil extends DiffUtil.ItemCallback<HomeBean> {
             ArticleBean.DataBean.DatasBean newBean = (ArticleBean.DataBean.DatasBean) newItem;
             return oldBean.getId() == newBean.getId();
         }
-        if (oldItem.getViewType() == HomePageAdapter.HEADER_VIEW_TYPE) {
+        if (oldItem.getViewType() == HomePageAdapter.TOP_VIEW_TYPE) {
             ToppingBean.DataBean oldBean = (ToppingBean.DataBean) oldItem;
             ToppingBean.DataBean newBean = (ToppingBean.DataBean) newItem;
             return oldBean.getId() == newBean.getId();
         }
         return true;
+    }
+
+    @Override
+    public boolean areContentsTheSame(@NonNull HomeBean oldItem, @NonNull HomeBean newItem) {
+        return false;
     }
 }

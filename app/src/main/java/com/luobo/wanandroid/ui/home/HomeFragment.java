@@ -15,36 +15,46 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class HomeFragment extends Fragment {
     static String TAG = "HomeFragment";
     HomeViewModel viewModel;
     HomePageAdapter adapter;
-    List<HomeBean> data = new ArrayList<>();
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.e(TAG, "onCreate: ");
+        super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        adapter = new HomePageAdapter(getContext(), getLifecycle(), new HomeDiffUtil());
+
+        viewModel.getHomeData().observe(getActivity(), homeBeans -> {
+            adapter.submitList(homeBeans);
+        });
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e(TAG, "onCreateView: " + this);
+
         return inflater.inflate(R.layout.fragment_home, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Log.e(TAG, "onViewCreated: " + this);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
-        adapter = new HomePageAdapter(getContext(), getLifecycle(), new HomeDiffUtil());
 
         RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-
 
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         linearLayoutManager.setAutoMeasureEnabled(true);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         //Banner
         viewModel.getBanner().observe(getViewLifecycleOwner(), homeBannerBean -> {
             HomePageAdapter.BannerViewHolder viewHolder =
@@ -53,24 +63,6 @@ public class HomeFragment extends Fragment {
             adapter.notifyDataSetChanged();
         });
 
-        //Top
-        viewModel.getTopping().observe(getViewLifecycleOwner(), toppingBean -> {
-            for (HomeBean bean : toppingBean.getData()
-            ) {
-                bean.setViewType(HomePageAdapter.HEADER_VIEW_TYPE);
-            }
-            data.addAll(toppingBean.getData());
-            adapter.submitList(data);
-        });
-        //Article
-        viewModel.getData().observe(getViewLifecycleOwner(), articleDataBean -> {
-            for (HomeBean bean : articleDataBean.getData().getDatas()
-            ) {
-                bean.setViewType(HomePageAdapter.NORMAL_VIEW_TYPE);
-            }
-            data.addAll(articleDataBean.getData().getDatas());
-            adapter.submitList(data);
-        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -80,10 +72,10 @@ public class HomeFragment extends Fragment {
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
                     viewModel.getData();
-                    Log.e(TAG, "onScrolled: ");
                 }
             }
         });
+
 
        /* NestedScrollView scrollView = view.findViewById(R.id.homeScrollView);
         scrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
@@ -96,4 +88,23 @@ public class HomeFragment extends Fragment {
 
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(TAG, "onResume: " + this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.e(TAG, "onDestroyView: " + this);
+    }
+
+    @Override
+    public void onDestroy() {
+
+        Log.e(TAG, "onDestroy: " + this);
+        super.onDestroy();
+    }
 }

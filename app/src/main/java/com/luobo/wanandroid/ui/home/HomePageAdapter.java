@@ -28,7 +28,7 @@ import com.zhpan.bannerview.BannerViewPager;
 class HomePageAdapter extends ListAdapter<HomeBean, RecyclerView.ViewHolder> {
     private String TAG = this.getClass().getName();
     public static final int BANNER_VIEW_TYPE = -2; //Banner
-    public static final int HEADER_VIEW_TYPE = -1; //Top
+    public static final int TOP_VIEW_TYPE = -1; //Top
     public static final int NORMAL_VIEW_TYPE = 0;
     public static final int FOOTER_VIEW_TYPE = 1;//Foot
 
@@ -43,7 +43,6 @@ class HomePageAdapter extends ListAdapter<HomeBean, RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-
         //增加banner+1，增加footer+1；
         return super.getItemCount() + 2;
     }
@@ -69,7 +68,7 @@ class HomePageAdapter extends ListAdapter<HomeBean, RecyclerView.ViewHolder> {
             case BANNER_VIEW_TYPE:
                 itemView = LayoutInflater.from(context).inflate(R.layout.banner, parent, false);
                 return new BannerViewHolder(itemView);
-            case HEADER_VIEW_TYPE:
+            case TOP_VIEW_TYPE:
                 itemView = LayoutInflater.from(context).inflate(R.layout.item_head, parent, false);
                 return new TopViewHolder(itemView);
             case FOOTER_VIEW_TYPE:
@@ -98,9 +97,8 @@ class HomePageAdapter extends ListAdapter<HomeBean, RecyclerView.ViewHolder> {
             Log.e(TAG, "onBindViewHolder: type" + type);
 
             switch (type) {
-                case HEADER_VIEW_TYPE:
+                case TOP_VIEW_TYPE:
                     ToppingBean.DataBean toppingBean = (ToppingBean.DataBean) getCurrentList().get(position - 1);
-
                     TopViewHolder topViewHolder = (TopViewHolder) holder;
                     topViewHolder.textView.setText(toppingBean.getTitle());
                     topViewHolder.classify.setText(toppingBean.getChapterName());
