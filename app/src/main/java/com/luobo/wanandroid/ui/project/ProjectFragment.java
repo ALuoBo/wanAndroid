@@ -32,7 +32,7 @@ public class ProjectFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(requireActivity()).get(ProjectViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(ProjectViewModel.class);
         return inflater.inflate(R.layout.fragment_project, container, false);
     }
 

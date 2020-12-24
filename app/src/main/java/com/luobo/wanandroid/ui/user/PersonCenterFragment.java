@@ -16,13 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.ui.login.LoggedInUser;
 import com.luobo.wanandroid.ui.login.LoginActivity;
-import com.luobo.wanandroid.ui.setting.SettingsActivity;
 
 public class PersonCenterFragment extends Fragment {
     TextView userName;
@@ -60,7 +58,7 @@ public class PersonCenterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(requireActivity()).get(PersonCenterViewModel.class);
+        viewModel = new ViewModelProvider(this).get(PersonCenterViewModel.class);
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
 }

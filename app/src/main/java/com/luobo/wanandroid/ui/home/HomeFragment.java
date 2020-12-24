@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeFragment extends Fragment {
     static String TAG = "HomeFragment";
     HomeViewModel viewModel;
@@ -22,14 +25,9 @@ public class HomeFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.e(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        adapter = new HomePageAdapter(getContext(), getLifecycle(), new HomeDiffUtil());
 
-        viewModel.getHomeData().observe(getActivity(), homeBeans -> {
-            adapter.submitList(homeBeans);
-        });
     }
 
     @Override
@@ -44,11 +42,17 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Log.e(TAG, "onViewCreated: " + this);
-
-
         RecyclerView recyclerView = view.findViewById(R.id.homeRecycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-
+        adapter = new HomePageAdapter(getContext(), getLifecycle(), new HomeDiffUtil());
+        viewModel.getHomeData().observe(getViewLifecycleOwner(), homeBeans -> {
+            Log.e(TAG, "onCreate: homeBeans change");
+            List<HomeBean> data = new ArrayList<>();
+            data.addAll(homeBeans);
+            //adapter.submitList(List)方法中需要提供一个列表，这个List必须是一个新的
+            //列表,如果你使用的是一个已经加载了的列表，那么将不会被加载。
+            adapter.submitList(data);
+        });
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         linearLayoutManager.setAutoMeasureEnabled(true);
         recyclerView.setHasFixedSize(true);
@@ -71,7 +75,7 @@ public class HomeFragment extends Fragment {
                 if (dy < 0) return;
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1) {
-                    viewModel.getData();
+                    //   viewModel.getData();
                 }
             }
         });
@@ -88,9 +92,9 @@ public class HomeFragment extends Fragment {
 
     }
 
-
     @Override
     public void onResume() {
+        Log.e(TAG, "onResume " + adapter.getCurrentList().size());
         super.onResume();
         Log.e(TAG, "onResume: " + this);
     }

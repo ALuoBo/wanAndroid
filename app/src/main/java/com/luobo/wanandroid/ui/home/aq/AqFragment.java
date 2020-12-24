@@ -72,7 +72,7 @@ public class AqFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        viewModel = new ViewModelProvider(requireActivity()).get(AqViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AqViewModel.class);
 
 
         return inflater.inflate(R.layout.fragment_aq, container, false);

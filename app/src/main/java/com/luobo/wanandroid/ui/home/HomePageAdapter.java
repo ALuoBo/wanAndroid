@@ -128,6 +128,7 @@ class HomePageAdapter extends ListAdapter<HomeBean, RecyclerView.ViewHolder> {
 
     public class BannerViewHolder extends RecyclerView.ViewHolder {
         BannerViewPager<HomeBannerBean.DataBean> mBannerViewPager;
+
         public BannerViewHolder(@NonNull View itemView) {
             super(itemView);
             mBannerViewPager = itemView.findViewById(R.id.banner_view);
@@ -170,4 +171,5 @@ class HomePageAdapter extends ListAdapter<HomeBean, RecyclerView.ViewHolder> {
             super(itemView);
         }
     }
+
 }

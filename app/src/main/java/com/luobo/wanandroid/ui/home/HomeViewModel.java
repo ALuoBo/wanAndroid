@@ -1,6 +1,7 @@
 package com.luobo.wanandroid.ui.home;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeViewModel extends AndroidViewModel {
+    private String TAG =this.getClass().getName();
     private HomePageRepository articleRepository;
 
     public HomeViewModel(@NonNull Application application) {
@@ -28,9 +30,7 @@ public class HomeViewModel extends AndroidViewModel {
         return articleRepository.getTopping();
     }
 
-     MutableLiveData<ArticleBean> getData() {
-        return articleRepository.getArticle();
-    }
+     MutableLiveData<ArticleBean> getData() { return articleRepository.getArticle(); }
 
     /**
      * 合并置顶与普通文章
@@ -38,7 +38,7 @@ public class HomeViewModel extends AndroidViewModel {
     private MediatorLiveData<List<HomeBean>> liveDataMerger = new MediatorLiveData();
 
     public MediatorLiveData<List<HomeBean>> getHomeData() {
-
+        Log.e(TAG, "getHomeData: ==========");
         ArrayList<HomeBean> data = new ArrayList<>();
 
         liveDataMerger.addSource(getTopping(), toppingBean -> {
@@ -47,8 +47,8 @@ public class HomeViewModel extends AndroidViewModel {
                 bean.setViewType(HomePageAdapter.TOP_VIEW_TYPE);
                 data.add(bean);
             }
+            Log.e(TAG, "getHomeData: "+ "topping.change----------" );
             liveDataMerger.setValue(data);
-
         });
 
         liveDataMerger.addSource(getData(), articleBean -> {
@@ -57,9 +57,10 @@ public class HomeViewModel extends AndroidViewModel {
                 bean.setViewType(HomePageAdapter.NORMAL_VIEW_TYPE);
                 data.add(bean);
             }
+            Log.e(TAG, "getHomeData: "+ "articleBean.change++++++++++" );
             liveDataMerger.setValue(data);
         });
-
+        Log.e(TAG, String.valueOf(data.size()));
         return liveDataMerger;
 
     }
