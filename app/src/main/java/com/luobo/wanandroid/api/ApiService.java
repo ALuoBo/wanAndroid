@@ -1,8 +1,8 @@
 package com.luobo.wanandroid.api;
 
-import com.luobo.wanandroid.ui.home.ArticleBean;
+import com.luobo.wanandroid.ui.home.article.ArticleBean;
 import com.luobo.wanandroid.ui.home.banner.HomeBannerBean;
-import com.luobo.wanandroid.ui.home.ToppingBean;
+import com.luobo.wanandroid.ui.home.top.ToppingBean;
 import com.luobo.wanandroid.ui.home.aq.AqResponse;
 import com.luobo.wanandroid.ui.login.LoggedInUser;
 import com.luobo.wanandroid.ui.official.OfficialArticleBean;

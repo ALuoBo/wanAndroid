@@ -21,7 +21,6 @@ import com.luobo.wanandroid.ui.home.aq.AqFragment;
 public class HomeContainFragment extends BaseFragment {
     NavController navController;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,7 +68,6 @@ public class HomeContainFragment extends BaseFragment {
                 default:
                     return new HomeFragment();
             }
-
         }
 
         @Override

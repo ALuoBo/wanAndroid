@@ -3,7 +3,7 @@ package com.luobo.wanandroid.ui.search;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.luobo.wanandroid.ui.home.ArticleBean;
+import com.luobo.wanandroid.ui.home.article.ArticleBean;
 
 public class SearchViewModel extends ViewModel {
     private SearchRepository searchRepository;

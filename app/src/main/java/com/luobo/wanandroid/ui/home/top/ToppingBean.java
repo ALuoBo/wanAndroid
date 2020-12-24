@@ -1,4 +1,4 @@
-package com.luobo.wanandroid.ui.home;
+package com.luobo.wanandroid.ui.home.top;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class ToppingBean {
         this.data = data;
     }
 
-    public static class DataBean extends HomeBean{
+    public static class DataBean {
         /**
          * apkLink :
          * audit : 1

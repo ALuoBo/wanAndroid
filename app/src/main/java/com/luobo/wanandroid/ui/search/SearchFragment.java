@@ -25,8 +25,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
 import com.luobo.wanandroid.base.BaseFragment;
-import com.luobo.wanandroid.ui.home.ArticleBean;
-import com.luobo.wanandroid.ui.home.ArticleDiffUtil;
+import com.luobo.wanandroid.ui.home.article.ArticleBean;
+import com.luobo.wanandroid.ui.home.article.ArticleDiffUtil;
 import com.luobo.wanandroid.utils.ScreenUtil;
 
 import java.util.ArrayList;

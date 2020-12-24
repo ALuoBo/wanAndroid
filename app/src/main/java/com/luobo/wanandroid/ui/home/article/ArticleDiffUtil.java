@@ -1,4 +1,4 @@
-package com.luobo.wanandroid.ui.home;
+package com.luobo.wanandroid.ui.home.article;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -18,7 +18,6 @@ public class ArticleDiffUtil extends DiffUtil.ItemCallback<ArticleBean.DataBean.
 
     @Override
     public boolean areContentsTheSame(@NonNull ArticleBean.DataBean.DatasBean oldItem, @NonNull ArticleBean.DataBean.DatasBean newItem) {
-
         return oldItem.getId() == newItem.getId();
     }
 

@@ -1,4 +1,4 @@
-package com.luobo.wanandroid.ui.home;
+package com.luobo.wanandroid.ui.home.article;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class ArticleBean  {
             this.datas = datas;
         }
 
-        public static class DatasBean extends HomeBean {
+        public static class DatasBean {
             /**
              * apkLink :
              * audit : 1

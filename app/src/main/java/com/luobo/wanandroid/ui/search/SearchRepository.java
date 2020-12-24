@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.luobo.wanandroid.api.ApiService;
 import com.luobo.wanandroid.api.RetrofitFactory;
-import com.luobo.wanandroid.ui.home.ArticleBean;
+import com.luobo.wanandroid.ui.home.article.ArticleBean;
 
 import retrofit2.Call;
 import retrofit2.Callback;
