@@ -2,6 +2,7 @@ package com.luobo.wanandroid.ui.home.article;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,8 @@ public class ArticleAdapter extends ListAdapter<ArticleBean.DataBean.DatasBean, 
     public void onBindViewHolder(@NonNull ArticleViewHolder holder, int position) {
         ArticleBean.DataBean.DatasBean articleBean = getCurrentList().get(position);
 
-        holder.textView.setText(articleBean.getTitle());
-        holder.classify.setText(articleBean.getChapterName());
+        holder.textView.setText(Html.fromHtml(articleBean.getTitle()));
+        holder.classify.setText(Html.fromHtml(articleBean.getChapterName()));
         holder.cardView.setOnClickListener(v -> {
             Intent intent = new Intent(context, WebActivity.class);
             intent.putExtra("URL", articleBean.getLink());

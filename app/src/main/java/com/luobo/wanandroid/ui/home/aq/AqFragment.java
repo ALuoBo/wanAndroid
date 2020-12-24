@@ -19,11 +19,14 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
-import com.luobo.wanandroid.ui.FootAdapter;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.header.MaterialHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,33 +35,55 @@ public class AqFragment extends Fragment {
     RecyclerView recyclerView;
     AqViewModel viewModel;
     AqAdapter aqAdapter;
-    FootAdapter footAdapter;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.aqRecyclerView);
-        footAdapter = new FootAdapter(getContext());
+
         aqAdapter = new AqAdapter(new AqDiffUtil());
-        ConcatAdapter concatAdapter = new ConcatAdapter(aqAdapter, footAdapter);
+        ConcatAdapter concatAdapter = new ConcatAdapter(aqAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(concatAdapter);
+
         viewModel.getAq().observe(getViewLifecycleOwner(), aqResponse -> {
             List<AqResponse.DataBean.DatasBean> data = new ArrayList<>(aqResponse.getData().getDatas());
             aqAdapter.submitList(data);
         });
 
-        SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
-        swipeRefreshLayout.setOnRefreshListener(() ->
+
+        RefreshLayout refreshLayout = (RefreshLayout) view.findViewById(R.id.refreshLayout);
+        refreshLayout.setRefreshHeader(new MaterialHeader(getContext()));
+        refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                viewModel.refresh();
+                viewModel.getAq();
+                Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
+                refreshlayout.finishRefresh(500/*,false*/);//传入false表示刷新失败
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                viewModel.getAq();
+                refreshlayout.finishLoadMore(500/*,false*/);//传入false表示加载失败
+            }
+        });
+
+       /* SwipeRefreshLayout swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
+       swipeRefreshLayout.setOnRefreshListener(() ->
         {
             viewModel.refresh();
             viewModel.getAq();
             swipeRefreshLayout.setRefreshing(false);
             Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
-        });
+        });*/
 
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+       /* recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -68,7 +93,7 @@ public class AqFragment extends Fragment {
                     viewModel.getAq();
                 }
             }
-        });
+        });*/
     }
 
 

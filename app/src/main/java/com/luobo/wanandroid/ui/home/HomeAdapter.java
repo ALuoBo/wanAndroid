@@ -28,8 +28,6 @@ class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.lifecycle = lifecycle;
     }
 
-
-
     @Override
     public int getItemViewType(int position) {
 

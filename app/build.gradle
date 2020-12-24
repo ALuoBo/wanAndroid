@@ -42,7 +42,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-beta01'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -67,9 +67,12 @@ dependencies {
 
     //
     implementation "com.github.franmontiel:PersistentCookieJar:v1.0.1"
-
+    //paging3
     implementation "androidx.paging:paging-runtime:$paging_version"
     //BannerViewPager
     implementation "com.github.zhpanvip:BannerViewPager:$BannerViewPagerVersion"
-
+    //SmartRefreshLayout
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    implementation  'com.scwang.smart:refresh-header-material:2.0.1'
+    implementation  'com.scwang.smart:refresh-footer-classics:2.0.1'
 }

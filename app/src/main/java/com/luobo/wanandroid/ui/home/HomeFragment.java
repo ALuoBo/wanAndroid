@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,13 +16,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
-import com.luobo.wanandroid.ui.FootAdapter;
 import com.luobo.wanandroid.ui.home.article.ArticleAdapter;
 import com.luobo.wanandroid.ui.home.article.ArticleBean;
 import com.luobo.wanandroid.ui.home.article.ArticleDiffUtil;
 import com.luobo.wanandroid.ui.home.top.ToppingAdapter;
 import com.luobo.wanandroid.ui.home.top.ToppingBean;
 import com.luobo.wanandroid.ui.home.top.ToppingDiffUtil;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.header.MaterialHeader;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +37,6 @@ public class HomeFragment extends Fragment {
     ToppingAdapter toppingAdapter;
     ArticleAdapter articleAdapter;
     HomeAdapter homeAdapter;
-    FootAdapter footAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,9 +54,26 @@ public class HomeFragment extends Fragment {
 
         toppingAdapter = new ToppingAdapter(getContext(), new ToppingDiffUtil());
         articleAdapter = new ArticleAdapter(getContext(), new ArticleDiffUtil());
+
         homeAdapter = new HomeAdapter(getContext(), getLifecycle());
-        footAdapter = new FootAdapter(getContext());
-        ConcatAdapter concatAdapter = new ConcatAdapter(homeAdapter, toppingAdapter, articleAdapter, footAdapter);
+        RefreshLayout refreshLayout = (RefreshLayout) view.findViewById(R.id.homeSwipeRefresh);
+        refreshLayout.setRefreshHeader(new MaterialHeader(getContext()));
+        refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
+                refreshlayout.finishRefresh(500/*,false*/);//传入false表示刷新失败
+            }
+        });
+        refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshlayout) {
+                viewModel.getData();
+                refreshlayout.finishLoadMore(500/*,false*/);//传入false表示加载失败
+            }
+        });
+        ConcatAdapter concatAdapter = new ConcatAdapter(homeAdapter, toppingAdapter, articleAdapter);
 
         recyclerView.setAdapter(concatAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

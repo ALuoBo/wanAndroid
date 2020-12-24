@@ -2,6 +2,7 @@ package com.luobo.wanandroid.ui.home.top;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +38,8 @@ public class ToppingAdapter extends ListAdapter<ToppingBean.DataBean, ToppingAda
     @Override
     public void onBindViewHolder(@NonNull TopViewHolder holder, int position) {
         ToppingBean.DataBean bean = getCurrentList().get(position);
-        holder.textView.setText(bean.getTitle());
-        holder.classify.setText(bean.getChapterName());
+        holder.textView.setText(Html.fromHtml(bean.getTitle()));
+        holder.classify.setText(Html.fromHtml(bean.getChapterName()));
         holder.cardView.setOnClickListener(v -> {
             Intent intent = new Intent(context, WebActivity.class);
             intent.putExtra("URL", bean.getLink());
