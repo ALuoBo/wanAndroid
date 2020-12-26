@@ -3,6 +3,7 @@ package com.luobo.wanandroid.ui.home.article;
 import android.content.Context;
 import android.content.Intent;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,13 @@ public class ArticleAdapter extends ListAdapter<ArticleBean.DataBean.DatasBean, 
     @Override
     public void onBindViewHolder(@NonNull ArticleViewHolder holder, int position) {
         ArticleBean.DataBean.DatasBean articleBean = getCurrentList().get(position);
-
+        if (articleBean.isFresh()) {
+            Log.e("will", "onBindViewHolder: " + articleBean.isFresh());
+            holder.newTag.setVisibility(View.VISIBLE);
+        } else {
+            holder.newTag.setVisibility(View.INVISIBLE);
+        }
+        holder.niceDate.setText(articleBean.getNiceDate());
         holder.textView.setText(Html.fromHtml(articleBean.getTitle()));
         holder.classify.setText(Html.fromHtml(articleBean.getChapterName()));
         holder.cardView.setOnClickListener(v -> {
@@ -46,7 +53,7 @@ public class ArticleAdapter extends ListAdapter<ArticleBean.DataBean.DatasBean, 
     }
 
     public class ArticleViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        TextView textView, newTag, niceDate;
         TextView classify;
         CardView cardView;
 
@@ -55,6 +62,8 @@ public class ArticleAdapter extends ListAdapter<ArticleBean.DataBean.DatasBean, 
             textView = itemView.findViewById(R.id.title);
             classify = itemView.findViewById(R.id.classify);
             cardView = itemView.findViewById(R.id.articleItem);
+            newTag = itemView.findViewById(R.id.newTag);
+            niceDate = itemView.findViewById(R.id.niceDate);
         }
 
     }

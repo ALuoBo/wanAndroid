@@ -7,10 +7,10 @@
     android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:gravity="center"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,10 +22,9 @@
             android:layout_marginStart="64dp"
             android:layout_marginEnd="64dp"
             android:background="@drawable/cursor"
+            app:iconifiedByDefault="false"
             app:queryHint="@string/searchQueryHint"
-            app:searchIcon="@drawable/search_24"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="12dp" />
+            app:searchIcon="@drawable/search_24" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

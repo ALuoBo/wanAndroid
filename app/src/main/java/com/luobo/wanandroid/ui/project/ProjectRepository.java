@@ -11,8 +11,9 @@ import retrofit2.Response;
 
 public class ProjectRepository {
     private ApiService service = RetrofitFactory.getInstance();
+
+    MutableLiveData<ProjectTreeBean> data = new MutableLiveData<>();
     public MutableLiveData<ProjectTreeBean> getProjectTree() {
-        MutableLiveData<ProjectTreeBean> data = new MutableLiveData<>();
         service.getProjectTree().enqueue(new Callback<ProjectTreeBean>() {
 
             @Override

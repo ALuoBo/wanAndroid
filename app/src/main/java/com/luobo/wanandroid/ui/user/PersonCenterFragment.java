@@ -19,7 +19,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.luobo.wanandroid.R;
-import com.luobo.wanandroid.ui.login.LoggedInUser;
+import com.luobo.wanandroid.ui.login.LoginBean;
 import com.luobo.wanandroid.ui.login.LoginActivity;
 
 public class PersonCenterFragment extends Fragment {
@@ -42,9 +42,8 @@ public class PersonCenterFragment extends Fragment {
             //startActivity(new Intent(getActivity(), SettingsActivity.class));
         });
         userName = view.findViewById(R.id.username);
-
         TextView integral = view.findViewById(R.id.integral);
-        if (LoggedInUser.getInstance().getData() != null) {
+        /*if (LoginBean.getInstance().getData() != null) {
             viewModel.getIntegral().observe(requireActivity(), new Observer<IntegralBean>() {
                 @Override
                 public void onChanged(IntegralBean integralBean) {
@@ -52,7 +51,7 @@ public class PersonCenterFragment extends Fragment {
                     integral.setText(String.valueOf(integralBean.getData().getCoinCount()));
                 }
             });
-        }
+        }*/
     }
 
     @Override

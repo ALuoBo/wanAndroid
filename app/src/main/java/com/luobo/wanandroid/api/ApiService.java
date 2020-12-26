@@ -4,7 +4,7 @@ import com.luobo.wanandroid.ui.home.article.ArticleBean;
 import com.luobo.wanandroid.ui.home.banner.HomeBannerBean;
 import com.luobo.wanandroid.ui.home.top.ToppingBean;
 import com.luobo.wanandroid.ui.home.aq.AqResponse;
-import com.luobo.wanandroid.ui.login.LoggedInUser;
+import com.luobo.wanandroid.ui.login.LoginBean;
 import com.luobo.wanandroid.ui.official.OfficialArticleBean;
 import com.luobo.wanandroid.ui.official.OfficialTreeBean;
 import com.luobo.wanandroid.ui.project.ProjectContentBean;
@@ -56,7 +56,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("/user/login")
-    Call<LoggedInUser> loginUser(@Field("username") String userName, @Field("password") String password);
+    Call<LoginBean> loginUser(@Field("username") String userName, @Field("password") String password);
 
     @GET("/user/logout/json")
     Call loginOut();

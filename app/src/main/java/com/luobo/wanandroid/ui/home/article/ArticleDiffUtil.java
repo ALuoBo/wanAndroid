@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil;
 /*
  * 学习ListAdapter 可参考：
  * https://www.jianshu.com/p/7992060cc2cb
+ * https://www.jianshu.com/p/66d0feab2b5b
  * */
 
 public class ArticleDiffUtil extends DiffUtil.ItemCallback<ArticleBean.DataBean.DatasBean> {
@@ -13,12 +14,13 @@ public class ArticleDiffUtil extends DiffUtil.ItemCallback<ArticleBean.DataBean.
     @Override
     public boolean areItemsTheSame(@NonNull ArticleBean.DataBean.DatasBean oldItem, @NonNull ArticleBean.DataBean.DatasBean newItem) {
 
-        return oldItem == newItem;
+        return oldItem.getId() == newItem.getId();
     }
 
     @Override
     public boolean areContentsTheSame(@NonNull ArticleBean.DataBean.DatasBean oldItem, @NonNull ArticleBean.DataBean.DatasBean newItem) {
-        return oldItem.getId() == newItem.getId();
+        // 当areItemsTheSame返回true时，我们还需要判断两个item的内容是否相同
+        return oldItem.getLink().equals(newItem.getLink());
     }
 
 }

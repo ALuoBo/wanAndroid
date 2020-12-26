@@ -12,8 +12,21 @@ import retrofit2.Response;
 class OfficialTreeRepository {
     private ApiService service = RetrofitFactory.getInstance();
 
+    private OfficialTreeRepository() {
+    }
+
+    private static volatile OfficialTreeRepository instance;
+
+    public static OfficialTreeRepository getInstance() {
+        if (instance == null) {
+            instance = new OfficialTreeRepository();
+        }
+        return instance;
+    }
+
+    MutableLiveData<OfficialTreeBean> datas = new MutableLiveData<>();
+
     MutableLiveData<OfficialTreeBean> getTabs() {
-        MutableLiveData<OfficialTreeBean> datas = new MutableLiveData<>();
         service.getOfficialTree().enqueue(new Callback<OfficialTreeBean>() {
             @Override
             public void onResponse(Call<OfficialTreeBean> call, Response<OfficialTreeBean> response) {

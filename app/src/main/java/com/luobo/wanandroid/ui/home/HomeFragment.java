@@ -73,18 +73,19 @@ public class HomeFragment extends Fragment {
                 refreshlayout.finishLoadMore(500/*,false*/);//传入false表示加载失败
             }
         });
-        ConcatAdapter concatAdapter = new ConcatAdapter(homeAdapter, toppingAdapter, articleAdapter);
 
+        ConcatAdapter concatAdapter = new ConcatAdapter(homeAdapter, toppingAdapter, articleAdapter);
         recyclerView.setAdapter(concatAdapter);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //Banner
+      /*  //Banner
         viewModel.getBanner().observe(getViewLifecycleOwner(), homeBannerBean -> {
             HomeAdapter.BannerViewHolder viewHolder =
                     (HomeAdapter.BannerViewHolder) recyclerView.getChildViewHolder(recyclerView.getChildAt(0));
             viewHolder.mBannerViewPager.refreshData(homeBannerBean.getData());
         });
-
+*/
         //Top
         viewModel.getTopping().observe(getViewLifecycleOwner(), toppingBean -> {
             List<ToppingBean.DataBean> data = new ArrayList(toppingBean.getData());

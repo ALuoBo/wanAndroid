@@ -1,20 +1,6 @@
 package com.luobo.wanandroid.ui.login;
 
-public class LoggedInUser {
-
-    private static LoggedInUser instance;
-
-    private LoggedInUser() {
-    }
-
-    public static LoggedInUser getInstance() {
-        if (instance == null) {
-            return instance = new LoggedInUser();
-        } else {
-            return instance;
-        }
-    }
-
+public class LoginBean {
     /**
      * data : null
      * errorCode : -1

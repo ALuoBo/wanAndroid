@@ -5,7 +5,7 @@ package com.luobo.wanandroid.ui.login;
  */
 class LoginResult {
 
-    private LoggedInUser success;
+    private LoggedInUserView success;
 
     private String error;
 
@@ -13,13 +13,15 @@ class LoginResult {
         this.error = error;
     }
 
-    LoginResult(LoggedInUser success) {
+    LoginResult(LoggedInUserView success) {
         this.success = success;
     }
 
-    LoggedInUser getSuccess() {
+
+    LoggedInUserView getSuccess() {
         return success;
     }
+
 
     String getError() {
         return error;

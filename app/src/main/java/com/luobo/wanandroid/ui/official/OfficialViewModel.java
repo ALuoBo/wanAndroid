@@ -4,7 +4,12 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class OfficialViewModel extends ViewModel {
-    private OfficialTreeRepository repository = new OfficialTreeRepository();
+    public OfficialViewModel() {
+        this.repository = OfficialTreeRepository.getInstance();
+    }
+
+    private OfficialTreeRepository repository;
+
     MutableLiveData<OfficialTreeBean> getTabs() {
         return repository.getTabs();
     }

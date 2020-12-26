@@ -40,6 +40,10 @@ public class ToppingAdapter extends ListAdapter<ToppingBean.DataBean, ToppingAda
         ToppingBean.DataBean bean = getCurrentList().get(position);
         holder.textView.setText(Html.fromHtml(bean.getTitle()));
         holder.classify.setText(Html.fromHtml(bean.getChapterName()));
+        if (bean.isFresh()) {
+            holder.isNew.setVisibility(View.VISIBLE);
+        }
+
         holder.cardView.setOnClickListener(v -> {
             Intent intent = new Intent(context, WebActivity.class);
             intent.putExtra("URL", bean.getLink());
@@ -49,7 +53,7 @@ public class ToppingAdapter extends ListAdapter<ToppingBean.DataBean, ToppingAda
     }
 
     public class TopViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        TextView textView, isNew;
         TextView classify;
         CardView cardView;
 
@@ -58,6 +62,7 @@ public class ToppingAdapter extends ListAdapter<ToppingBean.DataBean, ToppingAda
             textView = itemView.findViewById(R.id.topTitle);
             classify = itemView.findViewById(R.id.topClassify);
             cardView = itemView.findViewById(R.id.TopArticle);
+            isNew = itemView.findViewById(R.id.isNew);
         }
     }
 

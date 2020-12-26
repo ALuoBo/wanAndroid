@@ -20,16 +20,15 @@
         android:layout_gravity="center">
 
         <TextView
+            style="@style/typeText"
             android:id="@+id/newTag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/outline_square_gold"
-            android:paddingHorizontal="4dp"
             android:text="置顶"
             android:textColor="@color/gold"
-            android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,6 +59,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="AA字字" />
+
+        <TextView
+            android:id="@+id/isNew"
+            style="@style/typeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/outline_square"
+            android:text="新"
+            android:visibility="gone"
+            android:textColor="@color/indigo_500"
+            app:layout_constraintStart_toEndOf="@+id/newTag"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
 

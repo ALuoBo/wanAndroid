@@ -31,6 +31,8 @@ import com.luobo.wanandroid.utils.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class SearchFragment extends BaseFragment {
@@ -55,7 +57,17 @@ public class SearchFragment extends BaseFragment {
             @Override
             public void handleOnBackPressed() {
                 searchViewAnim(false);
-                getNavController(requireActivity()).navigateUp();
+
+                Timer timer = new Timer();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        getNavController(requireActivity()).navigateUp();
+                    }
+                };
+
+                timer.schedule(task,250);
+
             }
         });
 
@@ -74,7 +86,7 @@ public class SearchFragment extends BaseFragment {
         searchView = view.findViewById(R.id.searchView);
         searchView.findViewById(R.id.search_plate).setBackground(null);
         searchView.findViewById(R.id.submit_area).setBackground(null);
-        searchView.setIconifiedByDefault(false);
+
         TextView textSearch = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         textSearch.setTextSize(14);
         searchViewAnim(true);
@@ -123,7 +135,7 @@ public class SearchFragment extends BaseFragment {
      * 搜索框展开动画
      */
     private void searchViewAnim(boolean isIn) {
-        int searchWidth = ScreenUtil.getScreenWidth(getActivity()) - ScreenUtil.dp2px(getActivity(), 128);
+        int searchWidth = ScreenUtil.getScreenWidth(getActivity()) - ScreenUtil.dp2px(getActivity(), 134);
         int targetWidth = ScreenUtil.getScreenWidth(getActivity()) - ScreenUtil.dp2px(getActivity(), 32);
         ValueAnimator animator;
         if (isIn) {

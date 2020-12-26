@@ -36,7 +36,7 @@ class HomePageRepository {
     private boolean isFirstRequest = true;
     ArticleBean datasBean = new ArticleBean();
     public MutableLiveData<ArticleBean> getArticle() {
-        Log.e(TAG, "getArticle: " );
+        Log.e(TAG, "getArticle: ");
 
         if (isLoading) return liveData;
         isLoading = true;
@@ -48,14 +48,14 @@ class HomePageRepository {
                     datasBean.setData(response.body().getData());
                     isFirstRequest = false;
                 } else {
-                    Log.e(TAG, "getArticle: getArticle: onResponse NotFirstRequest" );
+                    Log.e(TAG, "getArticle: getArticle: onResponse NotFirstRequest");
                     datasBean.getData().getDatas().addAll(response.body().getData().getDatas());
                 }
                 //不管值是否相同，只看version的值,都会执行onchange()
                 liveData.setValue(datasBean);
                 page++;
                 isLoading = false;
-                Log.e(TAG, "getArticle: " +page +isLoading);
+                Log.e(TAG, "getArticle: " + page + isLoading);
             }
 
             @Override
@@ -67,8 +67,8 @@ class HomePageRepository {
         return liveData;
     }
 
+    MutableLiveData<HomeBannerBean> liveBanner = new MutableLiveData<>();
     public MutableLiveData<HomeBannerBean> getBanner() {
-        MutableLiveData<HomeBannerBean> liveBanner = new MutableLiveData<>();
         service.getBannerList().enqueue(new Callback<HomeBannerBean>() {
             @Override
             public void onResponse(Call<HomeBannerBean> call, Response<HomeBannerBean> response) {
@@ -84,13 +84,13 @@ class HomePageRepository {
         return liveBanner;
     }
 
+    MutableLiveData<ToppingBean> liveTopData = new MutableLiveData<>();
     public MutableLiveData<ToppingBean> getTopping() {
 
-        MutableLiveData<ToppingBean> liveData = new MutableLiveData<>();
         service.getToppingArticles().enqueue(new Callback<ToppingBean>() {
             @Override
             public void onResponse(Call<ToppingBean> call, Response<ToppingBean> response) {
-                liveData.setValue(response.body());
+                liveTopData.setValue(response.body());
             }
 
             @Override
@@ -99,7 +99,7 @@ class HomePageRepository {
             }
         });
 
-        return liveData;
+        return liveTopData;
     }
 
 

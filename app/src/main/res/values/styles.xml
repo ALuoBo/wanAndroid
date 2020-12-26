@@ -36,4 +36,10 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <!--类别字-->
+    <style name="typeText" >
+        <item name="android:textSize">12sp</item>>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+    </style>
 </resources>

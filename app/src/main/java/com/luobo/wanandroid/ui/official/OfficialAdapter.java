@@ -34,12 +34,10 @@ class OfficialAdapter extends ListAdapter<OfficialArticleBean.DataBean.DatasBean
 
     @Override
     public void onBindViewHolder(@NonNull MViewHolder holder, int position) {
-        TextView textView = holder.itemView.findViewById(R.id.title);
-        TextView classify = holder.itemView.findViewById(R.id.classify);
-        CardView cardView = holder.itemView.findViewById(R.id.articleItem);
-        textView.setText(getItem(position).getTitle());
-        classify.setText(getItem(position).getChapterName());
-        cardView.setOnClickListener(v -> {
+        holder.niceTime.setText(getItem(position).getNiceDate());
+        holder.textView.setText(getItem(position).getTitle());
+        holder.classify.setText(getItem(position).getChapterName());
+        holder.cardView.setOnClickListener(v -> {
             Intent intent = new Intent(context, WebActivity.class);
             intent.putExtra("URL", getItem(position).getLink());
             context.startActivity(intent);
@@ -48,10 +46,16 @@ class OfficialAdapter extends ListAdapter<OfficialArticleBean.DataBean.DatasBean
     }
 
     class MViewHolder extends RecyclerView.ViewHolder {
+        TextView textView ,niceTime;
+        TextView classify;
+        CardView cardView;
 
         public MViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            textView = itemView.findViewById(R.id.title);
+            classify = itemView.findViewById(R.id.classify);
+            cardView = itemView.findViewById(R.id.articleItem);
+            niceTime = itemView.findViewById(R.id.niceDate);
         }
     }
 }
