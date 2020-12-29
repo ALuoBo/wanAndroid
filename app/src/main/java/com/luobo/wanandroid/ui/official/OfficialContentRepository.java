@@ -25,9 +25,11 @@ class OfficialContentRepository {
     int page = 1;
 
     private ApiService service = RetrofitFactory.getInstance();
-    MutableLiveData<OfficialArticleBean> datas = new MutableLiveData<>();
+
 
     MutableLiveData<OfficialArticleBean> getOfficialArticle(int id) {
+        //由于不同的fragment传入的id 不同，所以每次观察的datas 应为新datas
+        MutableLiveData<OfficialArticleBean> datas = new MutableLiveData<>();
         service.getOfficialArticle(id, page).enqueue(new Callback<OfficialArticleBean>() {
             @Override
             public void onResponse(Call<OfficialArticleBean> call, Response<OfficialArticleBean> response) {

@@ -79,13 +79,16 @@ public class HomeFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-      /*  //Banner
+        //Banner
         viewModel.getBanner().observe(getViewLifecycleOwner(), homeBannerBean -> {
-            HomeAdapter.BannerViewHolder viewHolder =
-                    (HomeAdapter.BannerViewHolder) recyclerView.getChildViewHolder(recyclerView.getChildAt(0));
-            viewHolder.mBannerViewPager.refreshData(homeBannerBean.getData());
+       try {
+           //todo fragment 重建会报空指针异常
+           HomeAdapter.BannerViewHolder viewHolder = (HomeAdapter.BannerViewHolder) recyclerView.getChildViewHolder(recyclerView.getChildAt(0));
+           viewHolder.mBannerViewPager.refreshData(homeBannerBean.getData());
+       }catch (Exception e){
+           Log.e(TAG, "onViewCreated: " + e);
+       }
         });
-*/
         //Top
         viewModel.getTopping().observe(getViewLifecycleOwner(), toppingBean -> {
             List<ToppingBean.DataBean> data = new ArrayList(toppingBean.getData());

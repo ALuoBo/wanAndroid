@@ -1,6 +1,7 @@
 package com.luobo.wanandroid.ui.official;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +20,13 @@ import java.util.List;
 
 public class OfficialContentFragment extends BaseFragment {
     private OfficialContentViewModel viewModel;
-
+    private String TAG = this.getClass().getName();
     private int authorId;
-
+    OfficialAdapter adapter;
     public OfficialContentFragment(int authorId) {
         this.authorId = authorId;
     }
 
-    public static OfficialContentFragment newInstance(int authorId) {
-        return new OfficialContentFragment(authorId);
-    }
 
     @Nullable
     @Override
@@ -43,13 +41,26 @@ public class OfficialContentFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.OfficialRecycler);
-        OfficialAdapter adapter = new OfficialAdapter(getContext(), new OfficialDiffUtil());
+         adapter = new OfficialAdapter(getContext(), new OfficialDiffUtil());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+        Log.e(TAG, "onViewCreated: "+ authorId );
         viewModel.getOfficialArticle(authorId).observe(getViewLifecycleOwner(), officialArticleBean -> {
-            List<OfficialArticleBean.DataBean.DatasBean> data = new ArrayList<>();
-            data.addAll(officialArticleBean.getData().getDatas());
+            List<OfficialArticleBean.DataBean.DatasBean> data = new ArrayList<>(officialArticleBean.getData().getDatas());
             adapter.submitList(data);
         });
+    }
+
+    @Override
+    public void onResume() {
+
+        Log.e(TAG, "onResume: " );
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.e(TAG, "onDestroyView: " );
+        super.onDestroyView();
     }
 }

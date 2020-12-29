@@ -14,9 +14,9 @@ class ProjectContentRepository {
     private boolean isFirst = true;
     private boolean isLoading = false;
     private ApiService service = RetrofitFactory.getInstance();
-    MutableLiveData<ProjectContentBean> data = new MutableLiveData<>();
-    public MutableLiveData<ProjectContentBean> getProjectContent(int cid) {
 
+    public MutableLiveData<ProjectContentBean> getProjectContent(int cid) {
+        MutableLiveData<ProjectContentBean> data = new MutableLiveData<>();
         service.getProjectContent(page, cid).enqueue(new Callback<ProjectContentBean>() {
             @Override
             public void onResponse(Call<ProjectContentBean> call, Response<ProjectContentBean> response) {

@@ -25,22 +25,40 @@
         android:name="com.luobo.wanandroid.ui.user.PersonCenterFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user">
+        <argument
+            android:name="LoginState"
+            app:argType="boolean"
+            android:defaultValue="false" />
         <action
-            android:id="@+id/action_userFragment_to_settingsActivity"
-            app:destination="@id/settingsActivity" />
+            android:id="@+id/action_userFragment_to_settingFragment"
+            app:destination="@id/settingFragment"
+            app:enterAnim="@anim/slide_in_right" />
     </fragment>
-    <activity
-        android:id="@+id/settingsActivity"
-        android:name="com.luobo.wanandroid.ui.setting.SettingsActivity"
-        android:label="SettingsActivity" />
+
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.luobo.wanandroid.ui.search.SearchFragment"
+        tools:layout="@layout/fragment_serach"
         android:label="SearchFragment" />
     <fragment
         android:id="@+id/officialFragment"
         android:name="com.luobo.wanandroid.ui.official.OfficialFragment"
         android:label="fragment_offical_list"
         tools:layout="@layout/fragment_official" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.luobo.wanandroid.ui.login.LoginFragment"
+        tools:layout="@layout/fragment_login"
+        android:label="LoginFragment" />
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment"
+        app:enterAnim="@anim/slide_in_bottom"
+        app:popExitAnim="@anim/slide_out_bottom" />
+    <fragment
+        tools:layout="@layout/fragment_settings"
+        android:id="@+id/settingFragment"
+        android:name="com.luobo.wanandroid.ui.setting.SettingFragment"
+        android:label="SettingFragment" />
 
 </navigation>

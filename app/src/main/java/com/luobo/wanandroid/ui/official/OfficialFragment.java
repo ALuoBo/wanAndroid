@@ -59,6 +59,7 @@ public class OfficialFragment extends BaseFragment {
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             tab.setText(titleList.get(position));
         }).attach();
+
     }
 
     class OfficialContentFragmentAdapter extends FragmentStateAdapter {
@@ -70,7 +71,7 @@ public class OfficialFragment extends BaseFragment {
         @Override
         public Fragment createFragment(int position) {
             //添加内容fragment
-            return OfficialContentFragment.newInstance(authorIds[position]);
+            return new OfficialContentFragment(authorIds[position]);
         }
 
         @Override

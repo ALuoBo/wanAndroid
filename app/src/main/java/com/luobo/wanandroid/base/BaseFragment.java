@@ -1,5 +1,9 @@
 package com.luobo.wanandroid.base;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
@@ -19,4 +23,11 @@ public class BaseFragment extends Fragment {
         NavHostFragment navHostFragment = (NavHostFragment) requestActivity.getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         return navHostFragment.getNavController();
     }
+
+    protected boolean loginState() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("CookiePersistence", Context.MODE_PRIVATE);
+        String loginCookie = sharedPreferences.getString("http://www.wanandroid.com/|token_pass", null);
+        return loginCookie != null;
+    }
+
 }

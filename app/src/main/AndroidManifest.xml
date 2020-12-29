@@ -13,12 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTheme">
         <activity
-            android:name=".ui.setting.SettingsActivity"
-            android:label="@string/title_activity_settings"></activity>
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
-        <activity
             android:name=".LauncherActivity"
             android:theme="@style/AppLauncherTheme">
             <intent-filter>
