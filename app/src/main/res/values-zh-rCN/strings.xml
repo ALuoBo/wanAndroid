@@ -11,7 +11,7 @@
     <string name="other">广场</string>
     <string name="me">我的</string>
     <string name="noLogin">登录开启更多功能</string>
-    <string name="openSource">开源</string>
+    <string name="openSource">开源许可</string>
     <string name="searchQueryHint">用空格隔开多个关键词</string>
     <string name="logout_message">确定退出当前账号吗</string>
     <string name="title_activity_main">MainActivity</string>

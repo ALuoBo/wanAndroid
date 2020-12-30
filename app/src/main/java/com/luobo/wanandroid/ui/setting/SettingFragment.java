@@ -1,7 +1,10 @@
 package com.luobo.wanandroid.ui.setting;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -19,10 +22,16 @@ public class SettingFragment extends PreferenceFragmentCompat {
         logout.setOnPreferenceClickListener(preference -> {
             SimpleDialog logoutDialog = new SimpleDialog();
             logoutDialog.setMessage(getString(R.string.logout_message));
-            logoutDialog.show(getChildFragmentManager(),"login_out");
-          /*  SharedPreferences sharedPreferences = getContext().getSharedPreferences("CookiePersistence", Context.MODE_PRIVATE);
-            sharedPreferences.edit().clear().apply();*/
-            Log.e(TAG, "onPreferenceClick: ");
+            logoutDialog.setListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences sharedPreferences = getContext().getSharedPreferences("CookiePersistence", Context.MODE_PRIVATE);
+                    sharedPreferences.edit().clear().apply();
+                    logoutDialog.dismiss();
+                    Log.e(TAG, "logout");
+                }
+            });
+            logoutDialog.show(getChildFragmentManager(), "logout");
             return true;
         });
     }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,7 +18,7 @@ import com.luobo.wanandroid.R;
 
 public class SimpleDialog extends DialogFragment {
     private String message;
-
+    private View.OnClickListener listener;
     /**
      * 设置主题需要在 onCreate() 方法中调用 setStyle() 方法
      *
@@ -50,6 +51,13 @@ public class SimpleDialog extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         TextView messageTextView = view.findViewById(R.id.messageTextView);
         messageTextView.setText(message);
+        Button cancelButton = view.findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(v -> {
+            dismiss();
+        });
+        Button confirmButton = view.findViewById(R.id.confirmButton);
+        confirmButton.setOnClickListener(listener);
+
     }
 
     public String getMessage() {
@@ -58,5 +66,9 @@ public class SimpleDialog extends DialogFragment {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public void setListener(View.OnClickListener listener) {
+        this.listener = listener;
     }
 }

@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,21 +14,22 @@ import androidx.navigation.NavController;
 import com.airbnb.lottie.LottieAnimationView;
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.base.BaseFragment;
+import com.luobo.wanandroid.databinding.FragmentLoginBinding;
 
 
 public class LoginFragment extends BaseFragment {
-    LottieAnimationView lottieAnimationView;
+    private LottieAnimationView lottieAnimationView;
     private LoginViewModel loginViewModel;
-    Button loginButton;
-    EditText username, password, checkPassword;
-    TextView changeLogin;
+    private FragmentLoginBinding binding;
     NavController navController;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
+
+        binding = FragmentLoginBinding.inflate(inflater, container, false);
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        View view = binding.getRoot();
         return view;
     }
 
@@ -41,13 +39,6 @@ public class LoginFragment extends BaseFragment {
         navController = getNavController(getActivity());
         lottieAnimationView = view.findViewById(R.id.lottieCircle);
         lottieAnimationView.setMinAndMaxProgress(0, 0.775f);
-
-        username = view.findViewById(R.id.username);
-        password = view.findViewById(R.id.password);
-        loginButton = view.findViewById(R.id.done);
-
-        checkPassword = view.findViewById(R.id.checkPassword);
-        changeLogin = view.findViewById(R.id.changeLogin);
 
         loginViewModel.getLoginResult().observe(getViewLifecycleOwner(), loginResult -> {
             if (loginResult == null) {
@@ -64,14 +55,14 @@ public class LoginFragment extends BaseFragment {
 
             }
         });
-        loginButton.setOnClickListener(v -> {
-            String userName = username.getText().toString();
-            String psw = password.getText().toString();
+        binding.done.setOnClickListener(v -> {
+            String userName = binding.username.getText().toString();
+            String psw = binding.password.getText().toString();
             loginViewModel.login(userName, psw);
         });
 
-        changeLogin.setOnClickListener(v -> {
-            checkPassword.setVisibility(View.VISIBLE);
+        binding.changeLogin.setOnClickListener(v -> {
+            binding.checkPassword.setVisibility(View.VISIBLE);
         });
     }
 
