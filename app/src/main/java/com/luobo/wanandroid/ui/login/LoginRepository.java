@@ -15,7 +15,7 @@ import retrofit2.Response;
 public class LoginRepository {
 
     static final String TAG = "Will";
-
+    private MutableLiveData<LoginResult> loginResultData;
     private static volatile LoginRepository instance;
 
 
@@ -32,20 +32,20 @@ public class LoginRepository {
 
     private ApiService service = RetrofitFactory.getInstance();
 
-    private MutableLiveData<LoginResult> loginResultData = new MutableLiveData<>();
 
     public LiveData<LoginResult> getLoginResult() {
         return loginResultData;
     }
 
     public void login(String name, String psw) {
-
+        loginResultData = new MutableLiveData<>();
         service.loginUser(name, psw).enqueue(new Callback<LoginBean>() {
 
             @Override
             public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
-                Log.e(TAG, "onResponse: " + "login error code");
+
                 if (response.body().getErrorCode() == 0) {
+                    Log.e(TAG, "onResponse: " + "login error code 0");
                     loginResultData.setValue(new LoginResult(new LoggedInUserView(response.body().getData().getUsername())));
                 } else {
                     loginResultData.setValue(new LoginResult(response.body().getErrorMsg()));

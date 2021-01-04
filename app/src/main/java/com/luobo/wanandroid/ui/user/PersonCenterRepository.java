@@ -12,6 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 class PersonCenterRepository {
+    private String TAG = this.getClass().getName();
     private static volatile PersonCenterRepository instance;
     private ApiService service = RetrofitFactory.getInstance();
 
@@ -27,21 +28,23 @@ class PersonCenterRepository {
     }
 
     MutableLiveData<IntegralBean> data = new MutableLiveData<>();
-    MutableLiveData<IntegralBean> getIntegral() {
 
+    MutableLiveData<IntegralBean> getIntegral() {
+        Log.d(TAG, "getIntegral:");
         service.getIntegral().enqueue(new Callback<IntegralBean>() {
             @Override
             public void onResponse(Call<IntegralBean> call, Response<IntegralBean> response) {
-
+                Log.d(TAG, "getIntegral: on response" + String.valueOf(response.body().getErrorCode()));
                 if (response.body().getErrorCode() == 0) {
                     data.setValue(response.body());
-                    Log.e("will", "onResponse: " + response.body().getErrorCode() + response.body().getData().getCoinCount());
+                    Log.d(TAG, "onResponse: " + response.body().getErrorCode() + response.body().getData().getCoinCount());
                 }
+
             }
 
             @Override
             public void onFailure(Call<IntegralBean> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: ");
             }
         });
         return data;

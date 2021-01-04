@@ -42,10 +42,12 @@ public class ProjectContentFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         recyclerView = view.findViewById(R.id.projectContentRecycler);
         ProjectContentAdapter adapter = new ProjectContentAdapter(getContext(), new ProjectContentDiffUtil());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         mViewModel.getProjectContent(projectCid).observe(getViewLifecycleOwner(), new Observer<ProjectContentBean>() {
             @Override
             public void onChanged(ProjectContentBean projectContentBean) {

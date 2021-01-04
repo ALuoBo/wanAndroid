@@ -36,14 +36,4 @@ public class SettingFragment extends PreferenceFragmentCompat {
         });
     }
 
-    /*@Override
-    public boolean onPreferenceClick(Preference preference) {
-        if (preference == findPreference(getString(R.string.logout)))
-        {
-            SharedPreferences sharedPreferences = getContext().getSharedPreferences("CookiePersistence", Context.MODE_PRIVATE);
-            sharedPreferences.edit().clear().apply();
-            Log.e(TAG, "onPreferenceClick: ");
-        }
-        return true;
-    }*/
 }

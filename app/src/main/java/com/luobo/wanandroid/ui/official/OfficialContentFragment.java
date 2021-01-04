@@ -42,7 +42,8 @@ public class OfficialContentFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.OfficialRecycler);
          adapter = new OfficialAdapter(getContext(), new OfficialDiffUtil());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         Log.e(TAG, "onViewCreated: "+ authorId );
         viewModel.getOfficialArticle(authorId).observe(getViewLifecycleOwner(), officialArticleBean -> {
@@ -53,7 +54,6 @@ public class OfficialContentFragment extends BaseFragment {
 
     @Override
     public void onResume() {
-
         Log.e(TAG, "onResume: " );
         super.onResume();
     }

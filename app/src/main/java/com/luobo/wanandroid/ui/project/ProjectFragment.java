@@ -23,7 +23,9 @@ public class ProjectFragment extends Fragment {
     private String TAG = "projectFragment";
     private ProjectViewModel mViewModel;
     private int projectContentFragmentSize;
+
     private int[] typeId = new int[30];
+
 
     public static ProjectFragment newInstance() {
         return new ProjectFragment();
