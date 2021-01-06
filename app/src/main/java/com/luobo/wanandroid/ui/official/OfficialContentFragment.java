@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.base.BaseFragment;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class OfficialContentFragment extends BaseFragment {
     private String TAG = this.getClass().getName();
     private int authorId;
     OfficialAdapter adapter;
+
     public OfficialContentFragment(int authorId) {
         this.authorId = authorId;
     }
@@ -41,26 +44,35 @@ public class OfficialContentFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.OfficialRecycler);
-         adapter = new OfficialAdapter(getContext(), new OfficialDiffUtil());
+        adapter = new OfficialAdapter(getContext(), new OfficialDiffUtil());
 
-       recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
-        Log.e(TAG, "onViewCreated: "+ authorId );
+        Log.e(TAG, "onViewCreated: " + authorId);
+
         viewModel.getOfficialArticle(authorId).observe(getViewLifecycleOwner(), officialArticleBean -> {
             List<OfficialArticleBean.DataBean.DatasBean> data = new ArrayList<>(officialArticleBean.getData().getDatas());
             adapter.submitList(data);
+        });
+
+        RefreshLayout refreshLayout = (RefreshLayout) view.findViewById(R.id.officialSwipe);
+        refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
+
+        refreshLayout.setOnLoadMoreListener(refreshLayout1 -> {
+            viewModel.getOfficialArticle(authorId);
+            refreshLayout.finishLoadMore(500);//传入false表示加载失败
         });
     }
 
     @Override
     public void onResume() {
-        Log.e(TAG, "onResume: " );
+        Log.e(TAG, "onResume: ");
         super.onResume();
     }
 
     @Override
     public void onDestroyView() {
-        Log.e(TAG, "onDestroyView: " );
+        Log.e(TAG, "onDestroyView: ");
         super.onDestroyView();
     }
 }

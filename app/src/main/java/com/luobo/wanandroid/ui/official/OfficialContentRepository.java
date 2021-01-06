@@ -1,5 +1,7 @@
 package com.luobo.wanandroid.ui.official;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 
 import com.luobo.wanandroid.api.ApiService;
@@ -10,6 +12,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 class OfficialContentRepository {
+    private String TAG = this.getClass().getName();
+
     private OfficialContentRepository() {
     }
 
@@ -22,24 +26,49 @@ class OfficialContentRepository {
         return instance;
     }
 
-    int page = 1;
-
     private ApiService service = RetrofitFactory.getInstance();
+    //由于不同的fragment传入的id不同，所以每次观察的liveData 应为新liveData
+    //加载更多时为同一id,此时应为同一liveData
+    private int officialId;
 
+    MutableLiveData<OfficialArticleBean> data;
+
+    OfficialArticleBean beans;
+
+    private int page;
+
+    private boolean isLoading = false;
 
     MutableLiveData<OfficialArticleBean> getOfficialArticle(int id) {
-        //由于不同的fragment传入的id 不同，所以每次观察的datas 应为新datas
-        MutableLiveData<OfficialArticleBean> datas = new MutableLiveData<>();
-        service.getOfficialArticle(id, page).enqueue(new Callback<OfficialArticleBean>() {
+
+        Log.d(TAG, "getOfficialArticle: " + id);
+        if (officialId != id) {
+            officialId = id;
+            page = 1;
+            beans = new OfficialArticleBean();
+            data = new MutableLiveData<>();
+            Log.d(TAG, "getOfficialArticle:  init");
+        }
+        if (isLoading) return data;
+        isLoading = true;
+        service.getOfficialArticle(officialId, page).enqueue(new Callback<OfficialArticleBean>() {
             @Override
             public void onResponse(Call<OfficialArticleBean> call, Response<OfficialArticleBean> response) {
-                datas.setValue(response.body());
+                if (page == 1) {
+                    beans.setData(response.body().getData());
+                } else {
+                    beans.getData().getDatas().addAll(response.body().getData().getDatas());
+                }
+                data.setValue(beans);
+                page++;
+                isLoading = false;
             }
 
             @Override
             public void onFailure(Call<OfficialArticleBean> call, Throwable t) {
+                isLoading = false;
             }
         });
-        return datas;
+        return data;
     }
 }

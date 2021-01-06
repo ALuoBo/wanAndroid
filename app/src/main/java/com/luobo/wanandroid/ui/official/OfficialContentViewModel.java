@@ -4,7 +4,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class OfficialContentViewModel extends ViewModel {
-    private OfficialContentRepository repository ;
+    private OfficialContentRepository repository;
+
 
     public OfficialContentViewModel() {
         this.repository = OfficialContentRepository.getInstance();
@@ -13,4 +14,7 @@ public class OfficialContentViewModel extends ViewModel {
     public MutableLiveData<OfficialArticleBean> getOfficialArticle(int id) {
         return repository.getOfficialArticle(id);
     }
+
+
+
 }
