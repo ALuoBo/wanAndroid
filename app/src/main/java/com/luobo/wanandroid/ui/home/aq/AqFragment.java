@@ -62,14 +62,14 @@ public class AqFragment extends Fragment {
                 viewModel.refresh();
                 viewModel.getAq();
                 Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
-                refreshlayout.finishRefresh(500/*,false*/);//传入false表示刷新失败
+                refreshlayout.finishRefresh(300/*,false*/);//传入false表示刷新失败
             }
         });
         refreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(RefreshLayout refreshlayout) {
                 viewModel.getAq();
-                refreshlayout.finishLoadMore(500/*,false*/);//传入false表示加载失败
+                refreshlayout.finishLoadMore(300/*,false*/);//传入false表示加载失败
             }
         });
 

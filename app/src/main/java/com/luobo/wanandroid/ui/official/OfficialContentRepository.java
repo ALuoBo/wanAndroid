@@ -31,9 +31,9 @@ class OfficialContentRepository {
     //加载更多时为同一id,此时应为同一liveData
     private int officialId;
 
-    MutableLiveData<OfficialArticleBean> data;
+    private MutableLiveData<OfficialArticleBean> data;
 
-    OfficialArticleBean beans;
+    private OfficialArticleBean beans;
 
     private int page;
 

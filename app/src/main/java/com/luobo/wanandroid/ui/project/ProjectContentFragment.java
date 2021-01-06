@@ -14,13 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
+import com.scwang.smart.refresh.footer.ClassicsFooter;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectContentFragment extends Fragment {
 
-    private ProjectContentViewModel mViewModel;
+    private ProjectContentViewModel viewModel;
     private RecyclerView recyclerView;
     private int projectCid;
 
@@ -35,7 +37,7 @@ public class ProjectContentFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mViewModel = new ViewModelProvider(this).get(ProjectContentViewModel.class);
+        viewModel = new ViewModelProvider(this).get(ProjectContentViewModel.class);
         return inflater.inflate(R.layout.fragment_project_content, container, false);
     }
 
@@ -48,14 +50,21 @@ public class ProjectContentFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mViewModel.getProjectContent(projectCid).observe(getViewLifecycleOwner(), new Observer<ProjectContentBean>() {
+        viewModel.getProjectContent(projectCid).observe(getViewLifecycleOwner(), new Observer<ProjectContentBean>() {
             @Override
             public void onChanged(ProjectContentBean projectContentBean) {
-
                 List<ProjectContentBean.DataBean.DatasBean> data = new ArrayList<>();
                 data.addAll(projectContentBean.getData().getDatas());
                 adapter.submitList(data);
             }
+        });
+
+        SmartRefreshLayout refreshLayout = view.findViewById(R.id.projectRefresh);
+        refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
+        refreshLayout.setOnLoadMoreListener(refreshLayout1 -> {
+            viewModel.getProjectContent(projectCid);
+            refreshLayout.finishLoadMore(300/*,false*/);//传入false表示加载失败
+
         });
 
     }

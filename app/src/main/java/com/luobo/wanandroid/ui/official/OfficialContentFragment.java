@@ -60,7 +60,7 @@ public class OfficialContentFragment extends BaseFragment {
 
         refreshLayout.setOnLoadMoreListener(refreshLayout1 -> {
             viewModel.getOfficialArticle(authorId);
-            refreshLayout.finishLoadMore(500);//传入false表示加载失败
+            refreshLayout.finishLoadMore(300);//传入false表示加载失败
         });
     }
 
