@@ -10,6 +10,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.luobo.wanandroid.base.BaseActivity;
 
+
 public class MainActivity extends BaseActivity {
 
     BottomNavigationView bottomNavigationView;

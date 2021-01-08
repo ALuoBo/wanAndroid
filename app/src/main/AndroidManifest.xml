@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTheme">
         <activity
-            android:name=".LauncherActivity"
+            android:name=".SplashActivity"
             android:theme="@style/AppLauncherTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
