@@ -13,6 +13,8 @@
         <item name="colorPrimary">@color/colorAccent</item>
     </style>
 
-    <style name="AppLauncherTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppLauncherTheme" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/ic_method_draw_image</item>
     </style>
 </resources>
