@@ -56,7 +56,7 @@ class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     class BannerViewHolder extends RecyclerView.ViewHolder {
-        BannerViewPager<HomeBannerBean.DataBean> mBannerViewPager;
+        BannerViewPager<HomeBannerBean> mBannerViewPager;
         public BannerViewHolder(@NonNull View itemView) {
             super(itemView);
             mBannerViewPager = itemView.findViewById(R.id.banner_view);

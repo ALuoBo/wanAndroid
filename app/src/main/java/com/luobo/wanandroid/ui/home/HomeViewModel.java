@@ -24,7 +24,7 @@ public class HomeViewModel extends AndroidViewModel {
         articleRepository = HomePageRepository.getInstance();
     }
 
-    MutableLiveData<HomeBannerBean> getBanner() {
+    MutableLiveData<List<HomeBannerBean>> getBanner() {
         return articleRepository.getBanner();
     }
 

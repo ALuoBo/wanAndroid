@@ -3,6 +3,7 @@ package com.luobo.wanandroid.ui.home.aq;
 import androidx.lifecycle.MutableLiveData;
 
 import com.luobo.wanandroid.api.ApiService;
+import com.luobo.wanandroid.api.ResultData;
 import com.luobo.wanandroid.api.RetrofitFactory;
 
 import retrofit2.Call;
@@ -35,14 +36,16 @@ public class AqRepository {
             return responseLiveData;
         }
         isLoading = true;
-        service.getAq(page).enqueue(new Callback<AqResponse>() {
+
+
+        service.getAq(page).enqueue(new Callback<ResultData<AqResponse>>() {
             @Override
-            public void onResponse(Call<AqResponse> call, Response<AqResponse> response) {
+            public void onResponse(Call<ResultData<AqResponse>> call, Response<ResultData<AqResponse>> response) {
                 if (isFirst) {
-                    datas.setData(response.body().getData());
+                    datas.setDatas(response.body().getData().getDatas());
                     isFirst = false;
                 } else {
-                    datas.getData().getDatas().addAll(response.body().getData().getDatas());
+                    datas.getDatas().addAll(response.body().getData().getDatas());
                 }
                 responseLiveData.setValue(datas);
                 isLoading = false;
@@ -50,10 +53,11 @@ public class AqRepository {
             }
 
             @Override
-            public void onFailure(Call<AqResponse> call, Throwable t) {
+            public void onFailure(Call<ResultData<AqResponse>> call, Throwable t) {
                 isLoading = false;
             }
         });
+
         return responseLiveData;
     }
 

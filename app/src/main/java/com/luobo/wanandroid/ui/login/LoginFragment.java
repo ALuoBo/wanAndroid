@@ -45,20 +45,13 @@ public class LoginFragment extends BaseFragment {
         binding.done.setOnClickListener(v -> {
             String userName = binding.username.getText().toString();
             String psw = binding.password.getText().toString();
-            loginViewModel.login(userName, psw);
-            loginViewModel.getLoginResult().observe(getViewLifecycleOwner(), loginResult -> {
-                Log.d(TAG, "login result change");
-                if (loginResult == null) {
-                    return;
-                }
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+            loginViewModel.login(userName, psw).observe(getViewLifecycleOwner(), loginBeanResultData -> {
+                if (loginBeanResultData.getData() != null) {
+                    updateUiWithUser(loginBeanResultData.getData().getUsername());
                     // navController.getPreviousBackStackEntry().getSavedStateHandle().set("loginState",true);
                     navController.navigateUp();
                 }
+
             });
         });
 
@@ -67,9 +60,9 @@ public class LoginFragment extends BaseFragment {
         });
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
+    private void updateUiWithUser(String username) {
         Log.d(TAG, "updateUiWithUser ");
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        String welcome = getString(R.string.welcome) + username;
         // TODO : initiate successful logged in experience
         Toast.makeText(getContext(), welcome, Toast.LENGTH_LONG).show();
     }

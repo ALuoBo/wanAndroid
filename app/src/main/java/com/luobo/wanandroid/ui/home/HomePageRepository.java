@@ -5,10 +5,13 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.luobo.wanandroid.api.ApiService;
+import com.luobo.wanandroid.api.ResultData;
 import com.luobo.wanandroid.api.RetrofitFactory;
 import com.luobo.wanandroid.ui.home.article.ArticleBean;
 import com.luobo.wanandroid.ui.home.banner.HomeBannerBean;
 import com.luobo.wanandroid.ui.home.top.ToppingBean;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,16 +70,16 @@ class HomePageRepository {
         return liveData;
     }
 
-    MutableLiveData<HomeBannerBean> liveBanner = new MutableLiveData<>();
-    public MutableLiveData<HomeBannerBean> getBanner() {
-        service.getBannerList().enqueue(new Callback<HomeBannerBean>() {
+    MutableLiveData<List<HomeBannerBean>> liveBanner = new MutableLiveData<>();
+    public MutableLiveData<List<HomeBannerBean>> getBanner() {
+        service.getBannerList().enqueue(new Callback<ResultData<List<HomeBannerBean>>>() {
             @Override
-            public void onResponse(Call<HomeBannerBean> call, Response<HomeBannerBean> response) {
-                liveBanner.setValue(response.body());
+            public void onResponse(Call<ResultData<List<HomeBannerBean>>> call, Response<ResultData<List<HomeBannerBean>>> response) {
+                liveBanner.setValue(response.body().getData());
             }
 
             @Override
-            public void onFailure(Call<HomeBannerBean> call, Throwable t) {
+            public void onFailure(Call<ResultData<List<HomeBannerBean>>> call, Throwable t) {
 
             }
         });

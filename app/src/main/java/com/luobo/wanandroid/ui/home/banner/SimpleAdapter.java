@@ -15,11 +15,11 @@ import com.zhpan.bannerview.BaseViewHolder;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
-public class SimpleAdapter extends BaseBannerAdapter<HomeBannerBean.DataBean> {
+public class SimpleAdapter extends BaseBannerAdapter<HomeBannerBean> {
     Context context = MyApplication.getInstance();
 
     @Override
-    protected void bindData(BaseViewHolder<HomeBannerBean.DataBean> holder, HomeBannerBean.DataBean data, int position, int pageSize) {
+    protected void bindData(BaseViewHolder<HomeBannerBean> holder, HomeBannerBean data, int position, int pageSize) {
         ImageView imageView = holder.itemView.findViewById(R.id.banner_image);
         Glide.with(context).load(data.getImagePath()).into(imageView);
         Log.e("will", "bindData:" + data.getImagePath());

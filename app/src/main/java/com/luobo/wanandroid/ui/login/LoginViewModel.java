@@ -7,6 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.luobo.wanandroid.api.ResultData;
+
 public class LoginViewModel extends AndroidViewModel {
 
     private LoginRepository loginRepository;
@@ -20,13 +22,8 @@ public class LoginViewModel extends AndroidViewModel {
          Log.e("will", "viewModel");
          return userRepository.login(name, psw);
      }*/
-    //登录结果
-    LiveData<LoginResult> getLoginResult() {
-        return loginRepository.getLoginResult();
-    }
-
-    public void login(String name, String password) {
-        loginRepository.login(name, password);
+    public MutableLiveData<ResultData<LoginBean>> login(String name, String password) {
+      return   loginRepository.login(name, password);
     }
 }
 

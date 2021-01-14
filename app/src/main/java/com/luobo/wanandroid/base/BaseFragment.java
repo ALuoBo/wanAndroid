@@ -2,8 +2,13 @@ package com.luobo.wanandroid.base;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
@@ -13,9 +18,14 @@ import com.luobo.wanandroid.R;
 
 public class BaseFragment extends Fragment {
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_base, container, false);
+    }
+
     /**
      * 获取导航控制器
-     *
      * @param requestActivity
      * @return
      */
@@ -29,5 +39,7 @@ public class BaseFragment extends Fragment {
         String loginCookie = sharedPreferences.getString("http://www.wanandroid.com/|token_pass", null);
         return loginCookie != null;
     }
+
+
 
 }

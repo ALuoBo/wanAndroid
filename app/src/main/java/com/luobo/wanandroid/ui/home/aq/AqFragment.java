@@ -48,7 +48,7 @@ public class AqFragment extends Fragment {
         recyclerView.setAdapter(concatAdapter);
 
         viewModel.getAq().observe(getViewLifecycleOwner(), aqResponse -> {
-            List<AqResponse.DataBean.DatasBean> data = new ArrayList<>(aqResponse.getData().getDatas());
+            List<AqResponse.DatasBean> data = new ArrayList<>(aqResponse.getDatas());
             aqAdapter.submitList(data);
         });
 
@@ -107,9 +107,9 @@ public class AqFragment extends Fragment {
     }
 
 
-    class AqAdapter extends ListAdapter<AqResponse.DataBean.DatasBean, AqAdapter.MyViewHolder> {
+    class AqAdapter extends ListAdapter<AqResponse.DatasBean, AqAdapter.MyViewHolder> {
 
-        protected AqAdapter(@NonNull DiffUtil.ItemCallback<AqResponse.DataBean.DatasBean> diffCallback) {
+        protected AqAdapter(@NonNull DiffUtil.ItemCallback<AqResponse.DatasBean> diffCallback) {
             super(diffCallback);
         }
 

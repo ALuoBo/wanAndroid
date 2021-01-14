@@ -42,7 +42,6 @@ public class RetrofitFactory {
                 .client(client)
                 .baseUrl("https://www.wanandroid.com")
                 .addConverterFactory(GsonConverterFactory.create())
-
                 .build();
 
         return retrofit.create(ApiService.class);

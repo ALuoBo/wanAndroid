@@ -1,15 +1,17 @@
 package com.luobo.wanandroid.api;
 
+import com.luobo.wanandroid.ui.home.aq.AqResponse;
 import com.luobo.wanandroid.ui.home.article.ArticleBean;
 import com.luobo.wanandroid.ui.home.banner.HomeBannerBean;
 import com.luobo.wanandroid.ui.home.top.ToppingBean;
-import com.luobo.wanandroid.ui.home.aq.AqResponse;
 import com.luobo.wanandroid.ui.login.LoginBean;
 import com.luobo.wanandroid.ui.official.OfficialArticleBean;
 import com.luobo.wanandroid.ui.official.OfficialTreeBean;
 import com.luobo.wanandroid.ui.project.ProjectContentBean;
 import com.luobo.wanandroid.ui.project.ProjectTreeBean;
 import com.luobo.wanandroid.ui.user.IntegralBean;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -36,7 +38,7 @@ public interface ApiService {
      * @return
      */
     @GET("banner/json")
-    Call<HomeBannerBean> getBannerList();
+    Call<ResultData<List<HomeBannerBean>>> getBannerList();
 
     /**
      * 置顶文章
@@ -56,7 +58,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("/user/login")
-    Call<LoginBean> loginUser(@Field("username") String userName, @Field("password") String password);
+    Call<ResultData<LoginBean>> loginUser(@Field("username") String userName, @Field("password") String password);
 
     @GET("/user/logout/json")
     Call loginOut();
@@ -68,7 +70,7 @@ public interface ApiService {
      * @return
      */
     @GET("/wenda/list/{pageNum}/json")
-    Call<AqResponse> getAq(@Path("pageNum") int curPage);
+    Call<ResultData<AqResponse>> getAq(@Path("pageNum") int curPage);
 
 
     /**

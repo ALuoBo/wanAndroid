@@ -147,4 +147,5 @@
     </string>
     <string name="setting">setting</string>
     <string name="cancel">cancel</string>
+    <string name="network_error_try_again">network error , try again</string>
 </resources>

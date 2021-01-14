@@ -1,11 +1,9 @@
 package com.luobo.wanandroid.ui.login;
 
-import android.util.Log;
-
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.luobo.wanandroid.api.ApiService;
+import com.luobo.wanandroid.api.ResultData;
 import com.luobo.wanandroid.api.RetrofitFactory;
 
 import retrofit2.Call;
@@ -13,11 +11,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginRepository {
-
     static final String TAG = "Will";
-    private MutableLiveData<LoginResult> loginResultData;
     private static volatile LoginRepository instance;
-
 
     private LoginRepository() {
     }
@@ -33,32 +28,19 @@ public class LoginRepository {
     private ApiService service = RetrofitFactory.getInstance();
 
 
-    public LiveData<LoginResult> getLoginResult() {
-        return loginResultData;
-    }
-
-    public void login(String name, String psw) {
-        loginResultData = new MutableLiveData<>();
-        service.loginUser(name, psw).enqueue(new Callback<LoginBean>() {
-
+    public MutableLiveData<ResultData<LoginBean>> login(String name, String psw) {
+        MutableLiveData<ResultData<LoginBean>> data = new MutableLiveData<>();
+        service.loginUser(name, psw).enqueue(new Callback<ResultData<LoginBean>>() {
             @Override
-            public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
-
-                if (response.body().getErrorCode() == 0) {
-                    Log.e(TAG, "onResponse: " + "login error code 0");
-                    loginResultData.setValue(new LoginResult(new LoggedInUserView(response.body().getData().getUsername())));
-                } else {
-                    loginResultData.setValue(new LoginResult(response.body().getErrorMsg()));
-                }
-
+            public void onResponse(Call<ResultData<LoginBean>> call, Response<ResultData<LoginBean>> response) {
+                data.setValue(response.body());
             }
 
             @Override
-            public void onFailure(Call<LoginBean> call, Throwable t) {
-                Log.e(TAG, "onResponse: " + t);
-                //网络异常处理
-                loginResultData.setValue(new LoginResult(t.getMessage()));
+            public void onFailure(Call<ResultData<LoginBean>> call, Throwable t) {
+
             }
         });
+        return data;
     }
 }
