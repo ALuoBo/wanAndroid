@@ -29,7 +29,7 @@ public interface ApiService {
      * @return
      */
     @GET("/article/list/{pageNum}/json")
-    Call<ArticleBean> getArticlesList(@Path("pageNum") int curPage);
+    Call<ResultData<ArticleBean>> getArticlesList(@Path("pageNum") int curPage);
 
 
     /**
@@ -90,7 +90,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("/article/query/{page}/json")
-    Call<ArticleBean> search(@Path("page") int page, @Field("k") String key);
+    Call<ResultData<ArticleBean>> search(@Path("page") int page, @Field("k") String key);
 
 
     @GET("/project/tree/json")

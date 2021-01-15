@@ -18,10 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
 
-public class ArticleAdapter extends ListAdapter<ArticleBean.DataBean.DatasBean, ArticleAdapter.ArticleViewHolder> {
+public class ArticleAdapter extends ListAdapter<ArticleBean.DatasBean, ArticleAdapter.ArticleViewHolder> {
     private Context context;
 
-    public ArticleAdapter(Context context, @NonNull DiffUtil.ItemCallback<ArticleBean.DataBean.DatasBean> diffCallback) {
+    public ArticleAdapter(Context context, @NonNull DiffUtil.ItemCallback<ArticleBean.DatasBean> diffCallback) {
         super(diffCallback);
         this.context = context;
     }
@@ -35,7 +35,7 @@ public class ArticleAdapter extends ListAdapter<ArticleBean.DataBean.DatasBean, 
 
     @Override
     public void onBindViewHolder(@NonNull ArticleViewHolder holder, int position) {
-        ArticleBean.DataBean.DatasBean articleBean = getCurrentList().get(position);
+        ArticleBean.DatasBean articleBean = getCurrentList().get(position);
         if (articleBean.isFresh()) {
             Log.e("will", "onBindViewHolder: " + articleBean.isFresh());
             holder.newTag.setVisibility(View.VISIBLE);

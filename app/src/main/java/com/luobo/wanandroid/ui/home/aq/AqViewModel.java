@@ -1,17 +1,17 @@
 package com.luobo.wanandroid.ui.home.aq;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-public class AqViewModel extends AndroidViewModel {
+import com.luobo.wanandroid.base.BaseViewModel;
+
+
+public class AqViewModel extends BaseViewModel {
+
     private AqRepository aqRepository;
 
-    public AqViewModel(@NonNull Application application) {
-        super(application);
-        aqRepository = AqRepository.getInstance();
+    public AqViewModel() {
+
+        this.aqRepository = AqRepository.getInstance();
     }
 
     public MutableLiveData<AqResponse> getAq() {

@@ -95,10 +95,11 @@ public class HomeFragment extends Fragment {
             toppingAdapter.submitList(data);
         });
         //Article
-        viewModel.getData().observe(getViewLifecycleOwner(), articleDataBean -> {
-            ArrayList<ArticleBean.DataBean.DatasBean> data = new ArrayList(articleDataBean.getData().getDatas());
+        viewModel.getData().observe(getViewLifecycleOwner(),articleBean -> {
+            ArrayList<ArticleBean.DatasBean> data = new ArrayList(articleBean.getDatas());
             articleAdapter.submitList(data);
         });
+
 
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

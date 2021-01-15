@@ -16,7 +16,7 @@ public class SearchViewModel extends ViewModel {
         return searchRepository.getSearchResult(keywords);
     }
 
-    public MutableLiveData<ArticleBean> LoadMoreResult(String keywords) {
+    /*public MutableLiveData<ArticleBean> LoadMoreResult(String keywords) {
         return searchRepository.LoadMoreResult(keywords);
-    }
+    }*/
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.luobo.wanandroid.api.ResultData;
 import com.luobo.wanandroid.ui.home.article.ArticleBean;
 import com.luobo.wanandroid.ui.home.banner.HomeBannerBean;
 import com.luobo.wanandroid.ui.home.top.ToppingBean;

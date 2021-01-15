@@ -3,21 +3,6 @@ package com.luobo.wanandroid.ui.home.article;
 import java.util.List;
 
 public class ArticleBean  {
-    /**
-     * data : {"curPage":2,"datas":[{"apkLink":"","audit":1,"author":"鸿洋","canEdit":false,"chapterId":408,"chapterName":"鸿洋","collect":false,"courseId":13,"desc":"","descMd":"","envelopePic":"","fresh":false,"id":15875,"link":"https://mp.weixin.qq.com/s/Q9HeT39w0LXGoR_ifyd9bg","niceDate":"2020-10-23 00:00","niceShareDate":"16小时前","origin":"","prefix":"","projectLink":"","publishTime":1603382400000,"realSuperChapterId":407,"selfVisible":0,"shareDate":1603727525000,"shareUser":"","superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/408/1"}],"title":"直面底层：这一次，彻底搞懂Android 中的Window","type":0,"userId":-1,"visible":1,"zan":0}]}
-     */
-
-    private DataBean data;
-
-    public DataBean getData() {
-        return data;
-    }
-
-    public void setData(DataBean data) {
-        this.data = data;
-    }
-
-    public static class DataBean  {
         /**
          * curPage : 2
          * datas : [{"apkLink":"","audit":1,"author":"鸿洋","canEdit":false,"chapterId":408,"chapterName":"鸿洋","collect":false,"courseId":13,"desc":"","descMd":"","envelopePic":"","fresh":false,"id":15875,"link":"https://mp.weixin.qq.com/s/Q9HeT39w0LXGoR_ifyd9bg","niceDate":"2020-10-23 00:00","niceShareDate":"16小时前","origin":"","prefix":"","projectLink":"","publishTime":1603382400000,"realSuperChapterId":407,"selfVisible":0,"shareDate":1603727525000,"shareUser":"","superChapterId":408,"superChapterName":"公众号","tags":[{"name":"公众号","url":"/wxarticle/list/408/1"}],"title":"直面底层：这一次，彻底搞懂Android 中的Window","type":0,"userId":-1,"visible":1,"zan":0}]
@@ -394,6 +379,6 @@ public class ArticleBean  {
             }
         }
     }
-}
+
 
 

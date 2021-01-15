@@ -33,28 +33,34 @@ class HomePageRepository {
     }
 
     private ApiService service = RetrofitFactory.getInstance();
+
     MutableLiveData<ArticleBean> liveData = new MutableLiveData<>();
+
     private int page = 0;
     private boolean isLoading = false;
     private boolean isFirstRequest = true;
+
     ArticleBean datasBean = new ArticleBean();
+
     public MutableLiveData<ArticleBean> getArticle() {
         Log.e(TAG, "getArticle: ");
 
         if (isLoading) return liveData;
         isLoading = true;
-        service.getArticlesList(page).enqueue(new Callback<ArticleBean>() {
+        service.getArticlesList(page).enqueue(new Callback<ResultData<ArticleBean>>() {
             @Override
-            public void onResponse(Call<ArticleBean> call, Response<ArticleBean> response) {
+            public void onResponse(Call<ResultData<ArticleBean>> call, Response<ResultData<ArticleBean>> response) {
                 if (isFirstRequest) {
                     Log.e(TAG, "getArticle: onResponse isFirstRequest");
-                    datasBean.setData(response.body().getData());
+                    datasBean.setDatas(response.body().getData().getDatas());
                     isFirstRequest = false;
+
                 } else {
                     Log.e(TAG, "getArticle: getArticle: onResponse NotFirstRequest");
-                    datasBean.getData().getDatas().addAll(response.body().getData().getDatas());
+                    datasBean.getDatas().addAll(response.body().getData().getDatas());
                 }
                 //不管值是否相同，只看version的值,都会执行onchange()
+
                 liveData.setValue(datasBean);
                 page++;
                 isLoading = false;
@@ -62,15 +68,15 @@ class HomePageRepository {
             }
 
             @Override
-            public void onFailure(Call<ArticleBean> call, Throwable t) {
+            public void onFailure(Call<ResultData<ArticleBean>> call, Throwable t) {
                 isLoading = false;
             }
         });
-
         return liveData;
     }
 
     MutableLiveData<List<HomeBannerBean>> liveBanner = new MutableLiveData<>();
+
     public MutableLiveData<List<HomeBannerBean>> getBanner() {
         service.getBannerList().enqueue(new Callback<ResultData<List<HomeBannerBean>>>() {
             @Override
@@ -88,6 +94,7 @@ class HomePageRepository {
     }
 
     MutableLiveData<ToppingBean> liveTopData = new MutableLiveData<>();
+
     public MutableLiveData<ToppingBean> getTopping() {
 
         service.getToppingArticles().enqueue(new Callback<ToppingBean>() {

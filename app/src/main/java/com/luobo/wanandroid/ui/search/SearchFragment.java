@@ -104,7 +104,7 @@ public class SearchFragment extends BaseFragment {
                 if (dy < 0) return;
                 LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
                 if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1 && !keywords.isEmpty()) {
-                    viewModel.LoadMoreResult(keywords).observe(getViewLifecycleOwner(), observer);
+                   // viewModel.LoadMoreResult(keywords).observe(getViewLifecycleOwner(), observer);
                 }
             }
         });
@@ -115,7 +115,7 @@ public class SearchFragment extends BaseFragment {
                 viewModel.getSearchResult(keywords).observe(getViewLifecycleOwner(), new Observer<ArticleBean>() {
                     @Override
                     public void onChanged(ArticleBean articleBean) {
-                        adapter.submitList(articleBean.getData().getDatas());
+                        adapter.submitList(articleBean.getDatas());
 
                     }
                 });
@@ -153,10 +153,10 @@ public class SearchFragment extends BaseFragment {
         animator.start();
     }
 
-    class MyAdapter extends ListAdapter<ArticleBean.DataBean.DatasBean, MyAdapter.SearchResultViewHolder> {
+    class MyAdapter extends ListAdapter<ArticleBean.DatasBean, MyAdapter.SearchResultViewHolder> {
 
 
-        protected MyAdapter(@NonNull DiffUtil.ItemCallback<ArticleBean.DataBean.DatasBean> diffCallback) {
+        protected MyAdapter(@NonNull DiffUtil.ItemCallback<ArticleBean.DatasBean> diffCallback) {
             super(diffCallback);
         }
 
@@ -198,8 +198,8 @@ public class SearchFragment extends BaseFragment {
         @Override
         public void onChanged(ArticleBean articleBean) {
             Log.e("myTag", "onChange");
-            List<ArticleBean.DataBean.DatasBean> data = new ArrayList<>();
-            data.addAll(articleBean.getData().getDatas());
+            List<ArticleBean.DatasBean> data = new ArrayList<>();
+            data.addAll(articleBean.getDatas());
             adapter.submitList(data);
         }
 

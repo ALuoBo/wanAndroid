@@ -45,7 +45,7 @@ public class SearchRepository {
      */
     public MutableLiveData<ArticleBean> getSearchResult(String keywords) {
         MutableLiveData<ArticleBean> liveData = new MutableLiveData<>();
-        service.search(0, keywords).enqueue(new Callback<ArticleBean>() {
+        /*service.search(0, keywords).enqueue(new Callback<ArticleBean>() {
             @Override
             public void onResponse(Call<ArticleBean> call, Response<ArticleBean> response) {
                 liveData.setValue(response.body());
@@ -55,7 +55,7 @@ public class SearchRepository {
             public void onFailure(Call<ArticleBean> call, Throwable t) {
 
             }
-        });
+        });*/
         return liveData;
     }
 
@@ -64,7 +64,7 @@ public class SearchRepository {
      * @return liveData 搜索结果
      * @Description 加载更多
      */
-    public MutableLiveData<ArticleBean> LoadMoreResult(String keyword) {
+   /* public MutableLiveData<ArticleBean> LoadMoreResult(String keyword) {
 
         if (!isSameKeyword(keyword)) {
             page = 0;
@@ -93,7 +93,7 @@ public class SearchRepository {
             }
         });
         return data;
-    }
+    }*/
 
     /**
      * @param newKeywords 每次请求传入的关键词
