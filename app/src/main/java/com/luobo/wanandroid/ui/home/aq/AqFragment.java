@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
+import com.luobo.wanandroid.base.BaseFragment;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.MaterialHeader;
 import com.scwang.smart.refresh.layout.api.RefreshLayout;
@@ -31,7 +32,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AqFragment extends Fragment {
+public class AqFragment extends BaseFragment {
     RecyclerView recyclerView;
     AqViewModel viewModel;
     AqAdapter aqAdapter;
@@ -48,6 +49,7 @@ public class AqFragment extends Fragment {
         recyclerView.setAdapter(concatAdapter);
 
         viewModel.getAq().observe(getViewLifecycleOwner(), aqResponse -> {
+            viewModel.setLoadState();
             List<AqResponse.DatasBean> data = new ArrayList<>(aqResponse.getDatas());
             aqAdapter.submitList(data);
         });
@@ -101,8 +103,8 @@ public class AqFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        viewModel = new ViewModelProvider(this).get(AqViewModel.class);
 
+        viewModel = new ViewModelProvider(this).get(AqViewModel.class);
         return inflater.inflate(R.layout.fragment_aq, container, false);
     }
 
@@ -145,5 +147,6 @@ public class AqFragment extends Fragment {
             }
         }
     }
+
 
 }

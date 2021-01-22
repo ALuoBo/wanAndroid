@@ -11,17 +11,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.luobo.wanandroid.R;
 
+import java.util.zip.Inflater;
+
 public class BaseFragment extends Fragment {
 
+    private BaseViewModel viewModel;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+            viewModel =new ViewModelProvider(this).get(BaseViewModel.class);
+
         return inflater.inflate(R.layout.fragment_base, container, false);
+
     }
 
     /**
@@ -40,6 +48,25 @@ public class BaseFragment extends Fragment {
         return loginCookie != null;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel.loadStateLiveData.observe(getViewLifecycleOwner(),loadState -> {
+            switch (loadState){
+                case EMPTY:
 
+                    break;
+                case ERROR:
 
+                    break;
+                case LOADING:
+
+                    break;
+
+                case SUCCESS:
+                    break;
+            }
+        });
+    }
+   
 }

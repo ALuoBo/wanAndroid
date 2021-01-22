@@ -43,8 +43,7 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.preference:preference:1.1.1'
     implementation 'androidx.recyclerview:recyclerview:1.2.0-beta01'
-    implementation project(path: ':base')
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
@@ -58,7 +57,7 @@ dependencies {
     //Gson
     implementation "com.google.code.gson:gson:$GsonVersion"
 
-    implementation "com.squareup.okhttp3:logging-interceptor:3.12.3"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     //glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"

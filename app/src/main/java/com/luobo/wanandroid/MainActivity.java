@@ -3,6 +3,7 @@ package com.luobo.wanandroid;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -16,6 +17,8 @@ public class MainActivity extends BaseActivity {
     BottomNavigationView bottomNavigationView;
     NavController navController;
     TextView username;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
