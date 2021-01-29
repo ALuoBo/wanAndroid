@@ -2,17 +2,17 @@ package com.luobo.wanandroid.ui.home.aq;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.luobo.wanandroid.api.ApiService;
 import com.luobo.wanandroid.api.ResultData;
-import com.luobo.wanandroid.api.RetrofitFactory;
+import com.luobo.wanandroid.base.BaseRepository;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AqRepository {
+public class AqRepository extends BaseRepository {
+
     private static volatile AqRepository instance;
-    private ApiService service = RetrofitFactory.getInstance();
+
     private int page = 1;
     private boolean isFirst = true;
     private boolean isLoading = false;

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
@@ -22,12 +23,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.flexbox.FlexboxLayout;
 import com.luobo.wanandroid.R;
 import com.luobo.wanandroid.WebActivity;
 import com.luobo.wanandroid.base.BaseFragment;
 import com.luobo.wanandroid.ui.home.article.ArticleBean;
 import com.luobo.wanandroid.ui.home.article.ArticleDiffUtil;
 import com.luobo.wanandroid.utils.ScreenUtil;
+import com.scwang.smart.refresh.layout.SmartRefreshLayout;
+import com.scwang.smart.refresh.layout.api.RefreshLayout;
+import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +46,6 @@ public class SearchFragment extends BaseFragment {
     SearchViewModel viewModel;
     MyAdapter adapter;
     String keywords = "";
-    LoadMoreObserver observer = new LoadMoreObserver();
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -66,7 +70,7 @@ public class SearchFragment extends BaseFragment {
                     }
                 };
 
-                timer.schedule(task,250);
+                timer.schedule(task, 250);
 
             }
         });
@@ -86,7 +90,8 @@ public class SearchFragment extends BaseFragment {
         searchView = view.findViewById(R.id.searchView);
         searchView.findViewById(R.id.search_plate).setBackground(null);
         searchView.findViewById(R.id.submit_area).setBackground(null);
-
+        Button clearSearchHistoryBtn = view.findViewById(R.id.clearSearchHistory);
+        FlexboxLayout flexboxLayout = view.findViewById(R.id.searchFlexbox);
         TextView textSearch = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         textSearch.setTextSize(14);
         searchViewAnim(true);
@@ -97,28 +102,21 @@ public class SearchFragment extends BaseFragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (dy < 0) return;
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (layoutManager.findLastCompletelyVisibleItemPosition() == adapter.getItemCount() - 1 && !keywords.isEmpty()) {
-                   // viewModel.LoadMoreResult(keywords).observe(getViewLifecycleOwner(), observer);
-                }
-            }
-        });
+        SmartRefreshLayout searchSmartRefresh = view.findViewById(R.id.searchSmartRefresh);
+
+        searchSmartRefresh.setOnLoadMoreListener(refreshLayout -> viewModel.getSearchResult(keywords));
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 keywords = query;
-                viewModel.getSearchResult(keywords).observe(getViewLifecycleOwner(), new Observer<ArticleBean>() {
-                    @Override
-                    public void onChanged(ArticleBean articleBean) {
-                        adapter.submitList(articleBean.getDatas());
+                viewModel.getSearchResult(keywords).observe(getViewLifecycleOwner(),
+                        articleBean -> adapter.submitList(articleBean.getDatas()));
 
-                    }
-                });
+                OutLineTextView searchHistoryWord = new OutLineTextView(getContext());
+                searchHistoryWord.setText(query);
+                flexboxLayout.addView(searchHistoryWord);
+
                 return false;
             }
 
@@ -128,6 +126,11 @@ public class SearchFragment extends BaseFragment {
             }
         });
 
+
+        clearSearchHistoryBtn.setOnClickListener(v -> {
+            flexboxLayout.removeAllViews();
+            clearSearchHistoryBtn.setVisibility(View.INVISIBLE);
+        });
     }
 
 
@@ -194,14 +197,4 @@ public class SearchFragment extends BaseFragment {
         }
     }
 
-    class LoadMoreObserver implements Observer<ArticleBean> {
-        @Override
-        public void onChanged(ArticleBean articleBean) {
-            Log.e("myTag", "onChange");
-            List<ArticleBean.DatasBean> data = new ArrayList<>();
-            data.addAll(articleBean.getDatas());
-            adapter.submitList(data);
-        }
-
-    }
 }

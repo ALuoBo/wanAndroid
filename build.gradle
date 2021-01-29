@@ -16,6 +16,9 @@ buildscript {
         paging_version = "3.0.0-alpha11"
 
         BannerViewPagerVersion ="3.4.0"
+        //FlexboxLayout
+        FlexboxLayoutVersion ="2.0.1"
+
     }
     repositories {
         google()

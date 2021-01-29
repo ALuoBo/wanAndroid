@@ -51,7 +51,7 @@ public class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel.loadStateLiveData.observe(getViewLifecycleOwner(),loadState -> {
+      /*  viewModel.loadStateLiveData.observe(getViewLifecycleOwner(),loadState -> {
             switch (loadState){
                 case EMPTY:
 
@@ -66,7 +66,7 @@ public class BaseFragment extends Fragment {
                 case SUCCESS:
                     break;
             }
-        });
+        });*/
     }
    
 }

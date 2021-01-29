@@ -8,7 +8,13 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.luobo.wanandroid.base.MyApplication;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -29,6 +35,7 @@ public class RetrofitFactory {
         });
 
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         ClearableCookieJar cookieJar =
                 new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MyApplication.getInstance()));
 
@@ -46,4 +53,6 @@ public class RetrofitFactory {
 
         return retrofit.create(ApiService.class);
     }
+
+
 }

@@ -49,7 +49,6 @@ public class AqFragment extends BaseFragment {
         recyclerView.setAdapter(concatAdapter);
 
         viewModel.getAq().observe(getViewLifecycleOwner(), aqResponse -> {
-            viewModel.setLoadState();
             List<AqResponse.DatasBean> data = new ArrayList<>(aqResponse.getDatas());
             aqAdapter.submitList(data);
         });

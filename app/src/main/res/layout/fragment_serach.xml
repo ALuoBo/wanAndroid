@@ -1,41 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.scwang.smart.refresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchSmartRefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <LinearLayout
-        android:id="@+id/toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+        <LinearLayout
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:layout_marginStart="64dp"
-            android:layout_marginEnd="64dp"
-            android:background="@drawable/cursor"
-            app:iconifiedByDefault="false"
-            app:queryHint="@string/searchQueryHint"
-            app:searchIcon="@drawable/search_24" />
-    </LinearLayout>
+            android:layout_height="?attr/actionBarSize"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchResultRecycler"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:listitem="@layout/item_article" />
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="64dp"
+                android:background="@drawable/cursor"
+                app:iconifiedByDefault="false"
+                app:queryHint="@string/searchQueryHint"
+                app:searchIcon="@drawable/search_24" />
+        </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/searchHistoryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="搜索历史"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/clearSearchHistory"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/ic_baseline_clear_24"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/searchHistoryTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/searchHistoryTitle" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/searchFlexbox"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:flexWrap="wrap"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchHistoryTitle">
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchResultRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/item_article" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.scwang.smart.refresh.layout.SmartRefreshLayout>
