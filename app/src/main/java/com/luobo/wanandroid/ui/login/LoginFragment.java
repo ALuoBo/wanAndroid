@@ -38,7 +38,7 @@ public class LoginFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        navController = getNavController(getActivity());
+        navController = getNavController(R.id.nav_host_fragment);
         lottieAnimationView = view.findViewById(R.id.lottieCircle);
         lottieAnimationView.setMinAndMaxProgress(0, 0.775f);
 

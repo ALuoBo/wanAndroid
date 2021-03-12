@@ -33,12 +33,12 @@ public class BaseFragment extends Fragment {
     }
 
     /**
-     * 获取导航控制器
-     * @param requestActivity
-     * @return
+     *
+     * @param navHostFragmentId
+     * @return navController
      */
-    protected NavController getNavController(FragmentActivity requestActivity) {
-        NavHostFragment navHostFragment = (NavHostFragment) requestActivity.getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+    protected NavController getNavController(int navHostFragmentId) {
+        NavHostFragment navHostFragment = (NavHostFragment) getParentFragmentManager().findFragmentById(navHostFragmentId);
         return navHostFragment.getNavController();
     }
 

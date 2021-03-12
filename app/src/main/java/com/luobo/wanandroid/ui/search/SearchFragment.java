@@ -66,7 +66,7 @@ public class SearchFragment extends BaseFragment {
                 TimerTask task = new TimerTask() {
                     @Override
                     public void run() {
-                        getNavController(requireActivity()).navigateUp();
+                         getNavController(R.id.nav_host_fragment).navigateUp();
                     }
                 };
 
