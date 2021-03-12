@@ -27,13 +27,7 @@ public class OfficialFragment extends BaseFragment {
     private String TAG = this.getClass().getName();
     OfficialViewModel viewModel;
     int officialContentFragmentSize;
-    int[] authorIds = new int[30];
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.e(TAG, "onCreate: ");
-    }
+    ArrayList<Integer> authorIds;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,15 +45,17 @@ public class OfficialFragment extends BaseFragment {
         ViewPager2 viewPager = view.findViewById(R.id.officialViewPager);
         OfficialContentFragmentAdapter adapter = new OfficialContentFragmentAdapter(this);
         viewPager.setAdapter(adapter);
+        authorIds = new ArrayList<>();
+
         ArrayList<String> titleList = new ArrayList<>();
-
         viewModel.getTabs().observe(getViewLifecycleOwner(), projectTreeBean -> {
-
+            officialContentFragmentSize = 0;
+            Log.d(TAG, "onViewCreated: getTabs data change");
             for (OfficialTreeBean.DataBean dataBean : projectTreeBean.getData()) {
-
                 titleList.add(dataBean.getName());
-                authorIds[officialContentFragmentSize] = dataBean.getId();
+                authorIds.add(officialContentFragmentSize, dataBean.getId());
                 officialContentFragmentSize++;
+
             }
 
             // Issue : invalid view holder adapter positionFragmentViewHolder
@@ -90,7 +86,7 @@ public class OfficialFragment extends BaseFragment {
         @Override
         public Fragment createFragment(int position) {
             //添加内容fragment
-            return new OfficialContentFragment(authorIds[position]);
+            return new OfficialContentFragment(authorIds.get(position));
         }
 
         @Override
@@ -98,17 +94,7 @@ public class OfficialFragment extends BaseFragment {
             Log.d(TAG, "getItemCount: " + officialContentFragmentSize);
             return officialContentFragmentSize;
         }
+
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.d(TAG, "onDestroyView: ");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
-    }
 }

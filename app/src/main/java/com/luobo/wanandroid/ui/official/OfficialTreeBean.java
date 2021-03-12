@@ -1,6 +1,9 @@
 package com.luobo.wanandroid.ui.official;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
+import java.util.Objects;
 
 public class OfficialTreeBean {
 
@@ -122,5 +125,25 @@ public class OfficialTreeBean {
         public void setChildren(List<?> children) {
             this.children = children;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+
+            if (o == null || getClass() != o.getClass()) return false;
+
+            DataBean dataBean = (DataBean) o;
+            return id == dataBean.id;
+        }
+
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OfficialTreeBean that = (OfficialTreeBean) o;
+        return data.equals(that.data);
+    }
+
 }

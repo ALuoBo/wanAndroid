@@ -25,12 +25,16 @@ class OfficialTreeRepository {
     }
 
     MutableLiveData<OfficialTreeBean> datas = new MutableLiveData<>();
+    OfficialTreeBean bean = null;
 
     MutableLiveData<OfficialTreeBean> getTabs() {
         service.getOfficialTree().enqueue(new Callback<OfficialTreeBean>() {
             @Override
             public void onResponse(Call<OfficialTreeBean> call, Response<OfficialTreeBean> response) {
-                datas.setValue(response.body());
+                if (bean ==null||!bean.equals(response.body())){
+                    bean = response.body();
+                    datas.setValue(bean);
+                }
             }
 
             @Override
