@@ -34,7 +34,7 @@ public class HomeContainFragment extends BaseFragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        navController = getNavController(R.id.nav_host_fragment);
+        navController = getNavController();
         View goSearchBar = view.findViewById(R.id.goSearch);
         ViewPager2 viewPager = view.findViewById(R.id.homeContainViewpager);
         viewPager.setAdapter(new HomeFragmentAdapter(this));

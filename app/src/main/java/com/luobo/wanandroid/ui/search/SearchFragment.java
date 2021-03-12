@@ -4,7 +4,6 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,11 +29,7 @@ import com.luobo.wanandroid.ui.home.article.ArticleBean;
 import com.luobo.wanandroid.ui.home.article.ArticleDiffUtil;
 import com.luobo.wanandroid.utils.ScreenUtil;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
-import com.scwang.smart.refresh.layout.api.RefreshLayout;
-import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -66,7 +60,7 @@ public class SearchFragment extends BaseFragment {
                 TimerTask task = new TimerTask() {
                     @Override
                     public void run() {
-                         getNavController(R.id.nav_host_fragment).navigateUp();
+                         getNavController().navigateUp();
                     }
                 };
 

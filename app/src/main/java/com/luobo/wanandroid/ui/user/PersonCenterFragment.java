@@ -34,7 +34,7 @@ public class PersonCenterFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.d(TAG, "onViewCreated");
-        navController = getNavController(R.id.nav_host_fragment);
+        navController = getNavController();
         binding.userPhoto.setOnClickListener(v -> {
             navController.navigate(R.id.action_global_loginFragment);
         });
