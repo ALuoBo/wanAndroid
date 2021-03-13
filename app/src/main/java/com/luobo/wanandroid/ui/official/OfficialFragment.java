@@ -26,8 +26,10 @@ import java.util.ArrayList;
 public class OfficialFragment extends BaseFragment {
     private String TAG = this.getClass().getName();
     OfficialViewModel viewModel;
-    int officialContentFragmentSize;
-    ArrayList<Integer> authorIds;
+    ArrayList<Integer> authorIds  = new ArrayList<>();;
+
+    public OfficialFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,20 +43,20 @@ public class OfficialFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TabLayout tabLayout = view.findViewById(R.id.officialTable);
-        ViewPager2 viewPager = view.findViewById(R.id.officialViewPager);
+        TabLayout tabLayout = getView().findViewById(R.id.officialTable);
+        ViewPager2 viewPager = getView().findViewById(R.id.officialViewPager);
         OfficialContentFragmentAdapter adapter = new OfficialContentFragmentAdapter(this);
         viewPager.setAdapter(adapter);
-        authorIds = new ArrayList<>();
+
 
         ArrayList<String> titleList = new ArrayList<>();
+
         viewModel.getTabs().observe(getViewLifecycleOwner(), projectTreeBean -> {
-            officialContentFragmentSize = 0;
+
             Log.d(TAG, "onViewCreated: getTabs data change");
             for (OfficialTreeBean.DataBean dataBean : projectTreeBean.getData()) {
                 titleList.add(dataBean.getName());
-                authorIds.add(officialContentFragmentSize, dataBean.getId());
-                officialContentFragmentSize++;
+                authorIds.add(dataBean.getId());
 
             }
 
@@ -65,9 +67,9 @@ public class OfficialFragment extends BaseFragment {
             //before:
             //notifyItemRangeInserted(0, newContentSize);
             //This is the correct solution and is also mentioned in this post by an AOSP project member.
-            adapter.notifyItemRangeRemoved(0, officialContentFragmentSize);
+           adapter.notifyItemRangeRemoved(0, authorIds.size());
 
-            adapter.notifyItemRangeInserted(0, officialContentFragmentSize);
+            adapter.notifyItemRangeInserted(0,authorIds.size());
 
         });
 
@@ -91,8 +93,7 @@ public class OfficialFragment extends BaseFragment {
 
         @Override
         public int getItemCount() {
-            Log.d(TAG, "getItemCount: " + officialContentFragmentSize);
-            return officialContentFragmentSize;
+            return authorIds.size();
         }
 
     }

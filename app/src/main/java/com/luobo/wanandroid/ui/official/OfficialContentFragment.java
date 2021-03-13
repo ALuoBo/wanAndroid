@@ -26,6 +26,9 @@ public class OfficialContentFragment extends BaseFragment {
     private int authorId;
     OfficialAdapter adapter;
 
+    public OfficialContentFragment() {
+    }
+
     public OfficialContentFragment(int authorId) {
         this.authorId = authorId;
     }
@@ -43,7 +46,7 @@ public class OfficialContentFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView recyclerView = view.findViewById(R.id.OfficialRecycler);
+        RecyclerView recyclerView = getView().findViewById(R.id.OfficialRecycler);
         adapter = new OfficialAdapter(getContext(), new OfficialDiffUtil());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -55,7 +58,7 @@ public class OfficialContentFragment extends BaseFragment {
             adapter.submitList(data);
         });
 
-        RefreshLayout refreshLayout = (RefreshLayout) view.findViewById(R.id.officialSwipe);
+        RefreshLayout refreshLayout = (RefreshLayout) getView().findViewById(R.id.officialSwipe);
         refreshLayout.setRefreshFooter(new ClassicsFooter(getContext()));
 
         refreshLayout.setOnLoadMoreListener(refreshLayout1 -> {
