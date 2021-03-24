@@ -9,11 +9,14 @@
 > Retrofit + Glide + Jetpack(涉及: ViewModle + Livedata + ViewBinding ) + Navigation+SmartRefreshLayout + BannerViewPager
 
 网络数据传递使用
+
 <div align="center">
    <img src="https://github.com/ALuoBo/wanAndroid/blob/master/describe/Livedata.png">
 </div>
-## 实现模块
 
+---
+
+## 实现模块
 + 首页
 + 问答
 + 搜索
