@@ -4,6 +4,8 @@
 
 ## 简介
 
+[🚨由于设计不是很合理，此仓库已废弃]
+
 > 遵循[谷歌架构指南](https://developer.android.google.cn/jetpack/guide)，使用Java编写的``玩安卓`` Android 端
 >
 > Retrofit + Glide + Jetpack(涉及: ViewModle + Livedata + ViewBinding ) + Navigation+SmartRefreshLayout + BannerViewPager
